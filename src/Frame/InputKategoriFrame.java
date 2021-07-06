@@ -117,11 +117,12 @@ public class InputKategoriFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKategoriActionPerformed
-        MainFrame main = new MainFrame(inputNama.getText(),inputTanggal.getCalendar(),inputDeskripsi.getText());
-        main.setVisible(true);
+//        MainFrame main = new MainFrame(inputNama.getText(),inputTanggal.getCalendar(),inputDeskripsi.getText());
+//        main.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_tambahKategoriActionPerformed
 

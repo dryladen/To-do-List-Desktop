@@ -7,7 +7,9 @@ package Frame;
 
 import java.util.Calendar;
 import javax.swing.DefaultListModel;
-
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Laden
@@ -19,14 +21,15 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         modelKategori = new DefaultListModel();
         pnlKategori.setModel(modelKategori);
+        tampilKategori();
     }
     
-    public MainFrame(String nama, Calendar tanggal, String deskripsi) {
-        initComponents();
-        modelKategori = new DefaultListModel();
-        pnlKategori.setModel(modelKategori);
-        modelKategori.addElement(nama);
-    }
+//    public MainFrame(String nama, Calendar tanggal, String deskripsi) {
+//        initComponents();
+//        modelKategori = new DefaultListModel();
+//        pnlKategori.setModel(modelKategori);
+//        modelKategori.addElement(nama);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -212,4 +215,21 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea pnlDetail;
     private javax.swing.JList<String> pnlKategori;
     // End of variables declaration//GEN-END:variables
-}
+
+    private void tampilKategori() {
+//        int row = pnlKategori.getComponentCount();
+//        for( int i = 0; i < row; i-=-1){
+//            modelKategori.removeElementAt(i);
+//        }
+        try {
+            Connection cn = DriverManager.getConnection("jdbc:mysql//localhost:3306/todolistdesktop","root","");
+            ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM KATEGORI");
+            while (rs.next()){
+                modelKategori.addElement(rs.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+} 
