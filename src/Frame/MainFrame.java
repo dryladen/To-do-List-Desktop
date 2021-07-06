@@ -5,24 +5,27 @@
  */
 package Frame;
 
+import java.util.Calendar;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Laden
  */
 public class MainFrame extends javax.swing.JFrame {
-
-    InputKategori inputKategori;
-    DefaultListModel model;
+    
+    DefaultListModel modelKategori;
     public MainFrame() {
         initComponents();
-        inputKategori = new InputKategori();
-        mainPanel.add(inputKategori);
-        inputKategori.setVisible(false);
-        model = new DefaultListModel();
-        pnlKategori.setModel(model);
+        modelKategori = new DefaultListModel();
+        pnlKategori.setModel(modelKategori);
+    }
+    
+    public MainFrame(String nama, Calendar tanggal, String deskripsi) {
+        initComponents();
+        modelKategori = new DefaultListModel();
+        pnlKategori.setModel(modelKategori);
+        modelKategori.addElement(nama);
     }
 
     /**
@@ -157,10 +160,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUbahKategoriActionPerformed
 
     private void btnTambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKategoriActionPerformed
-        String input = JOptionPane.showInputDialog("Masukan Nama Kategori");
-        model.addElement(input);
-        
-        
+        InputKategoriFrame inputFrame = new InputKategoriFrame();
+        inputFrame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnTambahKategoriActionPerformed
 
     /**
@@ -203,7 +205,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Frame.CButton btnHapusKategori;
     private Frame.CButton btnTambahKategori;
     private Frame.CButton btnUbahKategori;
-    private javax.swing.JPanel homePanel;
+    public static javax.swing.JPanel homePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainPanel;
