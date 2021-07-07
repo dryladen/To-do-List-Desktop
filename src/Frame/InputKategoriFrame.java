@@ -1,6 +1,11 @@
 package Frame;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 /**
@@ -10,8 +15,23 @@ import javax.swing.JTextField;
 public class InputKategoriFrame extends javax.swing.JFrame {
 
     private final Koneksi koneksi = new Koneksi();
+    
     public InputKategoriFrame() {
         initComponents();
+    }
+    private boolean dataUpdate = false;
+    private String idKategori = null;
+
+    public InputKategoriFrame(boolean dataUpdate, String idKategori) {
+        try {
+            initComponents();
+            this.dataUpdate = dataUpdate;
+            this.idKategori = idKategori;
+            tambahKategori.setText("Ubah");
+            getDataUpdate();
+        } catch (ParseException ex) {
+            Logger.getLogger(InputKategoriFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +47,7 @@ public class InputKategoriFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         inputDeskripsi = new javax.swing.JTextArea();
         tambahKategori = new Frame.CButton();
+        tambahKategori1 = new Frame.CButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,21 +76,33 @@ public class InputKategoriFrame extends javax.swing.JFrame {
             }
         });
 
+        tambahKategori1.setBackground(new java.awt.Color(204, 255, 255));
+        tambahKategori1.setText("Kembali");
+        tambahKategori1.setColorClick(new java.awt.Color(102, 153, 255));
+        tambahKategori1.setRadius(10);
+        tambahKategori1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahKategori1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                        .addComponent(jLabelTanggal)
-                        .addComponent(jLabelDeskripsi)
-                        .addComponent(jLabelNama)
-                        .addComponent(inputNama)
-                        .addComponent(inputTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(tambahKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(jLabelTanggal, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDeskripsi, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelNama, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputNama, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputTanggal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -88,7 +121,9 @@ public class InputKategoriFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -112,26 +147,44 @@ public class InputKategoriFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKategoriActionPerformed
-        try {
-            String sql = "INSERT INTO kategori (namaKategori,tanggalKategori,deskripsiKategori) VALUES ('%s','%s','%s')";
-            sql = String.format(sql, inputNama.getText(),((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),inputDeskripsi.getText());
-            Connection cn = koneksi.getKoneksi();
-            PreparedStatement pst = cn.prepareStatement(sql);
-            pst.execute();
-            MainFrame main = new MainFrame();
-            main.setVisible(true);
-            this.dispose();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+        if(!inputNama.getText().isEmpty() && dataUpdate == false){
+            try {
+                String sql = "INSERT INTO kategori (namaKategori,tanggalKategori,deskripsiKategori) VALUES ('%s','%s','%s')";
+                sql = String.format(sql, inputNama.getText(),((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),inputDeskripsi.getText());
+                Connection cn = koneksi.getKoneksi();
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.execute();
+                System.out.println(inputTanggal.getDateFormatString());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+            }
+        } else if (dataUpdate = true){
+            try {
+                String sql = "UPDATE kategori SET namaKategori='%s',tanggalKategori='%s',deskripsiKategori='%s' WHERE idKategori='%s'";
+                sql = String.format(sql, inputNama.getText(),
+                        ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
+                        inputDeskripsi.getText(),
+                        idKategori);
+                Connection cn = koneksi.getKoneksi();
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.execute();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+            }
         }
-        
+        MainFrame main = new MainFrame();
+        main.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_tambahKategoriActionPerformed
+
+    private void tambahKategori1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKategori1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tambahKategori1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
         java.awt.EventQueue.invokeLater(() -> {
             new InputKategoriFrame().setVisible(true);
         });
@@ -147,5 +200,24 @@ public class InputKategoriFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private Frame.CButton tambahKategori;
+    private Frame.CButton tambahKategori1;
     // End of variables declaration//GEN-END:variables
+
+    private void getDataUpdate() throws ParseException {
+        try {
+            SimpleDateFormat date = new SimpleDateFormat("MMM d, yyyy");
+            String sql = "SELECT * FROM kategori WHERE idKategori='%s'";
+            sql = String.format(sql, this.idKategori);
+            Connection cn = koneksi.getKoneksi();
+            PreparedStatement pst = cn.prepareStatement(sql);
+            ResultSet result = pst.executeQuery(sql);
+            while(result.next()){
+                inputNama.setText(result.getString(2));
+                inputTanggal.setDate(date.parse(result.getString(3)));
+                inputDeskripsi.setText(result.getString(4));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InputKategoriFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
