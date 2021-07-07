@@ -1,37 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Frame;
 
 import javax.swing.DefaultListModel;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Laden
  */
 public class MainFrame extends javax.swing.JFrame {
-    
     DefaultListModel modelKategori;
-    Koneksi koneksi;
+    ArrayList<String> dataIdKategori = new ArrayList();
+    private final Koneksi koneksi = new Koneksi();
     public MainFrame() {
         initComponents();
-        koneksi = new Koneksi();
         modelKategori = new DefaultListModel();
         pnlKategori.setModel(modelKategori);
         getData();
     }
     
-//    public MainFrame(String nama, Calendar tanggal, String deskripsi) {
-//        initComponents();
-//        modelKategori = new DefaultListModel();
-//        pnlKategori.setModel(modelKategori);
-//        modelKategori.addElement(nama);
-//    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,13 +48,17 @@ public class MainFrame extends javax.swing.JFrame {
         backgroundPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 204, 204)));
 
         mainPanel.setBackground(new java.awt.Color(51, 255, 204));
-        mainPanel.setAlignmentY(0.5F);
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         homePanel.setBackground(new java.awt.Color(51, 255, 204));
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pnlKategori.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlKategoriMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(pnlKategori);
 
         pnlDetail.setEditable(false);
@@ -73,7 +66,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlDetail.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         pnlDetail.setLineWrap(true);
         pnlDetail.setRows(5);
-        pnlDetail.setText("Tanggal : \n-\nDeskripsi :\nIni untuk anu dan anu\n"); // NOI18N
+        pnlDetail.setText("Tanggal : \n-\nDeskripsi :\n-\n"); // NOI18N
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detail", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         jScrollPane2.setViewportView(pnlDetail);
 
@@ -160,7 +153,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
 
     private void btnUbahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKategoriActionPerformed
-        // TODO add your handling code here:
+        if(pnlKategori.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ubah kategori");
+        }
     }//GEN-LAST:event_btnUbahKategoriActionPerformed
 
     private void btnTambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKategoriActionPerformed
@@ -168,6 +165,33 @@ public class MainFrame extends javax.swing.JFrame {
         inputFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahKategoriActionPerformed
+    
+    private void pnlKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKategoriMouseClicked
+        try {
+            int index = pnlKategori.getSelectedIndex();
+            String sql = "SELECT * FROM kategori WHERE idKategori='%s'";
+            sql = String.format(sql, dataIdKategori.get(index));
+            Connection cn = koneksi.getKoneksi();
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.execute();
+            ResultSet result = pst.executeQuery(sql);
+            String tanggal = null,deskripsi=null;
+            pnlDetail.setText("");
+            while(result.next()){
+                tanggal = result.getString(3);
+                deskripsi = result.getString(4);
+            }
+            String detail = "Tanggal : \n"
+                    + tanggal
+                    + "\n\nDeskripsi : \n"
+                    + deskripsi;
+            pnlDetail.setText(detail);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_pnlKategoriMouseClicked
 
     /**
      * @param args the command line arguments
@@ -197,10 +221,8 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainFrame().setVisible(true);            
         });
     }
 
@@ -217,18 +239,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JList<String> pnlKategori;
     // End of variables declaration//GEN-END:variables
 
-    private void tampilKategori() {
-        koneksi.getKoneksi();
-    }
-    
     private void getData(){
         try{
+            modelKategori.removeAllElements();
             Connection cn = koneksi.getKoneksi();
             Statement stm = cn.createStatement();
             ResultSet result = stm.executeQuery("SELECT * FROM kategori");
-//            modelKategori.removeAllElements();
             while(result.next()){
-                modelKategori.addElement(result.getString(2));
+                modelKategori.addElement(result.getString("namaKategori"));
+                dataIdKategori.add(result.getString(1));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);

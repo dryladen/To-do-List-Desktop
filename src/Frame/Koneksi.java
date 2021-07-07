@@ -13,10 +13,10 @@ import java.util.logging.Logger;
 public class Koneksi {
     private Connection connect;
     
-    private String driverName = "com.mysql.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/todolistdesktop";
-    private String username = "root";
-    private String password = "";
+    private final String driverName = "com.mysql.jdbc.Driver";
+    private final String url = "jdbc:mysql://localhost:3306/todolistdesktop";
+    private final String username = "root";
+    private final String password = "";
     
     public Connection getKoneksi(){
         if (connect == null){
