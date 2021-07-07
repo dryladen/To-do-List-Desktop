@@ -5,11 +5,10 @@
  */
 package Frame;
 
-import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
+
 /**
  *
  * @author Laden
@@ -17,11 +16,13 @@ import java.util.logging.Logger;
 public class MainFrame extends javax.swing.JFrame {
     
     DefaultListModel modelKategori;
+    Koneksi koneksi;
     public MainFrame() {
         initComponents();
+        koneksi = new Koneksi();
         modelKategori = new DefaultListModel();
         pnlKategori.setModel(modelKategori);
-        tampilKategori();
+        getData();
     }
     
 //    public MainFrame(String nama, Calendar tanggal, String deskripsi) {
@@ -217,19 +218,20 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void tampilKategori() {
-//        int row = pnlKategori.getComponentCount();
-//        for( int i = 0; i < row; i-=-1){
-//            modelKategori.removeElementAt(i);
-//        }
-        try {
-            Connection cn = DriverManager.getConnection("jdbc:mysql//localhost:3306/todolistdesktop","root","");
-            ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM KATEGORI");
-            while (rs.next()){
-                modelKategori.addElement(rs.getString(2));
+        koneksi.getKoneksi();
+    }
+    
+    private void getData(){
+        try{
+            Connection cn = koneksi.getKoneksi();
+            Statement stm = cn.createStatement();
+            ResultSet result = stm.executeQuery("SELECT * FROM kategori");
+//            modelKategori.removeAllElements();
+            while(result.next()){
+                modelKategori.addElement(result.getString(2));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 } 
