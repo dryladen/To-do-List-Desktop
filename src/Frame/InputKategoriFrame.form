@@ -53,7 +53,7 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="tambahKategori1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnKembali" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="tambahKategori" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -86,7 +86,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tambahKategori" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tambahKategori1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnKembali" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="39" max="32767" attributes="0"/>
               </Group>
@@ -161,7 +161,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahKategoriActionPerformed"/>
           </Events>
         </Component>
-        <Component class="Frame.CButton" name="tambahKategori1">
+        <Component class="Frame.CButton" name="btnKembali">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -173,7 +173,7 @@
             <Property name="radius" type="int" value="10"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahKategori1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKembaliActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -47,7 +47,7 @@ public class InputKategoriFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         inputDeskripsi = new javax.swing.JTextArea();
         tambahKategori = new Frame.CButton();
-        tambahKategori1 = new Frame.CButton();
+        btnKembali = new Frame.CButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,13 +76,13 @@ public class InputKategoriFrame extends javax.swing.JFrame {
             }
         });
 
-        tambahKategori1.setBackground(new java.awt.Color(204, 255, 255));
-        tambahKategori1.setText("Kembali");
-        tambahKategori1.setColorClick(new java.awt.Color(102, 153, 255));
-        tambahKategori1.setRadius(10);
-        tambahKategori1.addActionListener(new java.awt.event.ActionListener() {
+        btnKembali.setBackground(new java.awt.Color(204, 255, 255));
+        btnKembali.setText("Kembali");
+        btnKembali.setColorClick(new java.awt.Color(102, 153, 255));
+        btnKembali.setRadius(10);
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahKategori1ActionPerformed(evt);
+                btnKembaliActionPerformed(evt);
             }
         });
 
@@ -94,7 +94,7 @@ public class InputKategoriFrame extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(tambahKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
@@ -123,7 +123,7 @@ public class InputKategoriFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tambahKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -177,9 +177,11 @@ public class InputKategoriFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_tambahKategoriActionPerformed
 
-    private void tambahKategori1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKategori1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tambahKategori1ActionPerformed
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        MainFrame main = new MainFrame();
+        main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +193,7 @@ public class InputKategoriFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Frame.CButton btnKembali;
     public static javax.swing.JTextArea inputDeskripsi;
     public static javax.swing.JTextField inputNama;
     public static com.toedter.calendar.JDateChooser inputTanggal;
@@ -200,7 +203,6 @@ public class InputKategoriFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private Frame.CButton tambahKategori;
-    private Frame.CButton tambahKategori1;
     // End of variables declaration//GEN-END:variables
 
     private void getDataUpdate() throws ParseException {
