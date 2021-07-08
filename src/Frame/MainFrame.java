@@ -63,6 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlDetail.setRows(5);
         pnlDetail.setText("Tanggal : \n-\n\nDeskripsi :\n-\n"); // NOI18N
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detail", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        pnlDetail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(pnlDetail);
 
         btnTambahKategori.setBackground(new java.awt.Color(204, 255, 255));
@@ -179,35 +180,33 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahKategoriActionPerformed
     
     private void pnlKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKategoriMouseClicked
-        try {
-            int index = pnlKategori.getSelectedIndex();
-            String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
-            Connection cn = koneksi.getKoneksi();
-            PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setString(1, dataIdKategori.get(index));
-            ResultSet result = pst.executeQuery();
-            String tanggal = "-",deskripsi="-";
-            pnlDetail.setText("");
-            while(result.next()){
-                tanggal = result.getString(3);
-                deskripsi = result.getString(4);
+        if(!pnlKategori.isSelectionEmpty()){
+            try {
+                int index = pnlKategori.getSelectedIndex();
+                String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
+                Connection cn = koneksi.getKoneksi();
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, dataIdKategori.get(index));
+                ResultSet result = pst.executeQuery();
+                String tanggal = "-",deskripsi="-";
+                pnlDetail.setText("");
+                while(result.next()){
+                    tanggal = result.getString(3);
+                    deskripsi = result.getString(4);
+                }
+                if(tanggal == null || tanggal.equals("")){
+                    tanggal = "-";
+                }
+                if(deskripsi == null || deskripsi.equals("")){
+                    deskripsi = "-";
+                }
+                String detail = "Tanggal : \n"+ tanggal+ "\n\nDeskripsi : \n"+ deskripsi;
+                pnlDetail.setText(detail);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(tanggal == null || tanggal.equals("")){
-                tanggal = "-";
-            }
-            if(deskripsi == null || deskripsi.equals("")){
-                deskripsi = "-";
-            }
-            String detail = "Tanggal : \n"
-                    + tanggal
-                    + "\n\nDeskripsi : \n"
-                    + deskripsi;
-            pnlDetail.setText(detail);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }//GEN-LAST:event_pnlKategoriMouseClicked
 
     /**
