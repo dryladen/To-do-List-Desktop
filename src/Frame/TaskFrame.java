@@ -125,31 +125,11 @@ public class TaskFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahKategoriActionPerformed
 
     private void btnUbahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKategoriActionPerformed
-        if(pnlKategori.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
-        } else {
-            InputKategoriFrame input = new InputKategoriFrame(true,dataIdKategori.get(pnlKategori.getSelectedIndex()));
-            input.setVisible(true);
-            this.dispose();
-        }
+        
     }//GEN-LAST:event_btnUbahKategoriActionPerformed
 
     private void btnHapusKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKategoriActionPerformed
-        if(pnlKategori.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
-        } else {
-            try {
-                String index = dataIdKategori.get(pnlKategori.getSelectedIndex());
-                String sql = "DELETE FROM kategoriTable WHERE idKategori=?";
-                Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setString(1, index);
-                pst.execute();
-                getData();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
-            }
-        }
+        
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
 
     /**
