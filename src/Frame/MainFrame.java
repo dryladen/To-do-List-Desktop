@@ -166,11 +166,11 @@ public class MainFrame extends javax.swing.JFrame {
     private void pnlKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKategoriMouseClicked
         try {
             int index = pnlKategori.getSelectedIndex();
-            String sql = "SELECT * FROM kategori WHERE idKategori='%s'";
-            sql = String.format(sql, dataIdKategori.get(index));
+            String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
             Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
-            ResultSet result = pst.executeQuery(sql);
+            pst.setString(1, dataIdKategori.get(index));
+            ResultSet result = pst.executeQuery();
             String tanggal = null,deskripsi=null;
             pnlDetail.setText("");
             while(result.next()){
@@ -240,13 +240,15 @@ public class MainFrame extends javax.swing.JFrame {
             modelKategori.removeAllElements();
             Connection cn = koneksi.getKoneksi();
             Statement stm = cn.createStatement();
-            ResultSet result = stm.executeQuery("SELECT * FROM kategori");
+            ResultSet result = stm.executeQuery("SELECT * FROM kategoriTable");
             while(result.next()){
-                modelKategori.addElement(result.getString("namaKategori"));
+                modelKategori.addElement(result.getString(2));
                 dataIdKategori.add(result.getString(1));
             }
         } catch (SQLException ex) {
+            System.out.println("Anjaeee");
+            JOptionPane.showMessageDialog(null, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 } 

@@ -12,18 +12,15 @@ import java.util.logging.Logger;
  */
 public class Koneksi {
     private Connection connect;
-    
-    private final String driverName = "com.mysql.jdbc.Driver";
-    private final String url = "jdbc:mysql://localhost:3306/todolistdesktop";
-    private final String username = "root";
-    private final String password = "";
+    private final String driverName = "org.sqlite.JDBC";
+    private final String url = "jdbc:sqlite:databasetodolist.db";
     
     public Connection getKoneksi(){
         if (connect == null){
             try{
                 Class.forName(driverName);
+                connect = DriverManager.getConnection(url);
                 System.out.println("Driver ditemukan");
-                connect = DriverManager.getConnection(url,username,password);
             } catch(ClassNotFoundException | SQLException ex){
                 Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE,null,ex);
             }

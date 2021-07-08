@@ -1,7 +1,6 @@
 package Frame;
 
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -21,7 +20,6 @@ public class InputKategoriFrame extends javax.swing.JFrame {
     }
     private boolean dataUpdate = false;
     private String idKategori = null;
-
     public InputKategoriFrame(boolean dataUpdate, String idKategori) {
         try {
             initComponents();
@@ -149,18 +147,17 @@ public class InputKategoriFrame extends javax.swing.JFrame {
     private void tambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKategoriActionPerformed
         if(!inputNama.getText().isEmpty() && dataUpdate == false){
             try {
-                String sql = "INSERT INTO kategori (namaKategori,tanggalKategori,deskripsiKategori) VALUES ('%s','%s','%s')";
+                String sql = "INSERT INTO kategoriTable (namaKategori,tanggalKategori,deskripsiKategori) VALUES ('%s','%s','%s')";
                 sql = String.format(sql, inputNama.getText(),((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),inputDeskripsi.getText());
                 Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.execute();
-                System.out.println(inputTanggal.getDateFormatString());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
             }
         } else if (dataUpdate = true){
             try {
-                String sql = "UPDATE kategori SET namaKategori='%s',tanggalKategori='%s',deskripsiKategori='%s' WHERE idKategori='%s'";
+                String sql = "UPDATE kategoriTable SET namaKategori='%s',tanggalKategori='%s',deskripsiKategori='%s' WHERE idKategori='%s'";
                 sql = String.format(sql, inputNama.getText(),
                         ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
                         inputDeskripsi.getText(),
@@ -208,11 +205,11 @@ public class InputKategoriFrame extends javax.swing.JFrame {
     private void getDataUpdate() throws ParseException {
         try {
             SimpleDateFormat date = new SimpleDateFormat("MMM d, yyyy");
-            String sql = "SELECT * FROM kategori WHERE idKategori='%s'";
+            String sql = "SELECT * FROM kategoriTable WHERE idKategori='%s'";
             sql = String.format(sql, this.idKategori);
             Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
-            ResultSet result = pst.executeQuery(sql);
+            ResultSet result = pst.executeQuery();
             while(result.next()){
                 inputNama.setText(result.getString(2));
                 inputTanggal.setDate(date.parse(result.getString(3)));
