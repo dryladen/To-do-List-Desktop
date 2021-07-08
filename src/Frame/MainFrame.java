@@ -61,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlDetail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pnlDetail.setLineWrap(true);
         pnlDetail.setRows(5);
-        pnlDetail.setText("Tanggal : \n-\nDeskripsi :\n-\n"); // NOI18N
+        pnlDetail.setText("Tanggal : \n-\n\nDeskripsi :\n-\n"); // NOI18N
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detail", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jScrollPane2.setViewportView(pnlDetail);
 
@@ -144,7 +144,22 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHapusKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKategoriActionPerformed
-        // TODO add your handling code here:
+        if(pnlKategori.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
+        } else {
+            try {
+                String index = dataIdKategori.get(pnlKategori.getSelectedIndex());
+                String sql = "DELETE FROM kategoriTable WHERE idKategori=?";
+                Connection cn = koneksi.getKoneksi();
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, index);
+                pst.execute();
+                getData();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+            }
+            
+        }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
 
     private void btnUbahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKategoriActionPerformed
@@ -171,11 +186,17 @@ public class MainFrame extends javax.swing.JFrame {
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, dataIdKategori.get(index));
             ResultSet result = pst.executeQuery();
-            String tanggal = null,deskripsi=null;
+            String tanggal = "-",deskripsi="-";
             pnlDetail.setText("");
             while(result.next()){
                 tanggal = result.getString(3);
                 deskripsi = result.getString(4);
+            }
+            if(tanggal == null || tanggal.equals("")){
+                tanggal = "-";
+            }
+            if(deskripsi == null || deskripsi.equals("")){
+                deskripsi = "-";
             }
             String detail = "Tanggal : \n"
                     + tanggal
@@ -246,7 +267,6 @@ public class MainFrame extends javax.swing.JFrame {
                 dataIdKategori.add(result.getString(1));
             }
         } catch (SQLException ex) {
-            System.out.println("Anjaeee");
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 

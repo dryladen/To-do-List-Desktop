@@ -148,7 +148,7 @@
                         </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Tanggal : &#xa;-&#xa;Deskripsi :&#xa;-&#xa;" noResource="true"/>
+                        <Property name="text" type="java.lang.String" value="Tanggal : &#xa;-&#xa;&#xa;Deskripsi :&#xa;-&#xa;" noResource="true"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder justification="1" position="1" title="Detail">
