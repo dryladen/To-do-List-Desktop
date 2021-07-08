@@ -62,8 +62,10 @@ public class MainFrame extends javax.swing.JFrame {
         pnlDetail.setLineWrap(true);
         pnlDetail.setRows(5);
         pnlDetail.setText("Tanggal : \n-\n\nDeskripsi :\n-\n"); // NOI18N
+        pnlDetail.setAutoscrolls(false);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detail", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlDetail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pnlDetail.setSelectionColor(new java.awt.Color(51, 255, 51));
         jScrollPane2.setViewportView(pnlDetail);
 
         btnTambahKategori.setBackground(new java.awt.Color(204, 255, 255));
@@ -117,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(homePanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

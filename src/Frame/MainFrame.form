@@ -88,7 +88,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="226" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="109" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnTambahKategori" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -149,6 +149,7 @@
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
                         <Property name="text" type="java.lang.String" value="Tanggal : &#xa;-&#xa;&#xa;Deskripsi :&#xa;-&#xa;" noResource="true"/>
+                        <Property name="autoscrolls" type="boolean" value="false"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder justification="1" position="1" title="Detail">
@@ -158,6 +159,9 @@
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                           <Color id="Default Cursor"/>
+                        </Property>
+                        <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="33" green="ff" red="33" type="rgb"/>
                         </Property>
                       </Properties>
                     </Component>
