@@ -159,7 +159,6 @@ public class MainFrame extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
             }
-            
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
 
@@ -188,7 +187,7 @@ public class MainFrame extends javax.swing.JFrame {
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKategori.get(index));
                 ResultSet result = pst.executeQuery();
-                String tanggal = "-",deskripsi="-";
+                String tanggal = null,deskripsi=null;
                 pnlDetail.setText("");
                 while(result.next()){
                     tanggal = result.getString(3);
@@ -238,7 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MainFrame().setVisible(true);            
+            new MainFrame().setVisible(true);
         });
     }
 

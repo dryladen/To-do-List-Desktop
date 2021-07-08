@@ -51,20 +51,20 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btnKembali" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="tambahKategori" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" alignment="0" pref="269" max="32767" attributes="0"/>
                       <Component id="jLabelTanggal" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelDeskripsi" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelNama" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="inputNama" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="287" max="32767" attributes="0"/>
                       <Component id="inputTanggal" alignment="0" max="32767" attributes="0"/>
+                      <Component id="inputNama" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -88,7 +88,7 @@
                       <Component id="tambahKategori" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnKembali" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
