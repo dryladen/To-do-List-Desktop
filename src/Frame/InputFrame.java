@@ -27,12 +27,14 @@ public class InputFrame extends javax.swing.JFrame {
     public InputFrame(boolean isKategori) {
         initComponents();
         this.isKategori = isKategori;
+        jLabelNama.setText("Masukan nama kategori");
     }
     
     public InputFrame(boolean isKategori, String idKategori) {
         initComponents();
         this.isKategori = isKategori;
         this.idKategori = idKategori;
+        jLabelNama.setText("Masukan nama kegiatan");
     }
     public InputFrame(boolean dataUpdate, String idKategori,boolean isKategori) {
         try {
@@ -41,6 +43,7 @@ public class InputFrame extends javax.swing.JFrame {
             this.idKategori = idKategori;
             this.isKategori = isKategori;
             tambahKategori.setText("Ubah");
+            jLabelNama.setText("Masukan nama kategori");
             getDataUpdate();
         } catch (ParseException ex) {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,6 +58,7 @@ public class InputFrame extends javax.swing.JFrame {
             this.idKategori = idKategori;
             this.idKegiatan = idKegiatan;
             tambahKategori.setText("Ubah");
+            jLabelNama.setText("Masukan nama kegiatan");
             getDataUpdate();
         } catch (ParseException ex) {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
