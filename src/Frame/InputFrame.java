@@ -14,16 +14,30 @@ import javax.swing.JTextField;
 public class InputFrame extends javax.swing.JFrame {
 
     private final Koneksi koneksi = new Koneksi();
-    
+    private boolean isDataUpdate = false;
+    private boolean isKategori = false;
+    private String idKategori = null;
+    private String sql = null;
+
     public InputFrame() {
         initComponents();
     }
-    private boolean dataUpdate = false;
-    private String idKategori = null;
-    public InputFrame(boolean dataUpdate, String idKategori) {
+    
+    public InputFrame(boolean isKategori) {
+        initComponents();
+        this.isKategori = isKategori;
+    }
+    
+    public InputFrame(boolean isKategori, String idKategori) {
+        initComponents();
+        this.isKategori = isKategori;
+        this.idKategori = idKategori;
+    }
+    
+    public InputFrame(boolean dataUpdate, String idKategori, boolean isKategori) {
         try {
             initComponents();
-            this.dataUpdate = dataUpdate;
+            this.isDataUpdate = dataUpdate;
             this.idKategori = idKategori;
             tambahKategori.setText("Ubah");
             getDataUpdate();
@@ -146,39 +160,76 @@ public class InputFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKategoriActionPerformed
-        if(!inputNama.getText().isEmpty() && dataUpdate == false){
-            try {
-                String sql = "INSERT INTO kategoriTable (namaKategori,tanggalKategori,deskripsiKategori) VALUES ('%s','%s','%s')";
-                sql = String.format(sql, inputNama.getText(),((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),inputDeskripsi.getText());
-                Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
-                pst.execute();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+        if(isKategori == true){
+            if(!inputNama.getText().isEmpty()){
+                if(isDataUpdate == false){
+                        sql = "INSERT INTO kategoriTable (namaKategori,tanggalKategori,deskripsiKategori) VALUES ('%s','%s','%s')";
+                        sql = String.format(sql, 
+                                inputNama.getText(),
+                                ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
+                                inputDeskripsi.getText());
+
+                } else if (isDataUpdate = true){
+                    sql = "UPDATE kategoriTable SET namaKategori='%s',tanggalKategori='%s',deskripsiKategori='%s' WHERE idKategori='%s'";
+                    sql = String.format(sql, 
+                            inputNama.getText(),
+                            ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
+                            inputDeskripsi.getText(),
+                            idKategori);
+                }
+                try {
+                    Connection cn = koneksi.getKoneksi();
+                    PreparedStatement pst = cn.prepareStatement(sql);
+                    pst.execute();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+                }
+                MainFrame main = new MainFrame();
+                main.setVisible(true);
+                this.dispose();
             }
-        } else if (dataUpdate = true){
-            try {
-                String sql = "UPDATE kategoriTable SET namaKategori='%s',tanggalKategori='%s',deskripsiKategori='%s' WHERE idKategori='%s'";
-                sql = String.format(sql, inputNama.getText(),
-                        ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
-                        inputDeskripsi.getText(),
-                        idKategori);
-                Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
-                pst.execute();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+        } else {
+            if(!inputNama.getText().isEmpty()){
+                if(isDataUpdate == false){
+                        sql = "INSERT INTO kegiatanTable (idKategori,namaKegiatan,tanggalKegiatan,deskripsiKegiatan) VALUES ('%s','%s','%s','%s')";
+                        sql = String.format(sql,
+                                idKategori,
+                                inputNama.getText(),
+                                ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
+                                inputDeskripsi.getText());
+
+                } else if (isDataUpdate = true){
+                    sql = "UPDATE kegiatanTable SET namaKegiatan='%s',tanggalKegiatan='%s',deskripsiKegiatan='%s' WHERE idKegiatan='%s'";
+                    sql = String.format(sql, 
+                            inputNama.getText(),
+                            ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
+                            inputDeskripsi.getText(),
+                            idKategori);
+                }
+                try {
+                    Connection cn = koneksi.getKoneksi();
+                    PreparedStatement pst = cn.prepareStatement(sql);
+                    pst.execute();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Gagal membuat kegiatan baru : "+ex);
+                }
+                TaskFrame task = new TaskFrame();
+                task.setVisible(true);
+                this.dispose();
             }
         }
-        MainFrame main = new MainFrame();
-        main.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_tambahKategoriActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        MainFrame main = new MainFrame();
-        main.setVisible(true);
-        this.dispose();
+        if(isKategori == true){
+            MainFrame main = new MainFrame();
+            main.setVisible(true);
+            this.dispose();
+        } else {
+            TaskFrame task = new TaskFrame();
+            task.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     /**

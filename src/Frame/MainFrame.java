@@ -170,14 +170,14 @@ public class MainFrame extends javax.swing.JFrame {
         if(pnlKategori.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
         } else {
-            InputFrame input = new InputFrame(true,dataIdKategori.get(pnlKategori.getSelectedIndex()));
+            InputFrame input = new InputFrame(true,dataIdKategori.get(pnlKategori.getSelectedIndex()),true);
             input.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnUbahKategoriActionPerformed
 
     private void btnTambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKategoriActionPerformed
-        InputFrame inputFrame = new InputFrame();
+        InputFrame inputFrame = new InputFrame(true);
         inputFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahKategoriActionPerformed
@@ -233,7 +233,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pst.execute();
                 getData();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+                JOptionPane.showMessageDialog(null, "Gagal menghapus kategori : "+ex);
             }
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed

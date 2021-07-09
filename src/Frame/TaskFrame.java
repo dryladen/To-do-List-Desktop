@@ -188,15 +188,37 @@ public class TaskFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuAwalActionPerformed
 
     private void btnTambahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKegiatanActionPerformed
-        
+        InputFrame input = new InputFrame(false,dataIdKegiatan.get(pnlKegiatan.getSelectedIndex()));
+        input.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnTambahKegiatanActionPerformed
 
     private void btnUbahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatanActionPerformed
-        // TODO add your handling code here:
+        if(pnlKegiatan.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
+        } else {
+            InputFrame input = new InputFrame(true,dataIdKegiatan.get(pnlKegiatan.getSelectedIndex()),false);
+            input.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnUbahKegiatanActionPerformed
 
     private void btnHapusKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKegiatanActionPerformed
-        // TODO add your handling code here:
+        if(pnlKegiatan.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
+        } else {
+            try {
+                String index = dataIdKegiatan.get(pnlKegiatan.getSelectedIndex());
+                String sql = "DELETE FROM kegiatanTable WHERE idKegiatan=?";
+                Connection cn = koneksi.getKoneksi();
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, index);
+                pst.execute();
+                getData();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal menghapus kegiatan : "+ex);
+            }
+        }
     }//GEN-LAST:event_btnHapusKegiatanActionPerformed
 
     /**
