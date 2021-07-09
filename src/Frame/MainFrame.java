@@ -210,7 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlKategoriMouseClicked
 
     private void pnlKategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlKategoriKeyTyped
-        if(!pnlKategori.isSelectionEmpty()){
+        if(!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 10){
             TaskFrame task = new TaskFrame();
             task.setVisible(true);
             this.dispose();

@@ -13,7 +13,7 @@ public class TaskFrame extends javax.swing.JFrame {
     DefaultListModel modelKegiatan;
     ArrayList<String> dataIdKegiatan = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
-    private String idKategori = "10";
+    private String idKategori = "";
     
     public TaskFrame() {
         initComponents();
