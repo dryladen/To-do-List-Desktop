@@ -17,6 +17,7 @@ public class InputFrame extends javax.swing.JFrame {
     private boolean isDataUpdate = false;
     private boolean isKategori = false;
     private String idKategori = null;
+    private String idKegiatan = null;
     private String sql = null;
 
     public InputFrame() {
@@ -33,12 +34,26 @@ public class InputFrame extends javax.swing.JFrame {
         this.isKategori = isKategori;
         this.idKategori = idKategori;
     }
-    
-    public InputFrame(boolean dataUpdate, String idKategori, boolean isKategori) {
+    public InputFrame(boolean dataUpdate, String idKategori,boolean isKategori) {
         try {
             initComponents();
             this.isDataUpdate = dataUpdate;
             this.idKategori = idKategori;
+            this.isKategori = isKategori;
+            tambahKategori.setText("Ubah");
+            getDataUpdate();
+        } catch (ParseException ex) {
+            Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public InputFrame(boolean dataUpdate, String idKategori, String idKegiatan, boolean isKategori) {
+        try {
+            initComponents();
+            this.isDataUpdate = dataUpdate;
+            this.isKategori = isKategori;
+            this.idKategori = idKategori;
+            this.idKegiatan = idKegiatan;
             tambahKategori.setText("Ubah");
             getDataUpdate();
         } catch (ParseException ex) {
@@ -204,7 +219,7 @@ public class InputFrame extends javax.swing.JFrame {
                             inputNama.getText(),
                             ((JTextField)inputTanggal.getDateEditor().getUiComponent()).getText(),
                             inputDeskripsi.getText(),
-                            idKategori);
+                            idKegiatan);
                 }
                 try {
                     Connection cn = koneksi.getKoneksi();
@@ -213,7 +228,7 @@ public class InputFrame extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Gagal membuat kegiatan baru : "+ex);
                 }
-                TaskFrame task = new TaskFrame();
+                TaskFrame task = new TaskFrame(idKategori);
                 task.setVisible(true);
                 this.dispose();
             }
@@ -221,12 +236,12 @@ public class InputFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tambahKategoriActionPerformed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        if(isKategori == true){
+        if(this.isKategori == true){
             MainFrame main = new MainFrame();
             main.setVisible(true);
             this.dispose();
         } else {
-            TaskFrame task = new TaskFrame();
+            TaskFrame task = new TaskFrame(idKategori);
             task.setVisible(true);
             this.dispose();
         }
@@ -255,10 +270,15 @@ public class InputFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void getDataUpdate() throws ParseException {
+        if(isKategori == true){
+            sql = "SELECT * FROM kategoriTable WHERE idKategori='%s'";
+            sql = String.format(sql,this.idKategori);
+        } else {
+            sql = "SELECT * FROM kegiatanTable WHERE idKegiatan='%s'";
+            sql = String.format(sql,this.idKegiatan);
+        }
         try {
             SimpleDateFormat date = new SimpleDateFormat("MMM d, yyyy");
-            String sql = "SELECT * FROM kategoriTable WHERE idKategori='%s'";
-            sql = String.format(sql, this.idKategori);
             Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
             ResultSet result = pst.executeQuery();
@@ -272,5 +292,9 @@ public class InputFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void If(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

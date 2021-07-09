@@ -188,7 +188,7 @@ public class TaskFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuAwalActionPerformed
 
     private void btnTambahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKegiatanActionPerformed
-        InputFrame input = new InputFrame(false,dataIdKegiatan.get(pnlKegiatan.getSelectedIndex()));
+        InputFrame input = new InputFrame(false,idKategori);
         input.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahKegiatanActionPerformed
@@ -197,7 +197,7 @@ public class TaskFrame extends javax.swing.JFrame {
         if(pnlKegiatan.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
         } else {
-            InputFrame input = new InputFrame(true,dataIdKegiatan.get(pnlKegiatan.getSelectedIndex()),false);
+            InputFrame input = new InputFrame(true,idKategori,dataIdKegiatan.get(pnlKegiatan.getSelectedIndex()),false);
             input.setVisible(true);
             this.dispose();
         }
@@ -273,7 +273,7 @@ public class TaskFrame extends javax.swing.JFrame {
             pst.setString(1, idKategori);
             ResultSet result = pst.executeQuery();
             while(result.next()){
-                modelKegiatan.addElement(result.getString(3));
+                modelKegiatan.addElement(result.getString(2));
                 dataIdKegiatan.add(result.getString(1));
             }
         } catch (SQLException ex) {
