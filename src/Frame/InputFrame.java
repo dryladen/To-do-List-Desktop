@@ -293,8 +293,4 @@ public class InputFrame extends javax.swing.JFrame {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private void If(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

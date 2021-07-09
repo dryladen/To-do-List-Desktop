@@ -2,6 +2,8 @@ package Frame;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -55,6 +57,11 @@ public class TaskFrame extends javax.swing.JFrame {
         pnlKegiatan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         pnlKegiatan.setValueIsAdjusting(true);
         pnlKegiatan.setVerifyInputWhenFocusTarget(false);
+        pnlKegiatan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlKegiatanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(pnlKegiatan);
 
         pnlDetail.setEditable(false);
@@ -220,6 +227,36 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnHapusKegiatanActionPerformed
+
+    private void pnlKegiatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKegiatanMouseClicked
+        if(!pnlKegiatan.isSelectionEmpty()){
+            try {
+                int index = pnlKegiatan.getSelectedIndex();
+                String sql = "SELECT * FROM kegiatanTable WHERE idKegiatan=?";
+                Connection cn = koneksi.getKoneksi();
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, dataIdKegiatan.get(index));
+                ResultSet result = pst.executeQuery();
+                String tanggal = null,deskripsi=null;
+                pnlDetail.setText("");
+                while(result.next()){
+                    tanggal = result.getString(3);
+                    deskripsi = result.getString(4);
+                }
+                if(tanggal == null || tanggal.equals("")){
+                    tanggal = "-";
+                }
+                if(deskripsi == null || deskripsi.equals("")){
+                    deskripsi = "-";
+                }
+                pnlTanggal.setText(tanggal);
+                pnlDetail.setText(deskripsi);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_pnlKegiatanMouseClicked
 
     /**
      * @param args the command line arguments
