@@ -13,7 +13,8 @@ public class TaskFrame extends javax.swing.JFrame {
     DefaultListModel modelKegiatan;
     ArrayList<String> dataIdKegiatan = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
-    private String idKategori = "";
+    private String idKategori = "10";
+    
     public TaskFrame() {
         initComponents();
         modelKegiatan = new DefaultListModel();
@@ -27,6 +28,7 @@ public class TaskFrame extends javax.swing.JFrame {
         modelKegiatan = new DefaultListModel();
         pnlKegiatan.setModel(modelKegiatan);
         getData();
+        System.out.println(dataIdKegiatan);
     }
     
     @SuppressWarnings("unchecked")
@@ -239,9 +241,8 @@ public class TaskFrame extends javax.swing.JFrame {
 
     private void getData() {
         try{
-            int index = pnlKegiatan.getSelectedIndex();
             modelKegiatan.removeAllElements();
-            String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
+            String sql = "SELECT * FROM kegiatanTable WHERE idKategori=?";
             Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, idKategori);
