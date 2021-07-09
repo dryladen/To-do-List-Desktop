@@ -43,6 +43,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pnlKategori.setToolTipText("Tekan Enter untuk melihat kegiatan");
+        pnlKategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlKategori.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKategoriMouseClicked(evt);
@@ -55,6 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(pnlKategori);
 
+        pnlTanggal.setEditable(false);
         pnlTanggal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         jScrollPane3.setViewportView(pnlTanggal);
 
@@ -211,7 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void pnlKategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlKategoriKeyTyped
         if(!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 10){
-            TaskFrame task = new TaskFrame();
+            TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
             task.setVisible(true);
             this.dispose();
         }
