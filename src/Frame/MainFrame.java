@@ -167,14 +167,14 @@ public class MainFrame extends javax.swing.JFrame {
         if(pnlKategori.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
         } else {
-            InputKategoriFrame input = new InputKategoriFrame(true,dataIdKategori.get(pnlKategori.getSelectedIndex()));
+            InputFrame input = new InputFrame(true,dataIdKategori.get(pnlKategori.getSelectedIndex()));
             input.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnUbahKategoriActionPerformed
 
     private void btnTambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKategoriActionPerformed
-        InputKategoriFrame inputFrame = new InputKategoriFrame();
+        InputFrame inputFrame = new InputFrame();
         inputFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahKategoriActionPerformed
