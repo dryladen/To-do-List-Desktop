@@ -35,6 +35,8 @@ public class MainFrame extends javax.swing.JFrame {
         btnTambahKategori = new Frame.CButton();
         btnUbahKategori = new Frame.CButton();
         btnHapusKategori = new Frame.CButton();
+        btnMoveUp = new Frame.CButton();
+        btnMoveDown = new Frame.CButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-do List");
@@ -45,6 +47,9 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pnlKategori.setToolTipText("Tekan Enter untuk melihat kegiatan");
         pnlKategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlKategori.setDoubleBuffered(true);
+        pnlKategori.setDragEnabled(true);
+        pnlKategori.setDropMode(javax.swing.DropMode.INSERT);
         pnlKategori.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKategoriMouseClicked(evt);
@@ -53,6 +58,11 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 pnlKategoriKeyTyped(evt);
+            }
+        });
+        pnlKategori.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                pnlKategoriValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(pnlKategori);
@@ -116,6 +126,34 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnMoveUp.setBackground(new java.awt.Color(204, 255, 255));
+        btnMoveUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/up-arrow (1).png"))); // NOI18N
+        btnMoveUp.setBorderColor(new java.awt.Color(153, 153, 153));
+        btnMoveUp.setColorClick(new java.awt.Color(102, 153, 255));
+        btnMoveUp.setMaximumSize(new java.awt.Dimension(105, 23));
+        btnMoveUp.setMinimumSize(new java.awt.Dimension(105, 23));
+        btnMoveUp.setPreferredSize(new java.awt.Dimension(105, 23));
+        btnMoveUp.setRadius(10);
+        btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveUpActionPerformed(evt);
+            }
+        });
+
+        btnMoveDown.setBackground(new java.awt.Color(204, 255, 255));
+        btnMoveDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/down-arrow (1).png"))); // NOI18N
+        btnMoveDown.setBorderColor(new java.awt.Color(153, 153, 153));
+        btnMoveDown.setColorClick(new java.awt.Color(102, 153, 255));
+        btnMoveDown.setMaximumSize(new java.awt.Dimension(105, 23));
+        btnMoveDown.setMinimumSize(new java.awt.Dimension(105, 23));
+        btnMoveDown.setPreferredSize(new java.awt.Dimension(105, 23));
+        btnMoveDown.setRadius(10);
+        btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveDownActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
@@ -123,7 +161,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(homePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, homePanelLayout.createSequentialGroup()
                         .addComponent(btnTambahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +168,13 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(btnUbahKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnHapusKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1)
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnMoveUp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMoveDown, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         homePanelLayout.setVerticalGroup(
@@ -140,8 +183,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addComponent(btnMoveUp, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMoveDown, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -213,10 +261,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlKategoriMouseClicked
 
     private void pnlKategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlKategoriKeyTyped
+        System.out.println(evt.getKeyLocation());
         if(!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 10){
             TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
             task.setVisible(true);
             this.dispose();
+        } else if (!pnlKategori.isSelectionEmpty() && evt.getKeyLocation() == 1){
+            System.out.println("Naik");
+        } else if (!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 40){
+            System.out.println("Turun");
         }
     }//GEN-LAST:event_pnlKategoriKeyTyped
 
@@ -237,6 +290,18 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
+
+    private void pnlKategoriValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_pnlKategoriValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlKategoriValueChanged
+
+    private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMoveUpActionPerformed
+
+    private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMoveDownActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +338,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Frame.CButton btnHapusKategori;
+    private Frame.CButton btnMoveDown;
+    private Frame.CButton btnMoveUp;
     private Frame.CButton btnTambahKategori;
     private Frame.CButton btnUbahKategori;
     public static javax.swing.JPanel homePanel;
