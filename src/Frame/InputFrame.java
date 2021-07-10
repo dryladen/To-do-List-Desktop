@@ -109,6 +109,7 @@ public class InputFrame extends javax.swing.JFrame {
         });
 
         btnKembali.setBackground(new java.awt.Color(204, 255, 255));
+        btnKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/left-arrow.png"))); // NOI18N
         btnKembali.setText("Kembali");
         btnKembali.setColorClick(new java.awt.Color(102, 153, 255));
         btnKembali.setRadius(10);

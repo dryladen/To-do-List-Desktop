@@ -48,7 +48,7 @@ public class TaskFrame extends javax.swing.JFrame {
         btnUbahKegiatan = new Frame.CButton();
         btnHapusKegiatan = new Frame.CButton();
         btnUbahKegiatan1 = new Frame.CButton();
-        btnUbahKegiatan2 = new Frame.CButton();
+        btnUbahKegiatan3 = new Frame.CButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 204));
@@ -82,7 +82,8 @@ public class TaskFrame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(pnlTanggal);
 
         btnMenuAwal.setBackground(new java.awt.Color(204, 255, 255));
-        btnMenuAwal.setText("Menu Awal");
+        btnMenuAwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/left-arrow.png"))); // NOI18N
+        btnMenuAwal.setText("Kembali");
         btnMenuAwal.setBorderColor(new java.awt.Color(153, 153, 153));
         btnMenuAwal.setColorClick(new java.awt.Color(102, 153, 255));
         btnMenuAwal.setMaximumSize(new java.awt.Dimension(105, 23));
@@ -151,17 +152,17 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         });
 
-        btnUbahKegiatan2.setBackground(new java.awt.Color(204, 255, 255));
-        btnUbahKegiatan2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/down-arrow (1).png"))); // NOI18N
-        btnUbahKegiatan2.setBorderColor(new java.awt.Color(153, 153, 153));
-        btnUbahKegiatan2.setColorClick(new java.awt.Color(102, 153, 255));
-        btnUbahKegiatan2.setMaximumSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan2.setMinimumSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan2.setPreferredSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan2.setRadius(10);
-        btnUbahKegiatan2.addActionListener(new java.awt.event.ActionListener() {
+        btnUbahKegiatan3.setBackground(new java.awt.Color(204, 255, 255));
+        btnUbahKegiatan3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/down-arrow (1).png"))); // NOI18N
+        btnUbahKegiatan3.setBorderColor(new java.awt.Color(153, 153, 153));
+        btnUbahKegiatan3.setColorClick(new java.awt.Color(102, 153, 255));
+        btnUbahKegiatan3.setMaximumSize(new java.awt.Dimension(105, 23));
+        btnUbahKegiatan3.setMinimumSize(new java.awt.Dimension(105, 23));
+        btnUbahKegiatan3.setPreferredSize(new java.awt.Dimension(105, 23));
+        btnUbahKegiatan3.setRadius(10);
+        btnUbahKegiatan3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUbahKegiatan2ActionPerformed(evt);
+                btnUbahKegiatan3ActionPerformed(evt);
             }
         });
 
@@ -189,26 +190,29 @@ public class TaskFrame extends javax.swing.JFrame {
                                 .addComponent(btnHapusKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jScrollPane3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnUbahKegiatan1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnUbahKegiatan2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(btnUbahKegiatan1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnUbahKegiatan3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(btnUbahKegiatan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUbahKegiatan1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUbahKegiatan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnUbahKegiatan3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMenuAwal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,9 +311,9 @@ public class TaskFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUbahKegiatan1ActionPerformed
 
-    private void btnUbahKegiatan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatan2ActionPerformed
+    private void btnUbahKegiatan3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatan3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUbahKegiatan2ActionPerformed
+    }//GEN-LAST:event_btnUbahKegiatan3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,7 +350,7 @@ public class TaskFrame extends javax.swing.JFrame {
     private Frame.CButton btnTambahKegiatan;
     private Frame.CButton btnUbahKegiatan;
     private Frame.CButton btnUbahKegiatan1;
-    private Frame.CButton btnUbahKegiatan2;
+    private Frame.CButton btnUbahKegiatan3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
