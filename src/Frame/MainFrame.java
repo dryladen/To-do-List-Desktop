@@ -296,11 +296,23 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlKategoriValueChanged
 
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
-        // TODO add your handling code here:
+        String value = pnlKategori.getSelectedValue();
+        int index = pnlKategori.getSelectedIndex();
+        if(!pnlKategori.isSelectionEmpty() && index > 0){
+            modelKategori.remove(index);
+            modelKategori.add(index-1, value);
+            pnlKategori.setSelectedIndex(index-1);
+        }
     }//GEN-LAST:event_btnMoveUpActionPerformed
 
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
-        // TODO add your handling code here:
+        String value = pnlKategori.getSelectedValue();
+        int index = pnlKategori.getSelectedIndex();
+        if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()){
+            modelKategori.remove(index);
+            modelKategori.add(index+1, value);
+            pnlKategori.setSelectedIndex(index+1);
+        }
     }//GEN-LAST:event_btnMoveDownActionPerformed
 
     /**
