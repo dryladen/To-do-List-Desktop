@@ -266,11 +266,7 @@ public class MainFrame extends javax.swing.JFrame {
             TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
             task.setVisible(true);
             this.dispose();
-        } else if (!pnlKategori.isSelectionEmpty() && evt.getKeyLocation() == 1){
-            System.out.println("Naik");
-        } else if (!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 40){
-            System.out.println("Turun");
-        }
+        } 
     }//GEN-LAST:event_pnlKategoriKeyTyped
 
     private void btnHapusKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKategoriActionPerformed
@@ -284,6 +280,11 @@ public class MainFrame extends javax.swing.JFrame {
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
+                sql = "DELETE FROM kegiatanTable WHERE idKategori=?";
+                PreparedStatement pst1 = cn.prepareStatement(sql);
+                pst1.setString(1, index);
+                pst1.execute();
+                
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus kategori : "+ex);
@@ -296,21 +297,27 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlKategoriValueChanged
 
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
-        String value = pnlKategori.getSelectedValue();
         int index = pnlKategori.getSelectedIndex();
+        String value = pnlKategori.getSelectedValue();
+        String valueID = dataIdKategori.get(index);
         if(!pnlKategori.isSelectionEmpty() && index > 0){
             modelKategori.remove(index);
+            dataIdKategori.remove(index);
             modelKategori.add(index-1, value);
+            dataIdKategori.add(index-1, valueID);
             pnlKategori.setSelectedIndex(index-1);
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
 
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
-        String value = pnlKategori.getSelectedValue();
         int index = pnlKategori.getSelectedIndex();
+        String value = pnlKategori.getSelectedValue();
+        String valueID = dataIdKategori.get(index);
         if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()){
             modelKategori.remove(index);
+            dataIdKategori.remove(index);
             modelKategori.add(index+1, value);
+            dataIdKategori.add(index+1, valueID);
             pnlKategori.setSelectedIndex(index+1);
         }
     }//GEN-LAST:event_btnMoveDownActionPerformed
