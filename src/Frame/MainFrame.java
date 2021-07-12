@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class MainFrame extends javax.swing.JFrame {
     DefaultListModel modelKategori;
     ArrayList<String> dataIdKategori = new ArrayList();
+    ArrayList<Kegiatan> dataKategori = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
     public MainFrame() {
         initComponents();
@@ -40,6 +41,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-do List");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                tutupFrame(evt);
+            }
+        });
 
         homePanel.setBackground(new java.awt.Color(51, 255, 204));
 
@@ -58,11 +64,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 pnlKategoriKeyTyped(evt);
-            }
-        });
-        pnlKategori.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                pnlKategoriValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(pnlKategori);
@@ -274,17 +275,18 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
         } else {
             try {
+                // menghapus item kategori
                 String index = dataIdKategori.get(pnlKategori.getSelectedIndex());
                 String sql = "DELETE FROM kategoriTable WHERE idKategori=?";
                 Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
+                // menghapus item kegiatan
                 sql = "DELETE FROM kegiatanTable WHERE idKategori=?";
                 PreparedStatement pst1 = cn.prepareStatement(sql);
                 pst1.setString(1, index);
                 pst1.execute();
-                
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus kategori : "+ex);
@@ -292,20 +294,31 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
 
-    private void pnlKategoriValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_pnlKategoriValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnlKategoriValueChanged
-
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
         int index = pnlKategori.getSelectedIndex();
         String value = pnlKategori.getSelectedValue();
-        String valueID = dataIdKategori.get(index);
+        String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
+        Connection cn = koneksi.getKoneksi();
         if(!pnlKategori.isSelectionEmpty() && index > 0){
-            modelKategori.remove(index);
-            dataIdKategori.remove(index);
-            modelKategori.add(index-1, value);
-            dataIdKategori.add(index-1, valueID);
-            pnlKategori.setSelectedIndex(index-1);
+            try {
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, dataKategori.get(index-1).getNamaKegiatan());
+                pst.setString(2, dataKategori.get(index-1).getTanggalKegiatan());
+                pst.setString(3, dataKategori.get(index-1).getDeskripsiKegiatan());
+                pst.setString(4, dataKategori.get(index).getIdKategori());
+                pst.execute();
+                PreparedStatement pst0 = cn.prepareStatement(sql);
+                pst0.setString(1, dataKategori.get(index).getNamaKegiatan());
+                pst0.setString(2, dataKategori.get(index).getTanggalKegiatan());
+                pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
+                pst0.setString(4, dataKategori.get(index-1).getIdKategori());
+                pst0.execute();
+                modelKategori.remove(index);
+                modelKategori.add(index-1, value);
+                pnlKategori.setSelectedIndex(index-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
 
@@ -321,6 +334,10 @@ public class MainFrame extends javax.swing.JFrame {
             pnlKategori.setSelectedIndex(index+1);
         }
     }//GEN-LAST:event_btnMoveDownActionPerformed
+
+    private void tutupFrame(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_tutupFrame
+//        setData();
+    }//GEN-LAST:event_tutupFrame
 
     /**
      * @param args the command line arguments
@@ -375,14 +392,33 @@ public class MainFrame extends javax.swing.JFrame {
             modelKategori.removeAllElements();
             Connection cn = koneksi.getKoneksi();
             Statement stm = cn.createStatement();
-            ResultSet result = stm.executeQuery("SELECT * FROM kategoriTable");
-            while(result.next()){
-                modelKategori.addElement(result.getString(2));
-                dataIdKategori.add(result.getString(1));
+            ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");
+            while(rst.next()){
+                modelKategori.addElement(rst.getString(2));
+                dataIdKategori.add(rst.getString(1));
+                dataKategori.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4)));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-} 
+
+    private void setData() {
+        try{
+            String sql = "DELETE FROM kategoriTable";
+            modelKategori.removeAllElements();
+            Connection cn = koneksi.getKoneksi();
+            Statement stm = cn.createStatement();
+            ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");
+            while(rst.next()){
+                modelKategori.addElement(rst.getString(2));
+                dataIdKategori.add(rst.getString(1));
+                dataKategori.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4)));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error : "+ ex);
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+}
