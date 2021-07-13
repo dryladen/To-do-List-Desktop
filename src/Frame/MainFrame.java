@@ -15,10 +15,12 @@ public class MainFrame extends javax.swing.JFrame {
     ArrayList<String> dataIdKategori = new ArrayList();
     ArrayList<Kegiatan> dataKategori = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
+    Connection cn;
     public MainFrame() {
         initComponents();
         modelKategori = new DefaultListModel();
         pnlKategori.setModel(modelKategori);
+        cn = koneksi.getKoneksi();
         getData();
     }
     
@@ -236,7 +238,6 @@ public class MainFrame extends javax.swing.JFrame {
             try {
                 int index = pnlKategori.getSelectedIndex();
                 String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
-                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKategori.get(index));
                 ResultSet result = pst.executeQuery();
@@ -277,7 +278,6 @@ public class MainFrame extends javax.swing.JFrame {
                 // menghapus item kategori
                 String index = dataIdKategori.get(pnlKategori.getSelectedIndex());
                 String sql = "DELETE FROM kategoriTable WHERE idKategori=?";
-                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
@@ -378,7 +378,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void getData(){
         try{
             modelKategori.removeAllElements();
-            Connection cn = koneksi.getKoneksi();
             Statement stm = cn.createStatement();
             ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");
             while(rst.next()){
@@ -394,7 +393,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void moveItem(int index, int index0) {
         try {
-            Connection cn = koneksi.getKoneksi();
             String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, dataKategori.get(index0).getNamaKegiatan());
