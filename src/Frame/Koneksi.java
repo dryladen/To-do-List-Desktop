@@ -35,19 +35,7 @@ public class Koneksi {
     public void moveItem(ArrayList<Kegiatan> dataKategori,ArrayList<String> dataId, int index, int index0, boolean isKategori) {
         try {
             Connection cn = getKoneksi();
-            String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
-            PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setString(1, dataKategori.get(index0).getNamaKegiatan());
-            pst.setString(2, dataKategori.get(index0).getTanggalKegiatan());
-            pst.setString(3, dataKategori.get(index0).getDeskripsiKegiatan());
-            pst.setString(4, dataKategori.get(index).getIdKategori());
-            pst.execute();
-            PreparedStatement pst0 = cn.prepareStatement(sql);
-            pst0.setString(1, dataKategori.get(index).getNamaKegiatan());
-            pst0.setString(2, dataKategori.get(index).getTanggalKegiatan());
-            pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
-            pst0.setString(4, dataKategori.get(index0).getIdKategori());
-            pst0.execute();
+            String sql = "UPDATE kegiatanTable SET namaKegiatan=?,tanggalKegiatan=?,deskripsiKegiatan=? WHERE idKegiatan=?";
             if(isKategori == true){
                 sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
                 PreparedStatement pst1 = cn.prepareStatement(sql);
@@ -62,6 +50,22 @@ public class Koneksi {
                 pst3.setString(1, dataId.get(index));
                 pst3.setString(2, "99");
                 pst3.execute();
+                sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
+            } 
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, dataKategori.get(index0).getNamaKegiatan());
+            pst.setString(2, dataKategori.get(index0).getTanggalKegiatan());
+            pst.setString(3, dataKategori.get(index0).getDeskripsiKegiatan());
+            pst.setString(4, dataKategori.get(index).getIdKategori());
+            pst.execute();
+            PreparedStatement pst0 = cn.prepareStatement(sql);
+            pst0.setString(1, dataKategori.get(index).getNamaKegiatan());
+            pst0.setString(2, dataKategori.get(index).getTanggalKegiatan());
+            pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
+            pst0.setString(4, dataKategori.get(index0).getIdKategori());
+            pst0.execute();
+            if(isKategori == true){
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);

@@ -15,12 +15,11 @@ public class MainFrame extends javax.swing.JFrame {
     ArrayList<String> dataIdKategori = new ArrayList();
     ArrayList<Kegiatan> dataKategori = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
-    Connection cn;
+    
     public MainFrame() {
         initComponents();
         modelKategori = new DefaultListModel();
         pnlKategori.setModel(modelKategori);
-        cn = koneksi.getKoneksi();
         getData();
     }
     
@@ -238,6 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
             try {
                 int index = pnlKategori.getSelectedIndex();
                 String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
+                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKategori.get(index));
                 ResultSet result = pst.executeQuery();
@@ -278,6 +278,7 @@ public class MainFrame extends javax.swing.JFrame {
                 // menghapus item kategori
                 String index = dataIdKategori.get(pnlKategori.getSelectedIndex());
                 String sql = "DELETE FROM kategoriTable WHERE idKategori=?";
+                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
@@ -305,13 +306,15 @@ public class MainFrame extends javax.swing.JFrame {
             dataKategori.add(index-1, dataKategori.get(index));
             dataKategori.remove(index+1);
             pnlKategori.setSelectedIndex(index-1);
+        } else if(pnlKategori.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
 
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         int index = pnlKategori.getSelectedIndex();
         String value = pnlKategori.getSelectedValue();
-        if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()){
+        if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()-1){
             koneksi.moveItem(dataKategori, dataIdKategori, index, index+1,true);
             dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
             dataKategori.get(index+1).setIdKategori(dataIdKategori.get(index));
@@ -320,6 +323,8 @@ public class MainFrame extends javax.swing.JFrame {
             modelKategori.remove(index);
             modelKategori.add(index+1, value);
             pnlKategori.setSelectedIndex(index+1);
+        } else if (pnlKategori.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
         }
     }//GEN-LAST:event_btnMoveDownActionPerformed
 
@@ -378,6 +383,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void getData(){
         try{
             modelKategori.removeAllElements();
+            Connection cn = koneksi.getKoneksi();
             Statement stm = cn.createStatement();
             ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");
             while(rst.next()){

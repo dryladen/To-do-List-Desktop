@@ -16,14 +16,12 @@ public class TaskFrame extends javax.swing.JFrame {
     ArrayList<String> dataIdKegiatan = new ArrayList();
     ArrayList<Kegiatan> dataKegiatan = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
-    Connection cn;
     private String idKategori = "";
     
     public TaskFrame() {
         initComponents();
         modelKegiatan = new DefaultListModel();
         pnlKegiatan.setModel(modelKegiatan);
-        cn = koneksi.getKoneksi();
         getData();
     }
     
@@ -269,6 +267,7 @@ public class TaskFrame extends javax.swing.JFrame {
             try {
                 String index = dataIdKegiatan.get(pnlKegiatan.getSelectedIndex());
                 String sql = "DELETE FROM kegiatanTable WHERE idKegiatan=?";
+                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
@@ -284,6 +283,7 @@ public class TaskFrame extends javax.swing.JFrame {
             try {
                 int index = pnlKegiatan.getSelectedIndex();
                 String sql = "SELECT * FROM kegiatanTable WHERE idKegiatan=?";
+                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKegiatan.get(index));
                 ResultSet result = pst.executeQuery();
@@ -312,19 +312,34 @@ public class TaskFrame extends javax.swing.JFrame {
         int index = pnlKegiatan.getSelectedIndex();
         String value = pnlKegiatan.getSelectedValue();
         if(!pnlKegiatan.isSelectionEmpty() && index > 0){
-//            koneksi.moveItem(dataKategori, dataIdKategori, index, index-1);
+            koneksi.moveItem(dataKegiatan, dataIdKegiatan, index, index-1,false);
             modelKegiatan.remove(index);
             modelKegiatan.add(index-1, value);
-//            dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
-//            dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
-//            dataKategori.add(index-1, dataKategori.get(index));
-//            dataKategori.remove(index+1);
+            dataKegiatan.get(index).setIdKategori(dataIdKegiatan.get(index-1));
+            dataKegiatan.get(index-1).setIdKategori(dataIdKegiatan.get(index));
+            dataKegiatan.add(index-1, dataKegiatan.get(index));
+            dataKegiatan.remove(index+1);
             pnlKegiatan.setSelectedIndex(index-1);
+        } else if (pnlKegiatan.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
 
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
-        // TODO add your handling code here:
+        int index = pnlKegiatan.getSelectedIndex();
+        String value = pnlKegiatan.getSelectedValue();
+        if(!pnlKegiatan.isSelectionEmpty() && index < modelKegiatan.getSize()-1){
+            koneksi.moveItem(dataKegiatan, dataIdKegiatan, index, index+1,false);
+            dataKegiatan.get(index).setIdKategori(dataIdKegiatan.get(index+1));
+            dataKegiatan.get(index+1).setIdKategori(dataIdKegiatan.get(index));
+            dataKegiatan.add(index+2, dataKegiatan.get(index));
+            dataKegiatan.remove(index);
+            modelKegiatan.remove(index);
+            modelKegiatan.add(index+1, value);
+            pnlKegiatan.setSelectedIndex(index+1);
+        } else if (pnlKegiatan.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
+        }
     }//GEN-LAST:event_btnMoveDownActionPerformed
 
     /**
@@ -376,6 +391,7 @@ public class TaskFrame extends javax.swing.JFrame {
         try{
             modelKegiatan.removeAllElements();
             String sql = "SELECT * FROM kegiatanTable WHERE idKategori=?";
+            Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, idKategori);
             ResultSet rst = pst.executeQuery();
