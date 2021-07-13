@@ -297,92 +297,30 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
         int index = pnlKategori.getSelectedIndex();
         String value = pnlKategori.getSelectedValue();
-        String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
-        Connection cn = koneksi.getKoneksi();
         if(!pnlKategori.isSelectionEmpty() && index > 0){
-            try {
-                PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setString(1, dataKategori.get(index-1).getNamaKegiatan());
-                pst.setString(2, dataKategori.get(index-1).getTanggalKegiatan());
-                pst.setString(3, dataKategori.get(index-1).getDeskripsiKegiatan());
-                pst.setString(4, dataKategori.get(index).getIdKategori());
-                pst.execute();
-                PreparedStatement pst0 = cn.prepareStatement(sql);
-                pst0.setString(1, dataKategori.get(index).getNamaKegiatan());
-                pst0.setString(2, dataKategori.get(index).getTanggalKegiatan());
-                pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
-                pst0.setString(4, dataKategori.get(index-1).getIdKategori());
-                pst0.execute();
-                sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
-                PreparedStatement pst1 = cn.prepareStatement(sql);
-                pst1.setString(1, "99");
-                pst1.setString(2, dataIdKategori.get(index-1));
-                pst1.execute();
-                PreparedStatement pst2 = cn.prepareStatement(sql);
-                pst2.setString(1, dataIdKategori.get(index-1));
-                pst2.setString(2, dataIdKategori.get(index));
-                pst2.execute();
-                PreparedStatement pst3 = cn.prepareStatement(sql);
-                pst3.setString(1, dataIdKategori.get(index));
-                pst3.setString(2, "99");
-                pst3.execute();
-                modelKategori.remove(index);
-                modelKategori.add(index-1, value);
-                dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
-                dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
-                dataKategori.add(index-1, dataKategori.get(index));
-                dataKategori.remove(index+1);
-                pnlKategori.setSelectedIndex(index-1);
-            } catch (SQLException ex) {                
-                JOptionPane.showMessageDialog(null, "Error33 : "+ ex);
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            moveItem(index, index-1);
+            modelKategori.remove(index);
+            modelKategori.add(index-1, value);
+            dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
+            dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
+            dataKategori.add(index-1, dataKategori.get(index));
+            dataKategori.remove(index+1);
+            pnlKategori.setSelectedIndex(index-1);
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
 
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         int index = pnlKategori.getSelectedIndex();
         String value = pnlKategori.getSelectedValue();
-        String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
-        Connection cn = koneksi.getKoneksi();
         if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()){
-            try {
-                PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setString(1, dataKategori.get(index+1).getNamaKegiatan());
-                pst.setString(2, dataKategori.get(index+1).getTanggalKegiatan());
-                pst.setString(3, dataKategori.get(index+1).getDeskripsiKegiatan());
-                pst.setString(4, dataKategori.get(index).getIdKategori());
-                pst.execute();
-                PreparedStatement pst0 = cn.prepareStatement(sql);
-                pst0.setString(1, dataKategori.get(index).getNamaKegiatan());
-                pst0.setString(2, dataKategori.get(index).getTanggalKegiatan());
-                pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
-                pst0.setString(4, dataKategori.get(index+1).getIdKategori());
-                pst0.execute();
-                sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
-                PreparedStatement pst1 = cn.prepareStatement(sql);
-                pst1.setString(1, "99");
-                pst1.setString(2, dataIdKategori.get(index+1));
-                pst1.execute();
-                PreparedStatement pst2 = cn.prepareStatement(sql);
-                pst2.setString(1, dataIdKategori.get(index+1));
-                pst2.setString(2, dataIdKategori.get(index));
-                pst2.execute();
-                PreparedStatement pst3 = cn.prepareStatement(sql);
-                pst3.setString(1, dataIdKategori.get(index));
-                pst3.setString(2, "99");
-                pst3.execute();
-                dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
-                dataKategori.get(index+1).setIdKategori(dataIdKategori.get(index));
-                dataKategori.add(index+2, dataKategori.get(index));
-                dataKategori.remove(index);
-                modelKategori.remove(index);
-                modelKategori.add(index+1, value);
-                pnlKategori.setSelectedIndex(index+1);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error : "+ ex);
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            moveItem(index,index+1);
+            dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
+            dataKategori.get(index+1).setIdKategori(dataIdKategori.get(index));
+            dataKategori.add(index+2, dataKategori.get(index));
+            dataKategori.remove(index);
+            modelKategori.remove(index);
+            modelKategori.add(index+1, value);
+            pnlKategori.setSelectedIndex(index+1);
         }
     }//GEN-LAST:event_btnMoveDownActionPerformed
 
@@ -453,5 +391,39 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+
+    private void moveItem(int index, int index0) {
+        try {
+            Connection cn = koneksi.getKoneksi();
+            String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, dataKategori.get(index0).getNamaKegiatan());
+            pst.setString(2, dataKategori.get(index0).getTanggalKegiatan());
+            pst.setString(3, dataKategori.get(index0).getDeskripsiKegiatan());
+            pst.setString(4, dataKategori.get(index).getIdKategori());
+            pst.execute();
+            PreparedStatement pst0 = cn.prepareStatement(sql);
+            pst0.setString(1, dataKategori.get(index).getNamaKegiatan());
+            pst0.setString(2, dataKategori.get(index).getTanggalKegiatan());
+            pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
+            pst0.setString(4, dataKategori.get(index0).getIdKategori());
+            pst0.execute();
+            sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
+            PreparedStatement pst1 = cn.prepareStatement(sql);
+            pst1.setString(1, "99");
+            pst1.setString(2, dataIdKategori.get(index0));
+            pst1.execute();
+            PreparedStatement pst2 = cn.prepareStatement(sql);
+            pst2.setString(1, dataIdKategori.get(index0));
+            pst2.setString(2, dataIdKategori.get(index));
+            pst2.execute();
+            PreparedStatement pst3 = cn.prepareStatement(sql);
+            pst3.setString(1, dataIdKategori.get(index));
+            pst3.setString(2, "99");
+            pst3.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
