@@ -297,7 +297,7 @@ public class MainFrame extends javax.swing.JFrame {
         int index = pnlKategori.getSelectedIndex();
         String value = pnlKategori.getSelectedValue();
         if(!pnlKategori.isSelectionEmpty() && index > 0){
-            koneksi.moveItem(dataKategori, dataIdKategori, index, index-1);
+            koneksi.moveItem(dataKategori, dataIdKategori, index, index-1,true);
             modelKategori.remove(index);
             modelKategori.add(index-1, value);
             dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
@@ -312,7 +312,7 @@ public class MainFrame extends javax.swing.JFrame {
         int index = pnlKategori.getSelectedIndex();
         String value = pnlKategori.getSelectedValue();
         if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()){
-            koneksi.moveItem(dataKategori, dataIdKategori, index, index+1);
+            koneksi.moveItem(dataKategori, dataIdKategori, index, index+1,true);
             dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
             dataKategori.get(index+1).setIdKategori(dataIdKategori.get(index));
             dataKategori.add(index+2, dataKategori.get(index));

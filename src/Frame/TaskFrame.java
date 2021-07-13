@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class TaskFrame extends javax.swing.JFrame {
     DefaultListModel modelKegiatan;
     ArrayList<String> dataIdKegiatan = new ArrayList();
+    ArrayList<Kegiatan> dataKegiatan = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
     Connection cn;
     private String idKategori = "";
@@ -49,8 +50,8 @@ public class TaskFrame extends javax.swing.JFrame {
         btnTambahKegiatan = new Frame.CButton();
         btnUbahKegiatan = new Frame.CButton();
         btnHapusKegiatan = new Frame.CButton();
-        btnUbahKegiatan1 = new Frame.CButton();
-        btnUbahKegiatan3 = new Frame.CButton();
+        btnMoveUp = new Frame.CButton();
+        btnMoveDown = new Frame.CButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 204));
@@ -140,31 +141,31 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         });
 
-        btnUbahKegiatan1.setBackground(new java.awt.Color(204, 255, 255));
-        btnUbahKegiatan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/up-arrow (1).png"))); // NOI18N
-        btnUbahKegiatan1.setBorderColor(new java.awt.Color(153, 153, 153));
-        btnUbahKegiatan1.setColorClick(new java.awt.Color(102, 153, 255));
-        btnUbahKegiatan1.setMaximumSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan1.setMinimumSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan1.setPreferredSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan1.setRadius(10);
-        btnUbahKegiatan1.addActionListener(new java.awt.event.ActionListener() {
+        btnMoveUp.setBackground(new java.awt.Color(204, 255, 255));
+        btnMoveUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/up-arrow (1).png"))); // NOI18N
+        btnMoveUp.setBorderColor(new java.awt.Color(153, 153, 153));
+        btnMoveUp.setColorClick(new java.awt.Color(102, 153, 255));
+        btnMoveUp.setMaximumSize(new java.awt.Dimension(105, 23));
+        btnMoveUp.setMinimumSize(new java.awt.Dimension(105, 23));
+        btnMoveUp.setPreferredSize(new java.awt.Dimension(105, 23));
+        btnMoveUp.setRadius(10);
+        btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUbahKegiatan1ActionPerformed(evt);
+                btnMoveUpActionPerformed(evt);
             }
         });
 
-        btnUbahKegiatan3.setBackground(new java.awt.Color(204, 255, 255));
-        btnUbahKegiatan3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/down-arrow (1).png"))); // NOI18N
-        btnUbahKegiatan3.setBorderColor(new java.awt.Color(153, 153, 153));
-        btnUbahKegiatan3.setColorClick(new java.awt.Color(102, 153, 255));
-        btnUbahKegiatan3.setMaximumSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan3.setMinimumSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan3.setPreferredSize(new java.awt.Dimension(105, 23));
-        btnUbahKegiatan3.setRadius(10);
-        btnUbahKegiatan3.addActionListener(new java.awt.event.ActionListener() {
+        btnMoveDown.setBackground(new java.awt.Color(204, 255, 255));
+        btnMoveDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/down-arrow (1).png"))); // NOI18N
+        btnMoveDown.setBorderColor(new java.awt.Color(153, 153, 153));
+        btnMoveDown.setColorClick(new java.awt.Color(102, 153, 255));
+        btnMoveDown.setMaximumSize(new java.awt.Dimension(105, 23));
+        btnMoveDown.setMinimumSize(new java.awt.Dimension(105, 23));
+        btnMoveDown.setPreferredSize(new java.awt.Dimension(105, 23));
+        btnMoveDown.setRadius(10);
+        btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUbahKegiatan3ActionPerformed(evt);
+                btnMoveDownActionPerformed(evt);
             }
         });
 
@@ -195,10 +196,10 @@ public class TaskFrame extends javax.swing.JFrame {
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
                                         .addGap(8, 8, 8)
-                                        .addComponent(btnUbahKegiatan1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnMoveUp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnUbahKegiatan3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(btnMoveDown, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -209,9 +210,9 @@ public class TaskFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(btnUbahKegiatan1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMoveUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUbahKegiatan3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnMoveDown, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,13 +308,24 @@ public class TaskFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pnlKegiatanMouseClicked
 
-    private void btnUbahKegiatan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatan1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUbahKegiatan1ActionPerformed
+    private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
+        int index = pnlKegiatan.getSelectedIndex();
+        String value = pnlKegiatan.getSelectedValue();
+        if(!pnlKegiatan.isSelectionEmpty() && index > 0){
+//            koneksi.moveItem(dataKategori, dataIdKategori, index, index-1);
+            modelKegiatan.remove(index);
+            modelKegiatan.add(index-1, value);
+//            dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
+//            dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
+//            dataKategori.add(index-1, dataKategori.get(index));
+//            dataKategori.remove(index+1);
+            pnlKegiatan.setSelectedIndex(index-1);
+        }
+    }//GEN-LAST:event_btnMoveUpActionPerformed
 
-    private void btnUbahKegiatan3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatan3ActionPerformed
+    private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUbahKegiatan3ActionPerformed
+    }//GEN-LAST:event_btnMoveDownActionPerformed
 
     /**
      * @param args the command line arguments
@@ -347,10 +359,10 @@ public class TaskFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Frame.CButton btnHapusKegiatan;
     private Frame.CButton btnMenuAwal;
+    private Frame.CButton btnMoveDown;
+    private Frame.CButton btnMoveUp;
     private Frame.CButton btnTambahKegiatan;
     private Frame.CButton btnUbahKegiatan;
-    private Frame.CButton btnUbahKegiatan1;
-    private Frame.CButton btnUbahKegiatan3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -366,10 +378,11 @@ public class TaskFrame extends javax.swing.JFrame {
             String sql = "SELECT * FROM kegiatanTable WHERE idKategori=?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, idKategori);
-            ResultSet result = pst.executeQuery();
-            while(result.next()){
-                modelKegiatan.addElement(result.getString(2));
-                dataIdKegiatan.add(result.getString(1));
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                modelKegiatan.addElement(rst.getString(2));
+                dataIdKegiatan.add(rst.getString(1));
+                dataKegiatan.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4)));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);

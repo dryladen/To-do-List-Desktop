@@ -32,9 +32,8 @@ public class Koneksi {
         return connect;
     }
     
-    public void moveItem(ArrayList<Kegiatan> dataKategori,ArrayList<String> dataId, int index, int index0) {
+    public void moveItem(ArrayList<Kegiatan> dataKategori,ArrayList<String> dataId, int index, int index0, boolean isKategori) {
         try {
-            
             Connection cn = getKoneksi();
             String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
             PreparedStatement pst = cn.prepareStatement(sql);
@@ -49,19 +48,21 @@ public class Koneksi {
             pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
             pst0.setString(4, dataKategori.get(index0).getIdKategori());
             pst0.execute();
-            sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
-            PreparedStatement pst1 = cn.prepareStatement(sql);
-            pst1.setString(1, "99");
-            pst1.setString(2, dataId.get(index0));
-            pst1.execute();
-            PreparedStatement pst2 = cn.prepareStatement(sql);
-            pst2.setString(1, dataId.get(index0));
-            pst2.setString(2, dataId.get(index));
-            pst2.execute();
-            PreparedStatement pst3 = cn.prepareStatement(sql);
-            pst3.setString(1, dataId.get(index));
-            pst3.setString(2, "99");
-            pst3.execute();
+            if(isKategori == true){
+                sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
+                PreparedStatement pst1 = cn.prepareStatement(sql);
+                pst1.setString(1, "99");
+                pst1.setString(2, dataId.get(index0));
+                pst1.execute();
+                PreparedStatement pst2 = cn.prepareStatement(sql);
+                pst2.setString(1, dataId.get(index0));
+                pst2.setString(2, dataId.get(index));
+                pst2.execute();
+                PreparedStatement pst3 = cn.prepareStatement(sql);
+                pst3.setString(1, dataId.get(index));
+                pst3.setString(2, "99");
+                pst3.execute();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -71,11 +71,11 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                          <Component id="btnUbahKegiatan1" min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Component id="btnMoveUp" min="-2" pref="31" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnUbahKegiatan3" min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Component id="btnMoveDown" min="-2" pref="31" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -94,9 +94,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="btnUbahKegiatan1" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnMoveUp" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnUbahKegiatan3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnMoveDown" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane3" min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
@@ -313,7 +313,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusKegiatanActionPerformed"/>
           </Events>
         </Component>
-        <Component class="Frame.CButton" name="btnUbahKegiatan1">
+        <Component class="Frame.CButton" name="btnMoveUp">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -339,10 +339,10 @@
             <Property name="radius" type="int" value="10"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUbahKegiatan1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoveUpActionPerformed"/>
           </Events>
         </Component>
-        <Component class="Frame.CButton" name="btnUbahKegiatan3">
+        <Component class="Frame.CButton" name="btnMoveDown">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -368,7 +368,7 @@
             <Property name="radius" type="int" value="10"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUbahKegiatan3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoveDownActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
