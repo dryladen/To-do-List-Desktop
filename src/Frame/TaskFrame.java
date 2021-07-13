@@ -15,12 +15,14 @@ public class TaskFrame extends javax.swing.JFrame {
     DefaultListModel modelKegiatan;
     ArrayList<String> dataIdKegiatan = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
+    Connection cn;
     private String idKategori = "";
     
     public TaskFrame() {
         initComponents();
         modelKegiatan = new DefaultListModel();
         pnlKegiatan.setModel(modelKegiatan);
+        cn = koneksi.getKoneksi();
         getData();
     }
     
@@ -266,7 +268,6 @@ public class TaskFrame extends javax.swing.JFrame {
             try {
                 String index = dataIdKegiatan.get(pnlKegiatan.getSelectedIndex());
                 String sql = "DELETE FROM kegiatanTable WHERE idKegiatan=?";
-                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
@@ -282,7 +283,6 @@ public class TaskFrame extends javax.swing.JFrame {
             try {
                 int index = pnlKegiatan.getSelectedIndex();
                 String sql = "SELECT * FROM kegiatanTable WHERE idKegiatan=?";
-                Connection cn = koneksi.getKoneksi();
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKegiatan.get(index));
                 ResultSet result = pst.executeQuery();
@@ -364,7 +364,6 @@ public class TaskFrame extends javax.swing.JFrame {
         try{
             modelKegiatan.removeAllElements();
             String sql = "SELECT * FROM kegiatanTable WHERE idKategori=?";
-            Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, idKategori);
             ResultSet result = pst.executeQuery();
