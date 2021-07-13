@@ -21,7 +21,6 @@ public class Koneksi {
             try{
                 Class.forName(driverName);
                 connect = DriverManager.getConnection(url);
-                System.out.println("Driver ditemukan");
             } catch(ClassNotFoundException | SQLException ex){
                 JOptionPane.showMessageDialog(null, "Error22 : "+ ex);
 

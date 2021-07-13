@@ -262,7 +262,6 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlKategoriMouseClicked
 
     private void pnlKategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlKategoriKeyTyped
-        System.out.println(evt.getKeyLocation());
         if(!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 10){
             TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
             task.setVisible(true);
