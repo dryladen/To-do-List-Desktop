@@ -185,7 +185,7 @@
                 <Property name="autoscrolls" type="boolean" value="false"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder justification="1" position="1" title="Detail">
+                    <TitledBorder justification="1" position="1" title="Deskripsi">
                       <Font PropertyName="font" name="Tahoma" size="13" style="1"/>
                     </TitledBorder>
                   </Border>

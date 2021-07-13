@@ -88,14 +88,20 @@ public class InputFrame extends javax.swing.JFrame {
         jLabelNama.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
         jLabelNama.setText("Masukan nama");
 
+        inputNama.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         jLabelDeskripsi.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
         jLabelDeskripsi.setText("Deskripsi");
+
+        inputTanggal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabelTanggal.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
         jLabelTanggal.setText("Tanggal");
 
         inputDeskripsi.setColumns(20);
+        inputDeskripsi.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         inputDeskripsi.setRows(5);
+        inputDeskripsi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setViewportView(inputDeskripsi);
 
         tambahKategori.setBackground(new java.awt.Color(204, 255, 255));
