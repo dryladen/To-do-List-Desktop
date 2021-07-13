@@ -315,8 +315,13 @@ public class MainFrame extends javax.swing.JFrame {
                 pst0.execute();
                 modelKategori.remove(index);
                 modelKategori.add(index-1, value);
+                dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
+                dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
+                dataKategori.add(index-1, dataKategori.get(index));
+                dataKategori.remove(index+1);
                 pnlKategori.setSelectedIndex(index-1);
-            } catch (SQLException ex) {
+            } catch (SQLException ex) {                
+                JOptionPane.showMessageDialog(null, "Error33 : "+ ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -325,13 +330,46 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         int index = pnlKategori.getSelectedIndex();
         String value = pnlKategori.getSelectedValue();
-        String valueID = dataIdKategori.get(index);
+        String sql = "UPDATE kategoriTable SET namaKategori=?,tanggalKategori=?,deskripsiKategori=? WHERE idKategori=?";
+        Connection cn = koneksi.getKoneksi();
         if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()){
-            modelKategori.remove(index);
-            dataIdKategori.remove(index);
-            modelKategori.add(index+1, value);
-            dataIdKategori.add(index+1, valueID);
-            pnlKategori.setSelectedIndex(index+1);
+            try {
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, dataKategori.get(index+1).getNamaKegiatan());
+                pst.setString(2, dataKategori.get(index+1).getTanggalKegiatan());
+                pst.setString(3, dataKategori.get(index+1).getDeskripsiKegiatan());
+                pst.setString(4, dataKategori.get(index).getIdKategori());
+                pst.execute();
+                PreparedStatement pst0 = cn.prepareStatement(sql);
+                pst0.setString(1, dataKategori.get(index).getNamaKegiatan());
+                pst0.setString(2, dataKategori.get(index).getTanggalKegiatan());
+                pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
+                pst0.setString(4, dataKategori.get(index+1).getIdKategori());
+                pst0.execute();
+                sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
+                PreparedStatement pst1 = cn.prepareStatement(sql);
+                pst1.setString(1, "99");
+                pst1.setString(2, dataIdKategori.get(index+1));
+                pst1.execute();
+                PreparedStatement pst2 = cn.prepareStatement(sql);
+                pst2.setString(1, dataIdKategori.get(index+1));
+                pst2.setString(2, dataIdKategori.get(index));
+                pst2.execute();
+                PreparedStatement pst3 = cn.prepareStatement(sql);
+                pst3.setString(1, dataIdKategori.get(index));
+                pst3.setString(2, "99");
+                pst3.execute();
+                dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
+                dataKategori.get(index+1).setIdKategori(dataIdKategori.get(index));
+                dataKategori.add(index+2, dataKategori.get(index));
+                dataKategori.remove(index);
+                modelKategori.remove(index);
+                modelKategori.add(index+1, value);
+                pnlKategori.setSelectedIndex(index+1);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error : "+ ex);
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnMoveDownActionPerformed
 
@@ -389,24 +427,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void getData(){
         try{
-            modelKategori.removeAllElements();
-            Connection cn = koneksi.getKoneksi();
-            Statement stm = cn.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");
-            while(rst.next()){
-                modelKategori.addElement(rst.getString(2));
-                dataIdKategori.add(rst.getString(1));
-                dataKategori.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4)));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error : "+ ex);
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-    }
-
-    private void setData() {
-        try{
-            String sql = "DELETE FROM kategoriTable";
             modelKategori.removeAllElements();
             Connection cn = koneksi.getKoneksi();
             Statement stm = cn.createStatement();

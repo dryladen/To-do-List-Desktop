@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +23,8 @@ public class Koneksi {
                 connect = DriverManager.getConnection(url);
                 System.out.println("Driver ditemukan");
             } catch(ClassNotFoundException | SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error22 : "+ ex);
+
                 Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE,null,ex);
             }
         }
