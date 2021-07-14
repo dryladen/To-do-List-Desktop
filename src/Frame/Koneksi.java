@@ -64,9 +64,6 @@ public class Koneksi {
             pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
             pst0.setString(4, dataKategori.get(index0).getIdKategori());
             pst0.execute();
-            if(isKategori == true){
-                
-            }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

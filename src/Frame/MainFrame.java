@@ -287,6 +287,7 @@ public class MainFrame extends javax.swing.JFrame {
                 PreparedStatement pst1 = cn.prepareStatement(sql);
                 pst1.setString(1, index);
                 pst1.execute();
+                dataIdKategori.remove(index);
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus kategori : "+ex);
