@@ -69,6 +69,7 @@ public class InputFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         mainPanel = new javax.swing.JPanel();
         jLabelNama = new javax.swing.JLabel();
         inputNama = new javax.swing.JTextField();
@@ -275,6 +276,7 @@ public class InputFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDeskripsi;
     private javax.swing.JLabel jLabelNama;
     private javax.swing.JLabel jLabelTanggal;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private Frame.CButton tambahKategori;

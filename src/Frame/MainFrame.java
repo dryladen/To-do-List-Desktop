@@ -27,6 +27,14 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        klikKanan = new javax.swing.JPopupMenu();
+        moveKategori = new javax.swing.JMenu();
+        moveUp = new javax.swing.JMenuItem();
+        moveDown = new javax.swing.JMenuItem();
+        colorChooser = new javax.swing.JMenu();
+        warnaMerah = new javax.swing.JMenuItem();
+        warnaHijau = new javax.swing.JMenuItem();
+        warnaKuning = new javax.swing.JMenuItem();
         homePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlKategori = new javax.swing.JList<>();
@@ -39,6 +47,34 @@ public class MainFrame extends javax.swing.JFrame {
         btnHapusKategori = new Frame.CButton();
         btnMoveUp = new Frame.CButton();
         btnMoveDown = new Frame.CButton();
+
+        klikKanan.setComponentPopupMenu(klikKanan);
+
+        moveKategori.setText("Pindah posisi");
+
+        moveUp.setText("Ke atas");
+        moveKategori.add(moveUp);
+
+        moveDown.setText("Ke bawah");
+        moveKategori.add(moveDown);
+
+        klikKanan.add(moveKategori);
+
+        colorChooser.setText("Ubah warna");
+
+        warnaMerah.setForeground(new java.awt.Color(255, 0, 0));
+        warnaMerah.setText("Merah");
+        colorChooser.add(warnaMerah);
+
+        warnaHijau.setForeground(new java.awt.Color(0, 255, 0));
+        warnaHijau.setText("Hijau");
+        colorChooser.add(warnaHijau);
+
+        warnaKuning.setForeground(new java.awt.Color(255, 255, 0));
+        warnaKuning.setText("Kuning");
+        colorChooser.add(warnaKuning);
+
+        klikKanan.add(colorChooser);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-do List");
@@ -53,6 +89,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pnlKategori.setToolTipText("Tekan Enter untuk melihat kegiatan");
+        pnlKategori.setComponentPopupMenu(klikKanan);
         pnlKategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlKategori.setDoubleBuffered(true);
         pnlKategori.setDragEnabled(true);
@@ -233,7 +270,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahKategoriActionPerformed
     
     private void pnlKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKategoriMouseClicked
-        if(!pnlKategori.isSelectionEmpty()){
+        if(evt.getClickCount() == 2){
+            TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
+            task.setVisible(true);
+            this.dispose();
+        }
+        if(!pnlKategori.isSelectionEmpty() && evt.getButton() == 1){
             try {
                 int index = pnlKategori.getSelectedIndex();
                 String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
@@ -372,13 +414,21 @@ public class MainFrame extends javax.swing.JFrame {
     private Frame.CButton btnMoveUp;
     private Frame.CButton btnTambahKategori;
     private Frame.CButton btnUbahKategori;
+    private javax.swing.JMenu colorChooser;
     public static javax.swing.JPanel homePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPopupMenu klikKanan;
+    private javax.swing.JMenuItem moveDown;
+    private javax.swing.JMenu moveKategori;
+    private javax.swing.JMenuItem moveUp;
     private javax.swing.JTextArea pnlDeskripsi;
     private javax.swing.JList<String> pnlKategori;
     private javax.swing.JTextPane pnlTanggal;
+    private javax.swing.JMenuItem warnaHijau;
+    private javax.swing.JMenuItem warnaKuning;
+    private javax.swing.JMenuItem warnaMerah;
     // End of variables declaration//GEN-END:variables
 
     private void getData(){
