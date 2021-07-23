@@ -105,7 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        pnlKategori.setToolTipText("Tekan Enter untuk melihat kegiatan");
+        pnlKategori.setToolTipText("Klik 2x untuk melihat kegiatan");
         pnlKategori.setComponentPopupMenu(klikKanan);
         pnlKategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlKategori.setDoubleBuffered(true);

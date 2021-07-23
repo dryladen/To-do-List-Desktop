@@ -182,7 +182,7 @@
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="0"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Tekan Enter untuk melihat kegiatan"/>
+                <Property name="toolTipText" type="java.lang.String" value="Klik 2x untuk melihat kegiatan"/>
                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="klikKanan"/>
                 </Property>

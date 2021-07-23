@@ -58,7 +58,7 @@ public class TaskFrame extends javax.swing.JFrame {
         btnTambahKegiatan = new Frame.CButton();
         btnUbahKegiatan = new Frame.CButton();
         btnHapusKegiatan = new Frame.CButton();
-        cButton1 = new Frame.CButton();
+        btnExit = new Frame.CButton();
 
         moveKategori.setText("Pindah posisi");
 
@@ -199,11 +199,16 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         });
 
-        cButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cancel.png"))); // NOI18N
-        cButton1.setBorderColor(new java.awt.Color(0, 153, 153));
-        cButton1.setColor(new java.awt.Color(0, 153, 153));
-        cButton1.setColorClick(new java.awt.Color(0, 153, 153));
-        cButton1.setColorOver(new java.awt.Color(255, 0, 0));
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cancel.png"))); // NOI18N
+        btnExit.setBorderColor(new java.awt.Color(0, 153, 153));
+        btnExit.setColor(new java.awt.Color(0, 153, 153));
+        btnExit.setColorClick(new java.awt.Color(0, 153, 153));
+        btnExit.setColorOver(new java.awt.Color(255, 0, 0));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -219,7 +224,7 @@ public class TaskFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHapusKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +234,7 @@ public class TaskFrame extends javax.swing.JFrame {
                     .addComponent(btnTambahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUbahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHapusKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -396,6 +401,10 @@ public class TaskFrame extends javax.swing.JFrame {
         this.setLocation(xx-x,yy-y);
     }//GEN-LAST:event_jPanel1MouseDragged
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -426,11 +435,11 @@ public class TaskFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Frame.CButton btnExit;
     private Frame.CButton btnHapusKegiatan;
     private Frame.CButton btnMenuAwal;
     private Frame.CButton btnTambahKegiatan;
     private Frame.CButton btnUbahKegiatan;
-    private Frame.CButton cButton1;
     private javax.swing.JMenu colorChooser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
