@@ -71,11 +71,8 @@ public class InputFrame extends javax.swing.JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         mainPanel = new javax.swing.JPanel();
-        jLabelNama = new javax.swing.JLabel();
         inputNama = new javax.swing.JTextField();
-        jLabelDeskripsi = new javax.swing.JLabel();
         inputTanggal = new com.toedter.calendar.JDateChooser();
-        jLabelTanggal = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputDeskripsi = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
@@ -87,23 +84,14 @@ public class InputFrame extends javax.swing.JFrame {
 
         mainPanel.setBackground(new java.awt.Color(51, 204, 255));
 
-        jLabelNama.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
-        jLabelNama.setText("Masukan nama");
+        inputNama.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nama Kategori", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
-        inputNama.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-        jLabelDeskripsi.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
-        jLabelDeskripsi.setText("Deskripsi");
-
-        inputTanggal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-        jLabelTanggal.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
-        jLabelTanggal.setText("Tanggal");
+        inputTanggal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
         inputDeskripsi.setColumns(20);
         inputDeskripsi.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         inputDeskripsi.setRows(5);
-        inputDeskripsi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        inputDeskripsi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         jScrollPane1.setViewportView(inputDeskripsi);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -175,12 +163,6 @@ public class InputFrame extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(inputNama, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(inputTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNama)
-                            .addComponent(jLabelTanggal)
-                            .addComponent(jLabelDeskripsi))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -188,18 +170,12 @@ public class InputFrame extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelNama)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelTanggal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(inputTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelDeskripsi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -316,9 +292,6 @@ public class InputFrame extends javax.swing.JFrame {
     public static javax.swing.JTextArea inputDeskripsi;
     public static javax.swing.JTextField inputNama;
     public static com.toedter.calendar.JDateChooser inputTanggal;
-    private javax.swing.JLabel jLabelDeskripsi;
-    private javax.swing.JLabel jLabelNama;
-    private javax.swing.JLabel jLabelTanggal;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
