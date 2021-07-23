@@ -30,12 +30,12 @@ public class Renderer extends DefaultListCellRenderer implements ListCellRendere
         JlistCustom lst =(JlistCustom) o;
         setText(lst.getText());
         if(isKategori){
-            setIcon(new ImageIcon("C:\\Users\\hp\\Documents\\Pemrograman\\Java\\To-do-List-Desktop\\src\\Icon\\arrow-pointing-to-right.png"));
+            setIcon(new ImageIcon("arrow-pointing-to-right.png"));
         } else {
             if(lst.getIscheck().equals("1")){
-                setIcon(new ImageIcon("C:\\Users\\hp\\Documents\\Pemrograman\\Java\\To-do-List-Desktop\\src\\Icon\\check-box.png"));
+                setIcon(new ImageIcon("check-box.png"));
             } else {
-                setIcon(new ImageIcon("C:\\Users\\hp\\Documents\\Pemrograman\\Java\\To-do-List-Desktop\\src\\Icon\\blank-check-box.png"));
+                setIcon(new ImageIcon("blank-check-box.png"));
             }
         }
         

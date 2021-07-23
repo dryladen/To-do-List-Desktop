@@ -22,6 +22,7 @@ public class TaskFrame extends javax.swing.JFrame {
     public TaskFrame() {
         initComponents();
         modelKegiatan = new DefaultListModel();
+        pnlKegiatan.setCellRenderer(new Renderer(false));
         pnlKegiatan.setModel(modelKegiatan);
         getData();
     }
@@ -30,6 +31,7 @@ public class TaskFrame extends javax.swing.JFrame {
         initComponents();
         this.idKategori = idKategori;
         modelKegiatan = new DefaultListModel();
+        pnlKegiatan.setCellRenderer(new Renderer(false));
         pnlKegiatan.setModel(modelKegiatan);
         getData();
     }
@@ -467,7 +469,7 @@ public class TaskFrame extends javax.swing.JFrame {
             pst.setString(1, idKategori);
             ResultSet rst = pst.executeQuery();
             while(rst.next()){
-                modelKegiatan.addElement(rst.getString(2));
+                modelKegiatan.addElement(new JlistCustom(rst.getString(2), rst.getString(6)));
                 dataIdKegiatan.add(rst.getString(1));
                 dataKegiatan.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(6)));
             }

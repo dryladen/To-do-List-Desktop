@@ -482,9 +482,9 @@ public class MainFrame extends javax.swing.JFrame {
             Statement stm = cn.createStatement();
             ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");
             while(rst.next()){
-                modelKategori.addElement(new JlistCustom(rst.getString(2), rst.getString(5)));
+                modelKategori.addElement(new JlistCustom(rst.getString(2), ""));
                 dataIdKategori.add(rst.getString(1));
-                dataKategori.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(5)));
+                dataKategori.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),""));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
