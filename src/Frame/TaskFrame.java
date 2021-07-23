@@ -469,7 +469,7 @@ public class TaskFrame extends javax.swing.JFrame {
             while(rst.next()){
                 modelKegiatan.addElement(rst.getString(2));
                 dataIdKegiatan.add(rst.getString(1));
-                dataKegiatan.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4)));
+                dataKegiatan.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(6)));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
