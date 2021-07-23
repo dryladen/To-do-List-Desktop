@@ -17,6 +17,7 @@ public class TaskFrame extends javax.swing.JFrame {
     ArrayList<Kegiatan> dataKegiatan = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
     private String idKategori = "";
+    private int x,y;
     
     public TaskFrame() {
         initComponents();
@@ -131,6 +132,16 @@ public class TaskFrame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(pnlTanggal);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
 
         btnMenuAwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/arrow.png"))); // NOI18N
         btnMenuAwal.setBorderColor(new java.awt.Color(0, 153, 153));
@@ -373,6 +384,17 @@ public class TaskFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_moveDownActionPerformed
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        int xx = evt.getXOnScreen();
+        int yy = evt.getYOnScreen();
+        this.setLocation(xx-x,yy-y);
+    }//GEN-LAST:event_jPanel1MouseDragged
 
     /**
      * @param args the command line arguments
