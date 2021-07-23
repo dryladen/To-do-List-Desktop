@@ -52,10 +52,12 @@ public class TaskFrame extends javax.swing.JFrame {
         pnlDetail = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         pnlTanggal = new javax.swing.JTextPane();
+        jPanel1 = new javax.swing.JPanel();
         btnMenuAwal = new Frame.CButton();
         btnTambahKegiatan = new Frame.CButton();
         btnUbahKegiatan = new Frame.CButton();
         btnHapusKegiatan = new Frame.CButton();
+        cButton1 = new Frame.CButton();
 
         moveKategori.setText("Pindah posisi");
 
@@ -97,6 +99,7 @@ public class TaskFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 204));
+        setUndecorated(true);
 
         mainPanel.setBackground(new java.awt.Color(51, 204, 255));
 
@@ -127,11 +130,12 @@ public class TaskFrame extends javax.swing.JFrame {
         pnlTanggal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         jScrollPane3.setViewportView(pnlTanggal);
 
-        btnMenuAwal.setBackground(new java.awt.Color(204, 255, 255));
-        btnMenuAwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/left-arrow.png"))); // NOI18N
-        btnMenuAwal.setText("Kembali");
-        btnMenuAwal.setBorderColor(new java.awt.Color(153, 153, 153));
-        btnMenuAwal.setColorClick(new java.awt.Color(102, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
+        btnMenuAwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/arrow.png"))); // NOI18N
+        btnMenuAwal.setBorderColor(new java.awt.Color(0, 153, 153));
+        btnMenuAwal.setColor(new java.awt.Color(0, 153, 153));
+        btnMenuAwal.setColorClick(new java.awt.Color(0, 153, 153));
         btnMenuAwal.setMaximumSize(new java.awt.Dimension(105, 23));
         btnMenuAwal.setMinimumSize(new java.awt.Dimension(105, 23));
         btnMenuAwal.setPreferredSize(new java.awt.Dimension(105, 23));
@@ -142,10 +146,10 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         });
 
-        btnTambahKegiatan.setBackground(new java.awt.Color(204, 255, 255));
-        btnTambahKegiatan.setText("Tambah");
-        btnTambahKegiatan.setBorderColor(new java.awt.Color(153, 153, 153));
-        btnTambahKegiatan.setColorClick(new java.awt.Color(102, 153, 255));
+        btnTambahKegiatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/plus-sign.png"))); // NOI18N
+        btnTambahKegiatan.setBorderColor(new java.awt.Color(0, 153, 153));
+        btnTambahKegiatan.setColor(new java.awt.Color(0, 153, 153));
+        btnTambahKegiatan.setColorClick(new java.awt.Color(0, 153, 153));
         btnTambahKegiatan.setMaximumSize(new java.awt.Dimension(105, 23));
         btnTambahKegiatan.setMinimumSize(new java.awt.Dimension(105, 23));
         btnTambahKegiatan.setPreferredSize(new java.awt.Dimension(105, 23));
@@ -156,10 +160,10 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         });
 
-        btnUbahKegiatan.setBackground(new java.awt.Color(204, 255, 255));
-        btnUbahKegiatan.setText("Ubah");
-        btnUbahKegiatan.setBorderColor(new java.awt.Color(153, 153, 153));
-        btnUbahKegiatan.setColorClick(new java.awt.Color(102, 153, 255));
+        btnUbahKegiatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/edit.png"))); // NOI18N
+        btnUbahKegiatan.setBorderColor(new java.awt.Color(0, 153, 153));
+        btnUbahKegiatan.setColor(new java.awt.Color(0, 153, 153));
+        btnUbahKegiatan.setColorClick(new java.awt.Color(0, 153, 153));
         btnUbahKegiatan.setMaximumSize(new java.awt.Dimension(105, 23));
         btnUbahKegiatan.setMinimumSize(new java.awt.Dimension(105, 23));
         btnUbahKegiatan.setPreferredSize(new java.awt.Dimension(105, 23));
@@ -170,10 +174,10 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         });
 
-        btnHapusKegiatan.setBackground(new java.awt.Color(204, 255, 255));
-        btnHapusKegiatan.setText("Hapus");
-        btnHapusKegiatan.setBorderColor(new java.awt.Color(153, 153, 153));
-        btnHapusKegiatan.setColorClick(new java.awt.Color(102, 153, 255));
+        btnHapusKegiatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/trash.png"))); // NOI18N
+        btnHapusKegiatan.setBorderColor(new java.awt.Color(0, 153, 153));
+        btnHapusKegiatan.setColor(new java.awt.Color(0, 153, 153));
+        btnHapusKegiatan.setColorClick(new java.awt.Color(0, 153, 153));
         btnHapusKegiatan.setMaximumSize(new java.awt.Dimension(105, 23));
         btnHapusKegiatan.setMinimumSize(new java.awt.Dimension(105, 23));
         btnHapusKegiatan.setPreferredSize(new java.awt.Dimension(105, 23));
@@ -184,46 +188,66 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         });
 
+        cButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cancel.png"))); // NOI18N
+        cButton1.setBorderColor(new java.awt.Color(0, 153, 153));
+        cButton1.setColor(new java.awt.Color(0, 153, 153));
+        cButton1.setColorClick(new java.awt.Color(0, 153, 153));
+        cButton1.setColorOver(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnMenuAwal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTambahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUbahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHapusKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMenuAwal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUbahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHapusKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addComponent(btnMenuAwal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnTambahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnUbahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnHapusKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMenuAwal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTambahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUbahKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHapusKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -231,11 +255,15 @@ public class TaskFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -380,7 +408,9 @@ public class TaskFrame extends javax.swing.JFrame {
     private Frame.CButton btnMenuAwal;
     private Frame.CButton btnTambahKegiatan;
     private Frame.CButton btnUbahKegiatan;
+    private Frame.CButton cButton1;
     private javax.swing.JMenu colorChooser;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

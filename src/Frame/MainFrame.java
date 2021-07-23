@@ -29,8 +29,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         klikKanan = new javax.swing.JPopupMenu();
-        editItem = new javax.swing.JMenuItem();
-        deleteItem = new javax.swing.JMenuItem();
         moveKategori = new javax.swing.JMenu();
         moveUp = new javax.swing.JMenuItem();
         moveDown = new javax.swing.JMenuItem();
@@ -52,12 +50,6 @@ public class MainFrame extends javax.swing.JFrame {
         btnUbahKategori = new Frame.CButton();
 
         klikKanan.setComponentPopupMenu(klikKanan);
-
-        editItem.setText("Edit");
-        klikKanan.add(editItem);
-
-        deleteItem.setText("Delete");
-        klikKanan.add(deleteItem);
 
         moveKategori.setText("Pindah posisi");
 
@@ -264,7 +256,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -465,8 +457,6 @@ public class MainFrame extends javax.swing.JFrame {
     private Frame.CButton btnTambahKategori1;
     private Frame.CButton btnUbahKategori;
     private javax.swing.JMenu colorChooser;
-    private javax.swing.JMenuItem deleteItem;
-    private javax.swing.JMenuItem editItem;
     public static javax.swing.JPanel homePanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
