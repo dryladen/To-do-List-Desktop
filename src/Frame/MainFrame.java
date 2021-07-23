@@ -33,10 +33,6 @@ public class MainFrame extends javax.swing.JFrame {
         moveKategori = new javax.swing.JMenu();
         moveUp = new javax.swing.JMenuItem();
         moveDown = new javax.swing.JMenuItem();
-        colorChooser = new javax.swing.JMenu();
-        warnaMerah = new javax.swing.JMenuItem();
-        warnaHijau = new javax.swing.JMenuItem();
-        warnaKuning = new javax.swing.JMenuItem();
         homePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlKategori = new javax.swing.JList<>();
@@ -73,22 +69,6 @@ public class MainFrame extends javax.swing.JFrame {
         moveKategori.add(moveDown);
 
         klikKanan.add(moveKategori);
-
-        colorChooser.setText("Ubah warna");
-
-        warnaMerah.setForeground(new java.awt.Color(255, 0, 0));
-        warnaMerah.setText("Merah");
-        colorChooser.add(warnaMerah);
-
-        warnaHijau.setForeground(new java.awt.Color(0, 255, 0));
-        warnaHijau.setText("Hijau");
-        colorChooser.add(warnaHijau);
-
-        warnaKuning.setForeground(new java.awt.Color(255, 255, 0));
-        warnaKuning.setText("Kuning");
-        colorChooser.add(warnaKuning);
-
-        klikKanan.add(colorChooser);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-do List");
@@ -457,7 +437,6 @@ public class MainFrame extends javax.swing.JFrame {
     private Frame.CButton btnHapusKategori;
     private Frame.CButton btnTambahKategori1;
     private Frame.CButton btnUbahKategori;
-    private javax.swing.JMenu colorChooser;
     public static javax.swing.JPanel homePanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -470,9 +449,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea pnlDeskripsi;
     private javax.swing.JList<String> pnlKategori;
     private javax.swing.JTextPane pnlTanggal;
-    private javax.swing.JMenuItem warnaHijau;
-    private javax.swing.JMenuItem warnaKuning;
-    private javax.swing.JMenuItem warnaMerah;
     // End of variables declaration//GEN-END:variables
 
     private void getData(){

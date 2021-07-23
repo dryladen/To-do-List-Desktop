@@ -44,10 +44,6 @@ public class TaskFrame extends javax.swing.JFrame {
         moveKategori = new javax.swing.JMenu();
         moveUp = new javax.swing.JMenuItem();
         moveDown = new javax.swing.JMenuItem();
-        colorChooser = new javax.swing.JMenu();
-        warnaMerah = new javax.swing.JMenuItem();
-        warnaHijau = new javax.swing.JMenuItem();
-        warnaKuning = new javax.swing.JMenuItem();
         mainPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlKegiatan = new javax.swing.JList<>();
@@ -83,22 +79,6 @@ public class TaskFrame extends javax.swing.JFrame {
         moveKategori.add(moveDown);
 
         klikKanan.add(moveKategori);
-
-        colorChooser.setText("Ubah warna");
-
-        warnaMerah.setForeground(new java.awt.Color(255, 0, 0));
-        warnaMerah.setText("Merah");
-        colorChooser.add(warnaMerah);
-
-        warnaHijau.setForeground(new java.awt.Color(0, 255, 0));
-        warnaHijau.setText("Hijau");
-        colorChooser.add(warnaHijau);
-
-        warnaKuning.setForeground(new java.awt.Color(255, 255, 0));
-        warnaKuning.setText("Kuning");
-        colorChooser.add(warnaKuning);
-
-        klikKanan.add(colorChooser);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 204));
@@ -329,6 +309,26 @@ public class TaskFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHapusKegiatanActionPerformed
 
     private void pnlKegiatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKegiatanMouseClicked
+        if(evt.getClickCount() == 2){
+            try {
+                int index = pnlKegiatan.getSelectedIndex();
+                String sql = "UPDATE kegiatanTable SET isCheck=1 WHERE idKegiatan=?";
+                if(dataKegiatan.get(index).getIsCheck().equals("1")){
+                    sql = "UPDATE kegiatanTable SET isCheck=0 WHERE idKegiatan=?";
+                    dataKegiatan.get(index).setIsCheck("0");
+                } else {
+                    dataKegiatan.get(index).setIsCheck("1");
+                }
+                Connection cn = koneksi.getKoneksi();
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, dataIdKegiatan.get(index));
+                pst.execute();
+                getData();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         if(!pnlKegiatan.isSelectionEmpty()){
             try {
                 int index = pnlKegiatan.getSelectedIndex();
@@ -442,7 +442,6 @@ public class TaskFrame extends javax.swing.JFrame {
     private Frame.CButton btnMenuAwal;
     private Frame.CButton btnTambahKegiatan;
     private Frame.CButton btnUbahKegiatan;
-    private javax.swing.JMenu colorChooser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -455,9 +454,6 @@ public class TaskFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea pnlDetail;
     private javax.swing.JList<String> pnlKegiatan;
     private javax.swing.JTextPane pnlTanggal;
-    private javax.swing.JMenuItem warnaHijau;
-    private javax.swing.JMenuItem warnaKuning;
-    private javax.swing.JMenuItem warnaMerah;
     // End of variables declaration//GEN-END:variables
 
     private void getData() {
