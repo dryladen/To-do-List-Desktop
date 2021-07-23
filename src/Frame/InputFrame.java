@@ -83,7 +83,7 @@ public class InputFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        mainPanel.setBackground(new java.awt.Color(51, 255, 204));
+        mainPanel.setBackground(new java.awt.Color(51, 204, 255));
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabelNama.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
