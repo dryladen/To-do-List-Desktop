@@ -27,14 +27,12 @@ public class InputFrame extends javax.swing.JFrame {
     public InputFrame(boolean isKategori) {
         initComponents();
         this.isKategori = isKategori;
-        jLabelNama.setText("Masukan nama kategori");
     }
     
     public InputFrame(boolean isKategori, String idKategori) {
         initComponents();
         this.isKategori = isKategori;
         this.idKategori = idKategori;
-        jLabelNama.setText("Masukan nama kegiatan");
     }
     public InputFrame(boolean dataUpdate, String idKategori,boolean isKategori) {
         try {
@@ -43,7 +41,6 @@ public class InputFrame extends javax.swing.JFrame {
             this.idKategori = idKategori;
             this.isKategori = isKategori;
             tambahKategori.setText("Ubah");
-            jLabelNama.setText("Masukan nama kategori");
             getDataUpdate();
         } catch (ParseException ex) {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +55,6 @@ public class InputFrame extends javax.swing.JFrame {
             this.idKategori = idKategori;
             this.idKegiatan = idKegiatan;
             tambahKategori.setText("Ubah");
-            jLabelNama.setText("Masukan nama kegiatan");
             getDataUpdate();
         } catch (ParseException ex) {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,7 +80,7 @@ public class InputFrame extends javax.swing.JFrame {
 
         mainPanel.setBackground(new java.awt.Color(51, 204, 255));
 
-        inputNama.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nama Kategori", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
+        inputNama.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nama Kategori / Kegiatan", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
         inputTanggal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
@@ -173,9 +169,9 @@ public class InputFrame extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
-                .addComponent(inputTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
