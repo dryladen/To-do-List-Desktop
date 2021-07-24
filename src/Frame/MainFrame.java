@@ -363,7 +363,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
         int index = pnlKategori.getSelectedIndex();
-        String value = pnlKategori.getSelectedValue();
+        System.out.println("A");
+        String value = dataKategori.get(index).getNamaKegiatan();
         if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()-1){
             koneksi.moveItem(dataKategori, dataIdKategori, index, index+1,true);
             dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
@@ -371,7 +372,7 @@ public class MainFrame extends javax.swing.JFrame {
             dataKategori.add(index+2, dataKategori.get(index));
             dataKategori.remove(index);
             modelKategori.remove(index);
-            modelKategori.add(index+1, value);
+            modelKategori.add(index+1, new JlistCustom(value, ""));
             pnlKategori.setSelectedIndex(index+1);
         } else if (pnlKategori.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Pilih kategori dulu");

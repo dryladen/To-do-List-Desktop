@@ -8,6 +8,7 @@ package Frame;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -17,7 +18,7 @@ import javax.swing.ListCellRenderer;
  *
  * @author Laden
  */
-public class Renderer extends DefaultListCellRenderer implements ListCellRenderer<Object>, ActionListener{
+public class Renderer extends DefaultListCellRenderer implements ListCellRenderer<Object>, ActionListener, Serializable{
     
     private boolean isKategori = true;
     public Renderer(boolean isKategori) {
