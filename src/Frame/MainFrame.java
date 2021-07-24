@@ -346,11 +346,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void moveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpActionPerformed
         int index = pnlKategori.getSelectedIndex();
-        String value = pnlKategori.getSelectedValue();
+        String value = dataKategori.get(index).getNamaKegiatan();
         if(!pnlKategori.isSelectionEmpty() && index > 0){
             koneksi.moveItem(dataKategori, dataIdKategori, index, index-1,true);
             modelKategori.remove(index);
-            modelKategori.add(index-1, value);
+            modelKategori.add(index-1, new JlistCustom(value, ""));
             dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
             dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
             dataKategori.add(index-1, dataKategori.get(index));
@@ -363,7 +363,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
         int index = pnlKategori.getSelectedIndex();
-        System.out.println("A");
         String value = dataKategori.get(index).getNamaKegiatan();
         if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()-1){
             koneksi.moveItem(dataKategori, dataIdKategori, index, index+1,true);
