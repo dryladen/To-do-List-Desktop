@@ -6,6 +6,8 @@
 package Frame;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -15,7 +17,7 @@ import javax.swing.ListCellRenderer;
  *
  * @author Laden
  */
-public class Renderer extends DefaultListCellRenderer implements ListCellRenderer<Object>{
+public class Renderer extends DefaultListCellRenderer implements ListCellRenderer<Object>, ActionListener{
     
     private boolean isKategori = true;
     public Renderer(boolean isKategori) {
@@ -50,6 +52,11 @@ public class Renderer extends DefaultListCellRenderer implements ListCellRendere
         setEnabled(true);
         setFont(jlist.getFont());
         return this;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
