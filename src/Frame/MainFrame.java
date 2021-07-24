@@ -33,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
         moveKategori = new javax.swing.JMenu();
         moveUp = new javax.swing.JMenuItem();
         moveDown = new javax.swing.JMenuItem();
+        cButton1 = new Frame.CButton();
         homePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlKategori = new javax.swing.JList<>();
@@ -69,6 +70,8 @@ public class MainFrame extends javax.swing.JFrame {
         moveKategori.add(moveDown);
 
         klikKanan.add(moveKategori);
+
+        cButton1.setText("cButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-do List");
@@ -437,6 +440,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Frame.CButton btnHapusKategori;
     private Frame.CButton btnTambahKategori1;
     private Frame.CButton btnUbahKategori;
+    private Frame.CButton cButton1;
     public static javax.swing.JPanel homePanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

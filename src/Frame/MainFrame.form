@@ -44,6 +44,11 @@
         </Menu>
       </SubComponents>
     </Container>
+    <Component class="Frame.CButton" name="cButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="cButton1"/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>

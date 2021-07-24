@@ -5,6 +5,7 @@
  */
 package Frame;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,7 +44,7 @@ public class Renderer extends DefaultListCellRenderer implements ListCellRendere
         }
         
         if(bln){
-            setBackground(jlist.getSelectionBackground());
+            setBackground(new Color(51,204,255));
             setForeground(jlist.getSelectionForeground());
         } else {
             setBackground(jlist.getBackground());
