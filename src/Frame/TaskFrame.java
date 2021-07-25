@@ -21,6 +21,7 @@ public class TaskFrame extends javax.swing.JFrame {
     
     public TaskFrame() {
         initComponents();
+        getLokasi();
         modelKegiatan = new DefaultListModel();
         pnlKegiatan.setCellRenderer(new Renderer(false));
         pnlKegiatan.setModel(modelKegiatan);
@@ -29,6 +30,7 @@ public class TaskFrame extends javax.swing.JFrame {
     
     public TaskFrame(String idKategori) {
         initComponents();
+        getLokasi();
         this.idKategori = idKategori;
         modelKegiatan = new DefaultListModel();
         pnlKegiatan.setCellRenderer(new Renderer(false));
@@ -269,12 +271,14 @@ public class TaskFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuAwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuAwalActionPerformed
+        setLokasi();
         MainFrame main = new MainFrame();
         main.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuAwalActionPerformed
 
     private void btnTambahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKegiatanActionPerformed
+        setLokasi();
         InputFrame input = new InputFrame(false,idKategori);
         input.setVisible(true);
         this.dispose();
@@ -405,6 +409,7 @@ public class TaskFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        setLokasi();
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 

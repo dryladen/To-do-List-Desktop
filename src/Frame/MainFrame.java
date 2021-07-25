@@ -276,6 +276,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     private void pnlKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKategoriMouseClicked
         if(evt.getClickCount() == 2){
+            setLokasi();
             TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
             task.setVisible(true);
             this.dispose();
@@ -311,6 +312,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void pnlKategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlKategoriKeyTyped
         if(!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 10){
+            setLokasi();
             TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
             task.setVisible(true);
             this.dispose();
@@ -377,6 +379,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_moveDownActionPerformed
 
     private void btnTambahKategori1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKategori1ActionPerformed
+        setLokasi();
         InputFrame inputFrame = new InputFrame(true);
         inputFrame.setVisible(true);
         this.dispose();
