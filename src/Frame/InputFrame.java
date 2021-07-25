@@ -335,4 +335,17 @@ public class InputFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
+    
+    private void getLokasi() {
+        try {
+            Connection cn = koneksi.getKoneksi();
+            Statement stm = cn.createStatement();
+            ResultSet rst = stm.executeQuery("SELECT * FROM lokasiTable");
+            while (rst.next()) {
+                this.setBounds(rst.getInt(1), rst.getInt(2), rst.getInt(3), rst.getInt(4));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
