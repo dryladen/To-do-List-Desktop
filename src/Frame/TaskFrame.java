@@ -474,4 +474,20 @@ public class TaskFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
         } 
     }
+    
+    private void setLokasi() {
+        try{
+            String sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
+            Connection cn = koneksi.getKoneksi();
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setInt(1, getX());
+            pst.setInt(2, getY());
+            pst.setInt(3, getWidth());
+            pst.setInt(4, getHeight());
+            pst.execute();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error : "+ ex);
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
 }

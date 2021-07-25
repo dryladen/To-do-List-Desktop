@@ -15,11 +15,11 @@ public class MainFrame extends javax.swing.JFrame {
     ArrayList<String> dataIdKategori = new ArrayList();
     ArrayList<Kegiatan> dataKategori = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
-    private int x,y;
+    private int x,y,fWidth,fHeight;
     
     public MainFrame() {
         initComponents();
-//        getLokasi();
+        getLokasi();
         modelKategori = new DefaultListModel();
         pnlKategori.setCellRenderer(new Renderer(true));
         pnlKategori.setModel(modelKategori);
@@ -78,15 +78,13 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("To-do List");
         setAutoRequestFocus(false);
         setLocationByPlatform(true);
-        setMinimumSize(new java.awt.Dimension(150, 386));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                tutupFrame(evt);
-            }
-        });
+        setMaximumSize(new java.awt.Dimension(312, 386));
+        setMinimumSize(new java.awt.Dimension(80, 386));
+        setUndecorated(true);
 
         homePanel.setBackground(new java.awt.Color(51, 204, 255));
-        homePanel.setMinimumSize(new java.awt.Dimension(150, 386));
+        homePanel.setMaximumSize(new java.awt.Dimension(312, 386));
+        homePanel.setMinimumSize(new java.awt.Dimension(50, 200));
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -96,6 +94,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.setDoubleBuffered(true);
         pnlKategori.setDragEnabled(true);
         pnlKategori.setDropMode(javax.swing.DropMode.INSERT);
+        pnlKategori.setMinimumSize(new java.awt.Dimension(80, 0));
         pnlKategori.setRequestFocusEnabled(false);
         pnlKategori.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -215,13 +214,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnHapusKategori, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnTambahKategori1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(btnUbahKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(btnUbahKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambahKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -234,7 +231,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -242,8 +239,8 @@ public class MainFrame extends javax.swing.JFrame {
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,7 +257,7 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(homePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -345,10 +342,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
 
-    private void tutupFrame(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_tutupFrame
-//        setData();
-    }//GEN-LAST:event_tutupFrame
-
     private void moveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpActionPerformed
         int index = pnlKategori.getSelectedIndex();
         String value = dataKategori.get(index).getNamaKegiatan();
@@ -390,6 +383,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahKategori1ActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        setLokasi();
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
@@ -479,10 +473,10 @@ public class MainFrame extends javax.swing.JFrame {
             String sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
             Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setString(1, "10");
-            pst.setString(2, "20");
-            pst.setString(3, "30");
-            pst.setString(4, "40");
+            pst.setInt(1, getX());
+            pst.setInt(2, getY());
+            pst.setInt(3, getWidth());
+            pst.setInt(4, getHeight());
             pst.execute();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
