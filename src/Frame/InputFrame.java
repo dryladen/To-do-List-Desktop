@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 /**
@@ -26,17 +27,23 @@ public class InputFrame extends javax.swing.JFrame {
     
     public InputFrame(boolean isKategori) {
         initComponents();
+        setIconImage(new ImageIcon("to-do-list.png").getImage());
+        getLokasi();
         this.isKategori = isKategori;
     }
     
     public InputFrame(boolean isKategori, String idKategori) {
         initComponents();
+        setIconImage(new ImageIcon("to-do-list.png").getImage());
+        getLokasi();
         this.isKategori = isKategori;
         this.idKategori = idKategori;
     }
     public InputFrame(boolean dataUpdate, String idKategori,boolean isKategori) {
         try {
             initComponents();
+            setIconImage(new ImageIcon("to-do-list.png").getImage());
+            getLokasi();
             this.isDataUpdate = dataUpdate;
             this.idKategori = idKategori;
             this.isKategori = isKategori;
@@ -50,6 +57,8 @@ public class InputFrame extends javax.swing.JFrame {
     public InputFrame(boolean dataUpdate, String idKategori, String idKegiatan, boolean isKategori) {
         try {
             initComponents();
+            setIconImage(new ImageIcon("to-do-list.png").getImage());
+            getLokasi();
             this.isDataUpdate = dataUpdate;
             this.isKategori = isKategori;
             this.idKategori = idKategori;
@@ -77,8 +86,10 @@ public class InputFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(312, 386));
 
         mainPanel.setBackground(new java.awt.Color(51, 204, 255));
+        mainPanel.setPreferredSize(new java.awt.Dimension(312, 386));
 
         inputNama.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nama Kategori / Kegiatan", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
@@ -166,10 +177,10 @@ public class InputFrame extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                .addComponent(inputTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -215,6 +226,7 @@ public class InputFrame extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
                 }
+                setLokasi();
                 MainFrame main = new MainFrame();
                 main.setVisible(true);
                 this.dispose();
@@ -244,6 +256,7 @@ public class InputFrame extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Gagal membuat kegiatan baru : "+ex);
                 }
+                setLokasi();
                 TaskFrame task = new TaskFrame(idKategori);
                 task.setVisible(true);
                 this.dispose();
@@ -253,10 +266,12 @@ public class InputFrame extends javax.swing.JFrame {
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         if(this.isKategori == true){
+            setLokasi();
             MainFrame main = new MainFrame();
             main.setVisible(true);
             this.dispose();
         } else {
+            setLokasi();
             TaskFrame task = new TaskFrame(idKategori);
             task.setVisible(true);
             this.dispose();

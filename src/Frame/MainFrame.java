@@ -1,9 +1,11 @@
 package Frame;
 
+import java.awt.Image;
 import javax.swing.DefaultListModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         initComponents();
+        setIconImage(new ImageIcon("to-do-list.png").getImage());
         getLokasi();
         modelKategori = new DefaultListModel();
         pnlKategori.setCellRenderer(new Renderer(true));
@@ -78,13 +81,9 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("To-do List");
         setAutoRequestFocus(false);
         setLocationByPlatform(true);
-        setMaximumSize(new java.awt.Dimension(312, 386));
-        setMinimumSize(new java.awt.Dimension(80, 386));
         setUndecorated(true);
 
         homePanel.setBackground(new java.awt.Color(51, 204, 255));
-        homePanel.setMaximumSize(new java.awt.Dimension(312, 386));
-        homePanel.setMinimumSize(new java.awt.Dimension(50, 200));
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -244,8 +243,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -256,9 +255,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
