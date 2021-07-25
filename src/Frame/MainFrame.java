@@ -19,6 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         initComponents();
+//        getLokasi();
         modelKategori = new DefaultListModel();
         pnlKategori.setCellRenderer(new Renderer(true));
         pnlKategori.setModel(modelKategori);
@@ -77,8 +78,7 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("To-do List");
         setAutoRequestFocus(false);
         setLocationByPlatform(true);
-        setUndecorated(true);
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(150, 386));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 tutupFrame(evt);
@@ -86,6 +86,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         homePanel.setBackground(new java.awt.Color(51, 204, 255));
+        homePanel.setMinimumSize(new java.awt.Dimension(150, 386));
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -95,6 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.setDoubleBuffered(true);
         pnlKategori.setDragEnabled(true);
         pnlKategori.setDropMode(javax.swing.DropMode.INSERT);
+        pnlKategori.setRequestFocusEnabled(false);
         pnlKategori.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKategoriMouseClicked(evt);
@@ -125,6 +127,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(pnlDeskripsi);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setMinimumSize(new java.awt.Dimension(150, 386));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -228,11 +231,11 @@ public class MainFrame extends javax.swing.JFrame {
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         homePanelLayout.setVerticalGroup(
@@ -262,7 +265,6 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUbahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKategoriActionPerformed
@@ -470,5 +472,18 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+
+    private void getLokasi() {
+        try {
+            Connection cn = koneksi.getKoneksi();
+            Statement stm = cn.createStatement();
+            ResultSet rst = stm.executeQuery("SELECT * FROM lokasiTable");
+            while (rst.next()) {
+                this.setBounds(rst.getInt(1), rst.getInt(2), rst.getInt(3), rst.getInt(4));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

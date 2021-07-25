@@ -331,6 +331,7 @@ public class TaskFrame extends javax.swing.JFrame {
         }
         if(!pnlKegiatan.isSelectionEmpty()){
             try {
+                
                 int index = pnlKegiatan.getSelectedIndex();
                 String sql = "SELECT * FROM kegiatanTable WHERE idKegiatan=?";
                 Connection cn = koneksi.getKoneksi();
