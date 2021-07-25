@@ -17,7 +17,7 @@ public class MainFrame extends javax.swing.JFrame {
     ArrayList<String> dataIdKategori = new ArrayList();
     ArrayList<Kegiatan> dataKategori = new ArrayList();
     private final Koneksi koneksi = new Koneksi();
-    private int x,y,fWidth,fHeight;
+    private int x,y;
     
     public MainFrame() {
         initComponents();
@@ -38,6 +38,11 @@ public class MainFrame extends javax.swing.JFrame {
         moveUp = new javax.swing.JMenuItem();
         moveDown = new javax.swing.JMenuItem();
         cButton1 = new Frame.CButton();
+        aturUkuran = new javax.swing.JPopupMenu();
+        ukuran = new javax.swing.JMenu();
+        ukuran1 = new javax.swing.JMenuItem();
+        ukuran2 = new javax.swing.JMenuItem();
+        ukuran3 = new javax.swing.JMenuItem();
         homePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlKategori = new javax.swing.JList<>();
@@ -45,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlTanggal = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         pnlDeskripsi = new javax.swing.JTextArea();
-        jPanel1 = new javax.swing.JPanel();
+        jtaskBar = new javax.swing.JPanel();
         btnExit = new Frame.CButton();
         btnHapusKategori = new Frame.CButton();
         btnTambahKategori1 = new Frame.CButton();
@@ -76,6 +81,19 @@ public class MainFrame extends javax.swing.JFrame {
         klikKanan.add(moveKategori);
 
         cButton1.setText("cButton1");
+
+        ukuran.setText("Atur Ukuran");
+
+        ukuran1.setText("jMenuItem1");
+        ukuran.add(ukuran1);
+
+        ukuran2.setText("jMenuItem2");
+        ukuran.add(ukuran2);
+
+        ukuran3.setText("jMenuItem3");
+        ukuran.add(ukuran3);
+
+        aturUkuran.add(ukuran);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-do List");
@@ -124,16 +142,18 @@ public class MainFrame extends javax.swing.JFrame {
         pnlDeskripsi.setSelectionColor(new java.awt.Color(51, 255, 51));
         jScrollPane2.setViewportView(pnlDeskripsi);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel1.setMinimumSize(new java.awt.Dimension(150, 386));
-        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jtaskBar.setBackground(new java.awt.Color(0, 153, 153));
+        jtaskBar.setToolTipText("Klik kanan untuk mengatur ukuran");
+        jtaskBar.setComponentPopupMenu(aturUkuran);
+        jtaskBar.setMinimumSize(new java.awt.Dimension(150, 386));
+        jtaskBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel1MouseDragged(evt);
+                jtaskBarMouseDragged(evt);
             }
         });
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtaskBar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
+                jtaskBarMousePressed(evt);
             }
         });
 
@@ -195,11 +215,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jtaskBarLayout = new javax.swing.GroupLayout(jtaskBar);
+        jtaskBar.setLayout(jtaskBarLayout);
+        jtaskBarLayout.setHorizontalGroup(
+            jtaskBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtaskBarLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnTambahKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,12 +230,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jtaskBarLayout.setVerticalGroup(
+            jtaskBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnHapusKategori, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnUbahKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jtaskBarLayout.createSequentialGroup()
+                .addGroup(jtaskBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTambahKategori1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -232,12 +252,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1))
                 .addContainerGap())
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jtaskBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtaskBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -334,6 +354,8 @@ public class MainFrame extends javax.swing.JFrame {
                 pst1.setString(1, index);
                 pst1.execute();
                 dataIdKategori.remove(index);
+                pnlTanggal.setText("-");
+                pnlDeskripsi.setText("-");
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus kategori : "+ex);
@@ -391,16 +413,16 @@ public class MainFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+    private void jtaskBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtaskBarMousePressed
         x = evt.getX();
         y = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
+    }//GEN-LAST:event_jtaskBarMousePressed
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+    private void jtaskBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtaskBarMouseDragged
         int xx = evt.getXOnScreen();
         int yy = evt.getYOnScreen();
         this.setLocation(xx-x,yy-y);
-    }//GEN-LAST:event_jPanel1MouseDragged
+    }//GEN-LAST:event_jtaskBarMouseDragged
 
     /**
      * @param args the command line arguments
@@ -436,16 +458,17 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu aturUkuran;
     private Frame.CButton btnExit;
     private Frame.CButton btnHapusKategori;
     private Frame.CButton btnTambahKategori1;
     private Frame.CButton btnUbahKategori;
     private Frame.CButton cButton1;
     public static javax.swing.JPanel homePanel;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel jtaskBar;
     private javax.swing.JPopupMenu klikKanan;
     private javax.swing.JMenuItem moveDown;
     private javax.swing.JMenu moveKategori;
@@ -453,6 +476,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea pnlDeskripsi;
     private javax.swing.JList<String> pnlKategori;
     private javax.swing.JTextPane pnlTanggal;
+    private javax.swing.JMenu ukuran;
+    private javax.swing.JMenuItem ukuran1;
+    private javax.swing.JMenuItem ukuran2;
+    private javax.swing.JMenuItem ukuran3;
     // End of variables declaration//GEN-END:variables
 
     private void getData(){
