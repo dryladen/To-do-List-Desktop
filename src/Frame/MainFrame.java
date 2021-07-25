@@ -255,7 +255,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -342,34 +342,38 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
 
     private void moveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpActionPerformed
-        int index = pnlKategori.getSelectedIndex();
-        String value = dataKategori.get(index).getNamaKegiatan();
-        if(!pnlKategori.isSelectionEmpty() && index > 0){
-            koneksi.moveItem(dataKategori, dataIdKategori, index, index-1,true);
-            modelKategori.remove(index);
-            modelKategori.add(index-1, new JlistCustom(value, ""));
-            dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
-            dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
-            dataKategori.add(index-1, dataKategori.get(index));
-            dataKategori.remove(index+1);
-            pnlKategori.setSelectedIndex(index-1);
+        if(!pnlKategori.isSelectionEmpty()){
+            int index = pnlKategori.getSelectedIndex();
+            String value = dataKategori.get(index).getNamaKegiatan();
+            if(index > 0){
+                koneksi.moveItem(dataKategori, dataIdKategori, index, index-1,true);
+                modelKategori.remove(index);
+                modelKategori.add(index-1, new JlistCustom(value, ""));
+                dataKategori.get(index).setIdKategori(dataIdKategori.get(index-1));
+                dataKategori.get(index-1).setIdKategori(dataIdKategori.get(index));
+                dataKategori.add(index-1, dataKategori.get(index));
+                dataKategori.remove(index+1);
+                pnlKategori.setSelectedIndex(index-1);
+            }
         } else if(pnlKategori.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
         }
     }//GEN-LAST:event_moveUpActionPerformed
 
     private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
-        int index = pnlKategori.getSelectedIndex();
-        String value = dataKategori.get(index).getNamaKegiatan();
-        if(!pnlKategori.isSelectionEmpty() && index < modelKategori.getSize()-1){
-            koneksi.moveItem(dataKategori, dataIdKategori, index, index+1,true);
-            dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
-            dataKategori.get(index+1).setIdKategori(dataIdKategori.get(index));
-            dataKategori.add(index+2, dataKategori.get(index));
-            dataKategori.remove(index);
-            modelKategori.remove(index);
-            modelKategori.add(index+1, new JlistCustom(value, ""));
-            pnlKategori.setSelectedIndex(index+1);
+        if(!pnlKategori.isSelectionEmpty()){
+            int index = pnlKategori.getSelectedIndex();
+            String value = dataKategori.get(index).getNamaKegiatan();
+            if(index < modelKategori.getSize()-1){
+                koneksi.moveItem(dataKategori, dataIdKategori, index, index+1,true);
+                dataKategori.get(index).setIdKategori(dataIdKategori.get(index+1));
+                dataKategori.get(index+1).setIdKategori(dataIdKategori.get(index));
+                dataKategori.add(index+2, dataKategori.get(index));
+                dataKategori.remove(index);
+                modelKategori.remove(index);
+                modelKategori.add(index+1, new JlistCustom(value, ""));
+                pnlKategori.setSelectedIndex(index+1);
+            }
         } else if (pnlKategori.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
         }
