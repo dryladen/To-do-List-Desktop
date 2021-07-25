@@ -473,7 +473,22 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-
+    
+    private void setLokasi() {
+        try{
+            String sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
+            Connection cn = koneksi.getKoneksi();
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, "10");
+            pst.setString(2, "20");
+            pst.setString(3, "30");
+            pst.setString(4, "40");
+            pst.execute();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error : "+ ex);
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
     private void getLokasi() {
         try {
             Connection cn = koneksi.getKoneksi();
