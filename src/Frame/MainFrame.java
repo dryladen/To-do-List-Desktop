@@ -436,7 +436,11 @@ public class MainFrame extends javax.swing.JFrame {
     private void jtaskBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtaskBarMouseDragged
         int xx = evt.getXOnScreen();
         int yy = evt.getYOnScreen();
-        this.setLocation(xx-x,yy-y);
+        if(yy-y < 40){
+            this.setLocation(xx-x,0);
+        } else {
+            this.setLocation(xx-x,yy-y);
+        }
     }//GEN-LAST:event_jtaskBarMouseDragged
 
     private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
