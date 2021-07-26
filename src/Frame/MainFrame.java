@@ -1,6 +1,5 @@
 package Frame;
 
-import java.awt.Image;
 import javax.swing.DefaultListModel;
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ public class MainFrame extends javax.swing.JFrame {
         moveKategori = new javax.swing.JMenu();
         moveUp = new javax.swing.JMenuItem();
         moveDown = new javax.swing.JMenuItem();
-        cButton1 = new Frame.CButton();
         aturUkuran = new javax.swing.JPopupMenu();
         ukuran = new javax.swing.JMenu();
         ukuran1 = new javax.swing.JMenuItem();
@@ -80,17 +78,33 @@ public class MainFrame extends javax.swing.JFrame {
 
         klikKanan.add(moveKategori);
 
-        cButton1.setText("cButton1");
-
         ukuran.setText("Atur Ukuran");
 
-        ukuran1.setText("jMenuItem1");
+        ukuran1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran1.setText("600x500");
+        ukuran1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran1ActionPerformed(evt);
+            }
+        });
         ukuran.add(ukuran1);
 
-        ukuran2.setText("jMenuItem2");
+        ukuran2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran2.setText("312x386");
+        ukuran2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran2ActionPerformed(evt);
+            }
+        });
         ukuran.add(ukuran2);
 
-        ukuran3.setText("jMenuItem3");
+        ukuran3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran3.setText("200x386");
+        ukuran3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran3ActionPerformed(evt);
+            }
+        });
         ukuran.add(ukuran3);
 
         aturUkuran.add(ukuran);
@@ -102,6 +116,7 @@ public class MainFrame extends javax.swing.JFrame {
         setUndecorated(true);
 
         homePanel.setBackground(new java.awt.Color(51, 204, 255));
+        homePanel.setPreferredSize(new java.awt.Dimension(312, 386));
 
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -424,6 +439,18 @@ public class MainFrame extends javax.swing.JFrame {
         this.setLocation(xx-x,yy-y);
     }//GEN-LAST:event_jtaskBarMouseDragged
 
+    private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
+        setSize(600, 500);
+    }//GEN-LAST:event_ukuran1ActionPerformed
+
+    private void ukuran2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran2ActionPerformed
+        setSize(312, 386);
+    }//GEN-LAST:event_ukuran2ActionPerformed
+
+    private void ukuran3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran3ActionPerformed
+        setSize(200, 386);
+    }//GEN-LAST:event_ukuran3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -463,7 +490,6 @@ public class MainFrame extends javax.swing.JFrame {
     private Frame.CButton btnHapusKategori;
     private Frame.CButton btnTambahKategori1;
     private Frame.CButton btnUbahKategori;
-    private Frame.CButton cButton1;
     public static javax.swing.JPanel homePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

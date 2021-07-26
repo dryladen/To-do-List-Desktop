@@ -49,6 +49,11 @@ public class TaskFrame extends javax.swing.JFrame {
         moveKategori = new javax.swing.JMenu();
         moveUp = new javax.swing.JMenuItem();
         moveDown = new javax.swing.JMenuItem();
+        aturUkuran = new javax.swing.JPopupMenu();
+        ukuran = new javax.swing.JMenu();
+        ukuran1 = new javax.swing.JMenuItem();
+        ukuran2 = new javax.swing.JMenuItem();
+        ukuran3 = new javax.swing.JMenuItem();
         mainPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlKegiatan = new javax.swing.JList<>();
@@ -85,6 +90,37 @@ public class TaskFrame extends javax.swing.JFrame {
 
         klikKanan.add(moveKategori);
 
+        ukuran.setText("Atur Ukuran");
+
+        ukuran1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran1.setText("600x500");
+        ukuran1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran1ActionPerformed(evt);
+            }
+        });
+        ukuran.add(ukuran1);
+
+        ukuran2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran2.setText("312x386");
+        ukuran2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran2ActionPerformed(evt);
+            }
+        });
+        ukuran.add(ukuran2);
+
+        ukuran3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran3.setText("200x386");
+        ukuran3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran3ActionPerformed(evt);
+            }
+        });
+        ukuran.add(ukuran3);
+
+        aturUkuran.add(ukuran);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 204));
         setUndecorated(true);
@@ -92,10 +128,12 @@ public class TaskFrame extends javax.swing.JFrame {
         mainPanel.setBackground(new java.awt.Color(51, 204, 255));
 
         pnlKegiatan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KEGIATAN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        pnlKegiatan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         pnlKegiatan.setComponentPopupMenu(klikKanan);
-        pnlKegiatan.setValueIsAdjusting(true);
-        pnlKegiatan.setVerifyInputWhenFocusTarget(false);
+        pnlKegiatan.setDoubleBuffered(true);
+        pnlKegiatan.setDragEnabled(true);
+        pnlKegiatan.setDropMode(javax.swing.DropMode.INSERT);
+        pnlKegiatan.setMinimumSize(new java.awt.Dimension(80, 0));
+        pnlKegiatan.setRequestFocusEnabled(false);
         pnlKegiatan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKegiatanMouseClicked(evt);
@@ -111,6 +149,8 @@ public class TaskFrame extends javax.swing.JFrame {
         pnlDetail.setAutoscrolls(false);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         pnlDetail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pnlDetail.setFocusable(false);
+        pnlDetail.setPreferredSize(new java.awt.Dimension(116, 61));
         pnlDetail.setRequestFocusEnabled(false);
         pnlDetail.setSelectionColor(new java.awt.Color(51, 255, 51));
         jScrollPane2.setViewportView(pnlDetail);
@@ -120,6 +160,9 @@ public class TaskFrame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(pnlTanggal);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setComponentPopupMenu(aturUkuran);
+        jPanel1.setMinimumSize(new java.awt.Dimension(150, 386));
+        jPanel1.setPreferredSize(new java.awt.Dimension(151, 30));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -230,16 +273,13 @@ public class TaskFrame extends javax.swing.JFrame {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -415,6 +455,18 @@ public class TaskFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
+        setSize(600, 500);
+    }//GEN-LAST:event_ukuran1ActionPerformed
+
+    private void ukuran2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran2ActionPerformed
+        setSize(312, 386);
+    }//GEN-LAST:event_ukuran2ActionPerformed
+
+    private void ukuran3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran3ActionPerformed
+        setSize(200, 386);
+    }//GEN-LAST:event_ukuran3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -445,6 +497,7 @@ public class TaskFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu aturUkuran;
     private Frame.CButton btnExit;
     private Frame.CButton btnHapusKegiatan;
     private Frame.CButton btnMenuAwal;
@@ -462,6 +515,10 @@ public class TaskFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea pnlDetail;
     private javax.swing.JList<String> pnlKegiatan;
     private javax.swing.JTextPane pnlTanggal;
+    private javax.swing.JMenu ukuran;
+    private javax.swing.JMenuItem ukuran1;
+    private javax.swing.JMenuItem ukuran2;
+    private javax.swing.JMenuItem ukuran3;
     // End of variables declaration//GEN-END:variables
 
     private void getData() {
