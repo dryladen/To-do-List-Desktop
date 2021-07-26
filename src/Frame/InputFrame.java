@@ -327,7 +327,11 @@ public class InputFrame extends javax.swing.JFrame {
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         int xx = evt.getXOnScreen();
         int yy = evt. getYOnScreen();
-        this.setLocation(xx-x,yy-y);
+        if(yy-y < 40){
+            this.setLocation(xx-x,0);
+        } else {
+            this.setLocation(xx-x,yy-y);
+        }
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
