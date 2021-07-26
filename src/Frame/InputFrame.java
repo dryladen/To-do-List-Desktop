@@ -74,7 +74,11 @@ public class InputFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        aturUkuran = new javax.swing.JPopupMenu();
+        ukuran = new javax.swing.JMenu();
+        ukuran1 = new javax.swing.JMenuItem();
+        ukuran2 = new javax.swing.JMenuItem();
+        ukuran3 = new javax.swing.JMenuItem();
         mainPanel = new javax.swing.JPanel();
         inputNama = new javax.swing.JTextField();
         inputTanggal = new com.toedter.calendar.JDateChooser();
@@ -83,6 +87,37 @@ public class InputFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnKembali = new Frame.CButton();
         tambahKategori = new Frame.CButton();
+
+        ukuran.setText("Atur Ukuran");
+
+        ukuran1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran1.setText("600x500");
+        ukuran1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran1ActionPerformed(evt);
+            }
+        });
+        ukuran.add(ukuran1);
+
+        ukuran2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran2.setText("312x386");
+        ukuran2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran2ActionPerformed(evt);
+            }
+        });
+        ukuran.add(ukuran2);
+
+        ukuran3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ukuran3.setText("200x386");
+        ukuran3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ukuran3ActionPerformed(evt);
+            }
+        });
+        ukuran.add(ukuran3);
+
+        aturUkuran.add(ukuran);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -95,16 +130,17 @@ public class InputFrame extends javax.swing.JFrame {
 
         inputTanggal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
-        inputDeskripsi.setColumns(20);
+        inputDeskripsi.setColumns(1);
         inputDeskripsi.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         inputDeskripsi.setRows(5);
+        inputDeskripsi.setAutoscrolls(false);
         inputDeskripsi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         inputDeskripsi.setMinimumSize(new java.awt.Dimension(116, 46));
-        inputDeskripsi.setPreferredSize(new java.awt.Dimension(116, 61));
         inputDeskripsi.setSelectionColor(new java.awt.Color(51, 255, 51));
         jScrollPane1.setViewportView(inputDeskripsi);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setComponentPopupMenu(aturUkuran);
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -294,6 +330,18 @@ public class InputFrame extends javax.swing.JFrame {
         this.setLocation(xx-x,yy-y);
     }//GEN-LAST:event_jPanel1MouseDragged
 
+    private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
+        setSize(600, 500);
+    }//GEN-LAST:event_ukuran1ActionPerformed
+
+    private void ukuran2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran2ActionPerformed
+        setSize(312, 386);
+    }//GEN-LAST:event_ukuran2ActionPerformed
+
+    private void ukuran3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran3ActionPerformed
+        setSize(200, 386);
+    }//GEN-LAST:event_ukuran3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -304,15 +352,19 @@ public class InputFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu aturUkuran;
     private Frame.CButton btnKembali;
     public static javax.swing.JTextArea inputDeskripsi;
     public static javax.swing.JTextField inputNama;
     public static com.toedter.calendar.JDateChooser inputTanggal;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private Frame.CButton tambahKategori;
+    private javax.swing.JMenu ukuran;
+    private javax.swing.JMenuItem ukuran1;
+    private javax.swing.JMenuItem ukuran2;
+    private javax.swing.JMenuItem ukuran3;
     // End of variables declaration//GEN-END:variables
 
     private void getDataUpdate() throws ParseException {
