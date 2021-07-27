@@ -128,6 +128,7 @@ public class TaskFrame extends javax.swing.JFrame {
         mainPanel.setBackground(new java.awt.Color(51, 204, 255));
 
         pnlKegiatan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KEGIATAN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        pnlKegiatan.setToolTipText("Klik 2x untuk centang / tidak mencentang kegiatan");
         pnlKegiatan.setComponentPopupMenu(klikKanan);
         pnlKegiatan.setDoubleBuffered(true);
         pnlKegiatan.setDragEnabled(true);
@@ -406,17 +407,19 @@ public class TaskFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlKegiatanMouseClicked
 
     private void moveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpActionPerformed
-        int index = pnlKegiatan.getSelectedIndex();
-        String value = pnlKegiatan.getSelectedValue();
-        if(!pnlKegiatan.isSelectionEmpty() && index > 0){
-            koneksi.moveItem(dataKegiatan, dataIdKegiatan, index, index-1,false);
-            modelKegiatan.remove(index);
-            modelKegiatan.add(index-1, value);
-            dataKegiatan.get(index).setIdKategori(dataIdKegiatan.get(index-1));
-            dataKegiatan.get(index-1).setIdKategori(dataIdKegiatan.get(index));
-            dataKegiatan.add(index-1, dataKegiatan.get(index));
-            dataKegiatan.remove(index+1);
-            pnlKegiatan.setSelectedIndex(index-1);
+        if(!pnlKegiatan.isSelectionEmpty()){
+            int index = pnlKegiatan.getSelectedIndex();
+            String value = dataKegiatan.get(index).getNamaKegiatan();
+            if(index > 0){
+                koneksi.moveItem(dataKegiatan, dataIdKegiatan, index, index-1,false);
+                modelKegiatan.remove(index);
+                modelKegiatan.add(index-1, new JlistCustom(value, ""));
+                dataKegiatan.get(index).setIdKategori(dataIdKegiatan.get(index-1));
+                dataKegiatan.get(index-1).setIdKategori(dataIdKegiatan.get(index));
+                dataKegiatan.add(index-1, dataKegiatan.get(index));
+                dataKegiatan.remove(index+1);
+                pnlKegiatan.setSelectedIndex(index-1);
+            }
         } else if (pnlKegiatan.isSelectionEmpty()){
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
