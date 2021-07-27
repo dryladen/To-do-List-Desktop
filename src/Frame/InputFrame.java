@@ -264,12 +264,14 @@ public class InputFrame extends javax.swing.JFrame {
                     PreparedStatement pst = cn.prepareStatement(sql);
                     pst.execute();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Gagal membuat kategori baru : "+ex);
+                    JOptionPane.showMessageDialog(inputTanggal, "Gagal membuat kategori baru : "+ex);
                 }
                 setLokasi();
                 MainFrame main = new MainFrame();
                 main.setVisible(true);
                 this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(inputTanggal, "Kategori belum mempunyai nama");
             }
         } else {
             if(!inputNama.getText().isEmpty()){
@@ -294,12 +296,14 @@ public class InputFrame extends javax.swing.JFrame {
                     PreparedStatement pst = cn.prepareStatement(sql);
                     pst.execute();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Gagal membuat kegiatan baru : "+ex);
+                    JOptionPane.showMessageDialog(inputTanggal, "Gagal membuat kegiatan baru : "+ex);
                 }
                 setLokasi();
                 TaskFrame task = new TaskFrame(idKategori);
                 task.setVisible(true);
                 this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(inputTanggal, "Kegiatan belum mempunyai nama");
             }
         }
     }//GEN-LAST:event_tambahKategoriActionPerformed
