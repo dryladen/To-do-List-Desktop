@@ -512,6 +512,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void getData(){
         try{
             modelKategori.removeAllElements();
+            dataKategori.clear();
             Connection cn = koneksi.getKoneksi();
             Statement stm = cn.createStatement();
             ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");

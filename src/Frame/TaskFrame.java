@@ -345,6 +345,9 @@ public class TaskFrame extends javax.swing.JFrame {
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
+                dataIdKegiatan.remove(index);
+                pnlTanggal.setText("-");
+                pnlDetail.setText("-");
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(pnlKegiatan, "Gagal menghapus kegiatan : "+ex);
@@ -531,6 +534,7 @@ public class TaskFrame extends javax.swing.JFrame {
     private void getData() {
         try{
             modelKegiatan.removeAllElements();
+            dataKegiatan.clear();
             String sql = "SELECT * FROM kegiatanTable WHERE idKategori=?";
             Connection cn = koneksi.getKoneksi();
             PreparedStatement pst = cn.prepareStatement(sql);
