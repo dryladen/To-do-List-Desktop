@@ -150,10 +150,7 @@ public class TaskFrame extends javax.swing.JFrame {
         pnlDetail.setAutoscrolls(false);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         pnlDetail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pnlDetail.setFocusable(false);
         pnlDetail.setPreferredSize(new java.awt.Dimension(116, 61));
-        pnlDetail.setRequestFocusEnabled(false);
-        pnlDetail.setSelectionColor(new java.awt.Color(51, 255, 51));
         jScrollPane2.setViewportView(pnlDetail);
 
         pnlTanggal.setEditable(false);

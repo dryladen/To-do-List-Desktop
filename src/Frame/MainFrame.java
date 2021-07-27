@@ -152,9 +152,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnlDeskripsi.setAutoscrolls(false);
         pnlDeskripsi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         pnlDeskripsi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pnlDeskripsi.setFocusable(false);
-        pnlDeskripsi.setRequestFocusEnabled(false);
-        pnlDeskripsi.setSelectionColor(new java.awt.Color(51, 255, 51));
         jScrollPane2.setViewportView(pnlDeskripsi);
 
         jtaskBar.setBackground(new java.awt.Color(0, 153, 153));

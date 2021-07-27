@@ -136,7 +136,6 @@ public class InputFrame extends javax.swing.JFrame {
         inputDeskripsi.setAutoscrolls(false);
         inputDeskripsi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         inputDeskripsi.setMinimumSize(new java.awt.Dimension(116, 46));
-        inputDeskripsi.setSelectionColor(new java.awt.Color(51, 255, 51));
         jScrollPane1.setViewportView(inputDeskripsi);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
