@@ -298,7 +298,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnUbahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKategoriActionPerformed
         if(pnlKategori.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
+            JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
         } else {
             InputFrame input = new InputFrame(true,dataIdKategori.get(pnlKategori.getSelectedIndex()),true);
             input.setVisible(true);
@@ -336,7 +336,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pnlTanggal.setText(tanggal);
                 pnlDeskripsi.setText(deskripsi);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(pnlKategori, ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -353,7 +353,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnHapusKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKategoriActionPerformed
         if(pnlKategori.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
+            JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
         } else {
             try {
                 // menghapus item kategori
@@ -373,7 +373,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pnlDeskripsi.setText("-");
                 getData();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal menghapus kategori : "+ex);
+                JOptionPane.showMessageDialog(pnlKategori, "Gagal menghapus kategori : "+ex);
             }
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
@@ -393,7 +393,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pnlKategori.setSelectedIndex(index-1);
             }
         } else if(pnlKategori.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
+            JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
         }
     }//GEN-LAST:event_moveUpActionPerformed
 
@@ -412,7 +412,7 @@ public class MainFrame extends javax.swing.JFrame {
                 pnlKategori.setSelectedIndex(index+1);
             }
         } else if (pnlKategori.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kategori dulu");
+            JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
         }
     }//GEN-LAST:event_moveDownActionPerformed
 
@@ -524,7 +524,7 @@ public class MainFrame extends javax.swing.JFrame {
                 dataKategori.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),""));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error : "+ ex);
+            JOptionPane.showMessageDialog(pnlKategori, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
@@ -540,7 +540,7 @@ public class MainFrame extends javax.swing.JFrame {
             pst.setInt(4, getHeight());
             pst.execute();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error : "+ ex);
+            JOptionPane.showMessageDialog(pnlKategori, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }

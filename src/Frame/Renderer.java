@@ -43,10 +43,10 @@ public class Renderer extends DefaultListCellRenderer implements ListCellRendere
             }
         }
         
-        if(bln){
+        if(bln){ // is Selected
             setBackground(new Color(51,204,255));
             setForeground(jlist.getSelectionForeground());
-        } else {
+        } else { // is not selected
             setBackground(jlist.getBackground());
             setForeground(jlist.getForeground());
         }
