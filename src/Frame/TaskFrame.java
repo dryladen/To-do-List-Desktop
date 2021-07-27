@@ -328,7 +328,7 @@ public class TaskFrame extends javax.swing.JFrame {
 
     private void btnUbahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatanActionPerformed
         if(pnlKegiatan.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
+            JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         } else {
             InputFrame input = new InputFrame(true,idKategori,dataIdKegiatan.get(pnlKegiatan.getSelectedIndex()),false);
             input.setVisible(true);
@@ -338,7 +338,7 @@ public class TaskFrame extends javax.swing.JFrame {
 
     private void btnHapusKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKegiatanActionPerformed
         if(pnlKegiatan.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
+            JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         } else {
             try {
                 String index = dataIdKegiatan.get(pnlKegiatan.getSelectedIndex());
@@ -349,7 +349,7 @@ public class TaskFrame extends javax.swing.JFrame {
                 pst.execute();
                 getData();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal menghapus kegiatan : "+ex);
+                JOptionPane.showMessageDialog(pnlKegiatan, "Gagal menghapus kegiatan : "+ex);
             }
         }
     }//GEN-LAST:event_btnHapusKegiatanActionPerformed
@@ -371,7 +371,7 @@ public class TaskFrame extends javax.swing.JFrame {
                 pst.execute();
                 getData();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(pnlKegiatan, ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -399,7 +399,7 @@ public class TaskFrame extends javax.swing.JFrame {
                 pnlTanggal.setText(tanggal);
                 pnlDetail.setText(deskripsi);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(pnlKegiatan, ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -418,7 +418,7 @@ public class TaskFrame extends javax.swing.JFrame {
             dataKegiatan.remove(index+1);
             pnlKegiatan.setSelectedIndex(index-1);
         } else if (pnlKegiatan.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
+            JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_moveUpActionPerformed
 
@@ -435,7 +435,7 @@ public class TaskFrame extends javax.swing.JFrame {
             modelKegiatan.add(index+1, value);
             pnlKegiatan.setSelectedIndex(index+1);
         } else if (pnlKegiatan.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Pilih kegiatan dulu");
+            JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_moveDownActionPerformed
 
@@ -539,7 +539,7 @@ public class TaskFrame extends javax.swing.JFrame {
                 dataKegiatan.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(6)));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error : "+ ex);
+            JOptionPane.showMessageDialog(pnlKegiatan, "Error : "+ ex);
         } 
     }
     
@@ -554,7 +554,7 @@ public class TaskFrame extends javax.swing.JFrame {
             pst.setInt(4, getHeight());
             pst.execute();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error : "+ ex);
+            JOptionPane.showMessageDialog(pnlKegiatan, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
