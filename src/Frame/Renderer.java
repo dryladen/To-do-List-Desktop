@@ -20,17 +20,12 @@ import javax.swing.ListCellRenderer;
  * @author Laden
  */
 public class Renderer extends DefaultListCellRenderer implements ListCellRenderer<Object>, ActionListener, Serializable{
-    
     private boolean isKategori = true;
     public Renderer(boolean isKategori) {
         this.isKategori = isKategori;
     }
-    
-    
-    
     @Override
     public Component getListCellRendererComponent(JList<?> jlist, Object o, int i, boolean bln, boolean bln1) {
-        
         JlistCustom lst =(JlistCustom) o;
         setText(lst.getText());
         if(isKategori){
@@ -42,7 +37,6 @@ public class Renderer extends DefaultListCellRenderer implements ListCellRendere
                 setIcon(new ImageIcon("blank-check-box.png"));
             }
         }
-        
         if(bln){ // is Selected
             setBackground(new Color(51,204,255));
             setForeground(jlist.getSelectionForeground());
@@ -50,15 +44,12 @@ public class Renderer extends DefaultListCellRenderer implements ListCellRendere
             setBackground(jlist.getBackground());
             setForeground(jlist.getForeground());
         }
-        
         setEnabled(true);
         setFont(jlist.getFont());
         return this;
     }
-
     @Override
     public void actionPerformed(ActionEvent ae) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

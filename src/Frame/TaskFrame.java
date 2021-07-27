@@ -375,7 +375,6 @@ public class TaskFrame extends javax.swing.JFrame {
         }
         if(!pnlKegiatan.isSelectionEmpty()){
             try {
-                
                 int index = pnlKegiatan.getSelectedIndex();
                 String sql = "SELECT * FROM kegiatanTable WHERE idKegiatan=?";
                 Connection cn = koneksi.getKoneksi();
@@ -407,10 +406,11 @@ public class TaskFrame extends javax.swing.JFrame {
         if(!pnlKegiatan.isSelectionEmpty()){
             int index = pnlKegiatan.getSelectedIndex();
             String value = dataKegiatan.get(index).getNamaKegiatan();
+            String isCheck = dataKegiatan.get(index).getIsCheck();
             if(index > 0){
                 koneksi.moveItem(dataKegiatan, dataIdKegiatan, index, index-1,false);
                 modelKegiatan.remove(index);
-                modelKegiatan.add(index-1, new JlistCustom(value, ""));
+                modelKegiatan.add(index-1, new JlistCustom(value,isCheck));
                 dataKegiatan.get(index).setIdKategori(dataIdKegiatan.get(index-1));
                 dataKegiatan.get(index-1).setIdKategori(dataIdKegiatan.get(index));
                 dataKegiatan.add(index-1, dataKegiatan.get(index));
@@ -423,17 +423,20 @@ public class TaskFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_moveUpActionPerformed
 
     private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
-        int index = pnlKegiatan.getSelectedIndex();
-        String value = pnlKegiatan.getSelectedValue();
-        if(!pnlKegiatan.isSelectionEmpty() && index < modelKegiatan.getSize()-1){
-            koneksi.moveItem(dataKegiatan, dataIdKegiatan, index, index+1,false);
-            dataKegiatan.get(index).setIdKategori(dataIdKegiatan.get(index+1));
-            dataKegiatan.get(index+1).setIdKategori(dataIdKegiatan.get(index));
-            dataKegiatan.add(index+2, dataKegiatan.get(index));
-            dataKegiatan.remove(index);
-            modelKegiatan.remove(index);
-            modelKegiatan.add(index+1, value);
-            pnlKegiatan.setSelectedIndex(index+1);
+        if(!pnlKegiatan.isSelectionEmpty()){
+            int index = pnlKegiatan.getSelectedIndex();
+            String value = dataKegiatan.get(index).getNamaKegiatan();
+            String isCheck = dataKegiatan.get(index).getIsCheck();
+            if(index < modelKegiatan.getSize()-1){
+                koneksi.moveItem(dataKegiatan, dataIdKegiatan, index, index+1,false);
+                dataKegiatan.get(index).setIdKategori(dataIdKegiatan.get(index+1));
+                dataKegiatan.get(index+1).setIdKategori(dataIdKegiatan.get(index));
+                dataKegiatan.add(index+2, dataKegiatan.get(index));
+                dataKegiatan.remove(index);
+                modelKegiatan.remove(index);
+                modelKegiatan.add(index+1, new JlistCustom(value,isCheck));
+                pnlKegiatan.setSelectedIndex(index+1);
+            } 
         } else if (pnlKegiatan.isSelectionEmpty()){
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
