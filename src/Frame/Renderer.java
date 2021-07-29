@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Frame;
 
 import java.awt.Color;
@@ -28,9 +23,9 @@ public class Renderer extends DefaultListCellRenderer implements ListCellRendere
     public Component getListCellRendererComponent(JList<?> jlist, Object o, int i, boolean bln, boolean bln1) {
         JlistCustom lst =(JlistCustom) o;
         setText(lst.getText());
-        if(isKategori){
+        if(isKategori){ // cell untuk kategori
             setIcon(new ImageIcon("arrow-pointing-to-right.png"));
-        } else {
+        } else { // cell untuk kegiatan
             if(lst.getIscheck().equals("1")){
                 setIcon(new ImageIcon("check-box.png"));
             } else {

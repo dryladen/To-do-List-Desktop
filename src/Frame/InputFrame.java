@@ -24,14 +24,14 @@ public class InputFrame extends javax.swing.JFrame {
     public InputFrame() {
         initComponents();
     }
-    
+    // contructor utama
     public InputFrame(boolean isKategori) {
         initComponents();
         setIconImage(new ImageIcon("to-do-list.png").getImage());
         getLokasi();
         this.isKategori = isKategori;
     }
-    
+    // contructor untuk tambah item
     public InputFrame(boolean isKategori, String idKategori) {
         initComponents();
         setIconImage(new ImageIcon("to-do-list.png").getImage());
@@ -39,6 +39,7 @@ public class InputFrame extends javax.swing.JFrame {
         this.isKategori = isKategori;
         this.idKategori = idKategori;
     }
+    // constructor untuk update item
     public InputFrame(boolean dataUpdate, String idKategori,boolean isKategori) {
         try {
             initComponents();
@@ -53,7 +54,7 @@ public class InputFrame extends javax.swing.JFrame {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    // constructor untuk update item 
     public InputFrame(boolean dataUpdate, String idKategori, String idKegiatan, boolean isKategori) {
         try {
             initComponents();
@@ -240,8 +241,10 @@ public class InputFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // button untuk menambah item
     private void tambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKategoriActionPerformed
+        // tambah item untuk kategori
         if(isKategori == true){
             if(!inputNama.getText().isEmpty()){
                 if(isDataUpdate == false){
@@ -273,7 +276,7 @@ public class InputFrame extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(inputTanggal, "Kategori belum mempunyai nama");
             }
-        } else {
+        } else { // tambah item untuk kegiatan
             if(!inputNama.getText().isEmpty()){
                 if(isDataUpdate == false){
                         sql = "INSERT INTO kegiatanTable (idKategori,namaKegiatan,tanggalKegiatan,deskripsiKegiatan) VALUES ('%s','%s','%s','%s')";
@@ -307,26 +310,25 @@ public class InputFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tambahKategoriActionPerformed
-
+    // button untuk kembali
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        if(this.isKategori == true){
+        if(this.isKategori == true){ // kembali ke main frame
             setLokasi();
             MainFrame main = new MainFrame();
             main.setVisible(true);
             this.dispose();
-        } else {
+        } else { // kembali ke task frame
             setLokasi();
             TaskFrame task = new TaskFrame(idKategori);
             task.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnKembaliActionPerformed
-
+    // event untuk mengatur lokasi frame
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
-
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         int xx = evt.getXOnScreen();
         int yy = evt. getYOnScreen();
@@ -336,15 +338,13 @@ public class InputFrame extends javax.swing.JFrame {
             this.setLocation(xx-x,yy-y);
         }
     }//GEN-LAST:event_jPanel1MouseDragged
-
+    // event untuk mengatur ukuran frame
     private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
         setSize(600, 500);
     }//GEN-LAST:event_ukuran1ActionPerformed
-
     private void ukuran2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran2ActionPerformed
         setSize(312, 386);
     }//GEN-LAST:event_ukuran2ActionPerformed
-
     private void ukuran3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran3ActionPerformed
         setSize(200, 386);
     }//GEN-LAST:event_ukuran3ActionPerformed
@@ -373,7 +373,8 @@ public class InputFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem ukuran2;
     private javax.swing.JMenuItem ukuran3;
     // End of variables declaration//GEN-END:variables
-
+    
+    // method untuk mengambil data dari dalam database 
     private void getDataUpdate() throws ParseException {
         if(isKategori == true){
             sql = "SELECT * FROM kategoriTable WHERE idKategori='%s'";
@@ -398,7 +399,7 @@ public class InputFrame extends javax.swing.JFrame {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    // event untuk menyimpan lokasi ke dalam database 
     private void setLokasi() {
         try{
             sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
@@ -414,7 +415,7 @@ public class InputFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-    
+    // event untuk mendapatkankan lokasi dari dalam database
     private void getLokasi() {
         try {
             Connection cn = koneksi.getKoneksi();

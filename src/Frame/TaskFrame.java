@@ -20,7 +20,7 @@ public class TaskFrame extends javax.swing.JFrame {
     private String idKategori = "";
     private int x,y;
     
-    public TaskFrame() {
+    public TaskFrame() { // constructor utama
         initComponents();
         setIconImage(new ImageIcon("to-do-list.png").getImage());
         getLokasi();
@@ -30,7 +30,7 @@ public class TaskFrame extends javax.swing.JFrame {
         getData();
     }
     
-    public TaskFrame(String idKategori) {
+    public TaskFrame(String idKategori) { // constructor dari MainFrame
         initComponents();
         setIconImage(new ImageIcon("to-do-list.png").getImage());
         getLokasi();
@@ -309,23 +309,26 @@ public class TaskFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // button untuk kembali ke mainFrame
     private void btnMenuAwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuAwalActionPerformed
         setLokasi();
         MainFrame main = new MainFrame();
         main.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuAwalActionPerformed
-
+    
+    // button untuk tambah kegiatan
     private void btnTambahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKegiatanActionPerformed
         setLokasi();
         InputFrame input = new InputFrame(false,idKategori);
         input.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahKegiatanActionPerformed
-
+    
+    // button untuk mengubah kegiatan
     private void btnUbahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatanActionPerformed
-        if(pnlKegiatan.isSelectionEmpty()){
+        if(pnlKegiatan.isSelectionEmpty()){ // message jika tidak ada kegiatan yang di select
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         } else {
             InputFrame input = new InputFrame(true,idKategori,dataIdKegiatan.get(pnlKegiatan.getSelectedIndex()),false);
@@ -333,9 +336,10 @@ public class TaskFrame extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnUbahKegiatanActionPerformed
-
+    
+    // button untuk menghapus kegiatan
     private void btnHapusKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKegiatanActionPerformed
-        if(pnlKegiatan.isSelectionEmpty()){
+        if(pnlKegiatan.isSelectionEmpty()){ // message jika tidak ada kegiatan yang di select
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         } else {
             try {
@@ -354,9 +358,10 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnHapusKegiatanActionPerformed
-
+    
+    // event ketika panel kegiatan di klik
     private void pnlKegiatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKegiatanMouseClicked
-        if(evt.getClickCount() == 2){
+        if(evt.getClickCount() == 2){ // event untuk mencentang / tidak mencentang kegiatan
             try {
                 int index = pnlKegiatan.getSelectedIndex();
                 String sql = "UPDATE kegiatanTable SET isCheck=1 WHERE idKegiatan=?";
@@ -376,7 +381,7 @@ public class TaskFrame extends javax.swing.JFrame {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(!pnlKegiatan.isSelectionEmpty()){
+        if(!pnlKegiatan.isSelectionEmpty()){ // event untuk menampilkan tanggal dan deskripsi
             try {
                 int index = pnlKegiatan.getSelectedIndex();
                 String sql = "SELECT * FROM kegiatanTable WHERE idKegiatan=?";
@@ -404,7 +409,8 @@ public class TaskFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_pnlKegiatanMouseClicked
-
+    
+    // event untuk memindahkan item ke atas
     private void moveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpActionPerformed
         if(!pnlKegiatan.isSelectionEmpty()){
             int index = pnlKegiatan.getSelectedIndex();
@@ -424,7 +430,8 @@ public class TaskFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_moveUpActionPerformed
-
+    
+    // event untuk memindahkan item ke bawah
     private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
         if(!pnlKegiatan.isSelectionEmpty()){
             int index = pnlKegiatan.getSelectedIndex();
@@ -444,12 +451,13 @@ public class TaskFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_moveDownActionPerformed
-
+    
+    // event untuk memindahkan frame
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
-
+    // event untuk memindahkan frame
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         int xx = evt.getXOnScreen();
         int yy = evt.getYOnScreen();
@@ -459,12 +467,12 @@ public class TaskFrame extends javax.swing.JFrame {
             this.setLocation(xx-x,yy-y);
         }
     }//GEN-LAST:event_jPanel1MouseDragged
-
+    // button untuk exit
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         setLokasi();
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
-
+    // event untuk mengatur ukuran frame
     private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
         setSize(600, 500);
     }//GEN-LAST:event_ukuran1ActionPerformed
@@ -530,7 +538,8 @@ public class TaskFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem ukuran2;
     private javax.swing.JMenuItem ukuran3;
     // End of variables declaration//GEN-END:variables
-
+    
+    // method untuk mengambil data dari dalam database dan menampilkannya di panel kegiatan
     private void getData() {
         try{
             modelKegiatan.removeAllElements();
@@ -549,7 +558,7 @@ public class TaskFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(pnlKegiatan, "Error : "+ ex);
         } 
     }
-    
+    // method untuk menyimpan lokasi frame kedalam database
     private void setLokasi() {
         try{
             String sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
@@ -565,7 +574,7 @@ public class TaskFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-    
+    // method untuk mendapatkan lokasi dari dalam database
     private void getLokasi() {
         try {
             Connection cn = koneksi.getKoneksi();

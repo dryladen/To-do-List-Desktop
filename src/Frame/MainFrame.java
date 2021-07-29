@@ -121,6 +121,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KATEGORI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pnlKategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pnlKategori.setToolTipText("Klik 2x untuk melihat kegiatan");
+        pnlKategori.setAutoscrolls(false);
         pnlKategori.setComponentPopupMenu(klikKanan);
         pnlKategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlKategori.setDoubleBuffered(true);
@@ -131,11 +132,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnlKategori.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKategoriMouseClicked(evt);
-            }
-        });
-        pnlKategori.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                pnlKategoriKeyTyped(evt);
             }
         });
         jScrollPane1.setViewportView(pnlKategori);
@@ -271,7 +267,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
                 .addComponent(jtaskBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,7 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    // button ubah kategori
     private void btnUbahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKategoriActionPerformed
         if(pnlKategori.isSelectionEmpty()){
             JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
@@ -302,15 +298,15 @@ public class MainFrame extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnUbahKategoriActionPerformed
-    
+    // event panel kategori ketika di klik
     private void pnlKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKategoriMouseClicked
-        if(evt.getClickCount() == 2){
+        if(evt.getClickCount() == 2){ // event klik 2x untuk masuk ke TaskFrame
             setLokasi();
             TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
             task.setVisible(true);
             this.dispose();
         }
-        if(!pnlKategori.isSelectionEmpty() && evt.getButton() == 1){
+        if(!pnlKategori.isSelectionEmpty() && evt.getButton() == 1){ // untuk menampilkan tanggal dan deskripsi
             try {
                 int index = pnlKategori.getSelectedIndex();
                 String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
@@ -338,18 +334,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_pnlKategoriMouseClicked
-
-    private void pnlKategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlKategoriKeyTyped
-        if(!pnlKategori.isSelectionEmpty() && evt.getKeyChar() == 10){
-            setLokasi();
-            TaskFrame task = new TaskFrame(dataIdKategori.get(pnlKategori.getSelectedIndex()));
-            task.setVisible(true);
-            this.dispose();
-        } 
-    }//GEN-LAST:event_pnlKategoriKeyTyped
-
+    // button hapus
     private void btnHapusKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKategoriActionPerformed
-        if(pnlKategori.isSelectionEmpty()){
+        if(pnlKategori.isSelectionEmpty()){ // message jika tidak ada kategori yang di select
             JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
         } else {
             try {
@@ -374,7 +361,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
-
+    // event memindahkan item ke atas
     private void moveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpActionPerformed
         if(!pnlKategori.isSelectionEmpty()){
             int index = pnlKategori.getSelectedIndex();
@@ -389,11 +376,11 @@ public class MainFrame extends javax.swing.JFrame {
                 dataKategori.remove(index+1);
                 pnlKategori.setSelectedIndex(index-1);
             }
-        } else if(pnlKategori.isSelectionEmpty()){
+        } else if(pnlKategori.isSelectionEmpty()){ // message jika tidak ada kategori yang di select
             JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
         }
     }//GEN-LAST:event_moveUpActionPerformed
-
+    // event memindahkan item ke bawah
     private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
         if(!pnlKategori.isSelectionEmpty()){
             int index = pnlKategori.getSelectedIndex();
@@ -408,28 +395,29 @@ public class MainFrame extends javax.swing.JFrame {
                 modelKategori.add(index+1, new JlistCustom(value, ""));
                 pnlKategori.setSelectedIndex(index+1);
             }
-        } else if (pnlKategori.isSelectionEmpty()){
+        } else if (pnlKategori.isSelectionEmpty()){ // message jika tidak ada kategori yang di select
             JOptionPane.showMessageDialog(pnlKategori, "Pilih kategori dulu");
         }
     }//GEN-LAST:event_moveDownActionPerformed
-
+    // button tambah kategori
     private void btnTambahKategori1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKategori1ActionPerformed
+        // pindah ke TaskFRame
         setLokasi();
         InputFrame inputFrame = new InputFrame(true);
         inputFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahKategori1ActionPerformed
-
+    // button exit
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         setLokasi();
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
-
+    // event untuk memindahkan lokasi frame
     private void jtaskBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtaskBarMousePressed
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jtaskBarMousePressed
-
+    // event untuk memindahkan lokasi frame
     private void jtaskBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtaskBarMouseDragged
         int xx = evt.getXOnScreen();
         int yy = evt.getYOnScreen();
@@ -439,15 +427,13 @@ public class MainFrame extends javax.swing.JFrame {
             this.setLocation(xx-x,yy-y);
         }
     }//GEN-LAST:event_jtaskBarMouseDragged
-
+    // event mengatur ukuran frame
     private void ukuran1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran1ActionPerformed
         setSize(600, 500);
     }//GEN-LAST:event_ukuran1ActionPerformed
-
     private void ukuran2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran2ActionPerformed
         setSize(312, 386);
     }//GEN-LAST:event_ukuran2ActionPerformed
-
     private void ukuran3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ukuran3ActionPerformed
         setSize(200, 386);
     }//GEN-LAST:event_ukuran3ActionPerformed
@@ -508,7 +494,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem ukuran2;
     private javax.swing.JMenuItem ukuran3;
     // End of variables declaration//GEN-END:variables
-
+    
+    // fungsi untuk mengambil data dari database dan ditampilkan ke panel kategori
     private void getData(){
         try{
             modelKategori.removeAllElements();
@@ -526,7 +513,7 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-    
+    // method untuk menyimpan lokasi kedalam database
     private void setLokasi() {
         try{
             String sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
@@ -542,6 +529,7 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
+    // method untuk mengambil lokasi dari dalam database
     private void getLokasi() {
         try {
             Connection cn = koneksi.getKoneksi();

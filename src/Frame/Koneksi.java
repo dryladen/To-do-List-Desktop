@@ -15,10 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class Koneksi {
     private Connection connect;
-    private final String driverName = "org.sqlite.JDBC";
-    private final String url = "jdbc:sqlite:databasetodolist.db";
+    private final String driverName = "org.sqlite.JDBC"; // jenis database
+    private final String url = "jdbc:sqlite:databasetodolist.db"; // nama database
     
-    public Connection getKoneksi(){
+    public Connection getKoneksi(){ // menghubungkan ke database
         if (connect == null){
             try{
                 Class.forName(driverName);
@@ -31,11 +31,12 @@ public class Koneksi {
         return connect;
     }
     
+    // method untuk mengubah posisi item di database
     public void moveItem(ArrayList<Kegiatan> dataKategori,ArrayList<String> dataId, int index, int index0, boolean isKategori) {
         try {
             Connection cn = getKoneksi();
             String sql = "UPDATE kegiatanTable SET namaKegiatan=?,tanggalKegiatan=?,deskripsiKegiatan=?,isCheck=? WHERE idKegiatan=?";
-            if(isKategori == true){
+            if(isKategori == true){ // untuk main frame
                 sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
                 PreparedStatement pst1 = cn.prepareStatement(sql);
                 pst1.setString(1, "99");
@@ -62,7 +63,7 @@ public class Koneksi {
                 pst0.setString(3, dataKategori.get(index).getDeskripsiKegiatan());
                 pst0.setString(4, dataKategori.get(index0).getIdKategori());
                 pst0.execute();
-            } else {
+            } else { // untuk task frame
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, dataKategori.get(index0).getNamaKegiatan());
                 pst.setString(2, dataKategori.get(index0).getTanggalKegiatan());
