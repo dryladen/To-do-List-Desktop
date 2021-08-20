@@ -15,6 +15,9 @@ public class MainFrame extends javax.swing.JFrame {
     DefaultListModel modelKategori;
     ArrayList<String> dataIdKategori = new ArrayList();
     ArrayList<Kegiatan> dataKategori = new ArrayList();
+    PreparedStatement pst;
+    Statement stm;
+    ResultSet result;
     private final Koneksi koneksi = new Koneksi();
     private int x,y;
     
@@ -311,9 +314,9 @@ public class MainFrame extends javax.swing.JFrame {
                 int index = pnlKategori.getSelectedIndex();
                 String sql = "SELECT * FROM kategoriTable WHERE idKategori=?";
                 Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
+                pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKategori.get(index));
-                ResultSet result = pst.executeQuery();
+                result = pst.executeQuery();
                 String tanggal = null,deskripsi=null;
                 pnlDeskripsi.setText("");
                 while(result.next()){
@@ -331,7 +334,14 @@ public class MainFrame extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(pnlKategori, ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } finally {
+                try {
+                    result.close();
+                    pst.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
         }
     }//GEN-LAST:event_pnlKategoriMouseClicked
     // button hapus
@@ -344,7 +354,7 @@ public class MainFrame extends javax.swing.JFrame {
                 String index = dataIdKategori.get(pnlKategori.getSelectedIndex());
                 String sql = "DELETE FROM kategoriTable WHERE idKategori=?";
                 Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
+                pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
                 // menghapus item kegiatan
@@ -358,7 +368,13 @@ public class MainFrame extends javax.swing.JFrame {
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(pnlKategori, "Gagal menghapus kategori : "+ex);
-            }
+            } finally {
+                try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
         }
     }//GEN-LAST:event_btnHapusKategoriActionPerformed
     // event memindahkan item ke atas
@@ -501,16 +517,23 @@ public class MainFrame extends javax.swing.JFrame {
             modelKategori.removeAllElements();
             dataKategori.clear();
             Connection cn = koneksi.getKoneksi();
-            Statement stm = cn.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM kategoriTable");
-            while(rst.next()){
-                modelKategori.addElement(new JlistCustom(rst.getString(2), ""));
-                dataIdKategori.add(rst.getString(1));
-                dataKategori.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),""));
+            stm = cn.createStatement();
+            result = stm.executeQuery("SELECT * FROM kategoriTable");
+            while(result.next()){
+                modelKategori.addElement(new JlistCustom(result.getString(2), ""));
+                dataIdKategori.add(result.getString(1));
+                dataKategori.add(new Kegiatan(result.getString(1),"",result.getString(2),result.getString(3),result.getString(4),""));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(pnlKategori, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                result.close();
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } 
     }
     // method untuk menyimpan lokasi kedalam database
@@ -518,7 +541,7 @@ public class MainFrame extends javax.swing.JFrame {
         try{
             String sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
             Connection cn = koneksi.getKoneksi();
-            PreparedStatement pst = cn.prepareStatement(sql);
+            pst = cn.prepareStatement(sql);
             pst.setInt(1, getX());
             pst.setInt(2, getY());
             pst.setInt(3, getWidth());
@@ -527,19 +550,33 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(pnlKategori, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                result.close();
+                pst.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } 
     }
     // method untuk mengambil lokasi dari dalam database
     private void getLokasi() {
         try {
             Connection cn = koneksi.getKoneksi();
-            Statement stm = cn.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM lokasiTable");
-            while (rst.next()) {
-                this.setBounds(rst.getInt(1), rst.getInt(2), rst.getInt(3), rst.getInt(4));
+            stm = cn.createStatement();
+            result = stm.executeQuery("SELECT * FROM lokasiTable");
+            while (result.next()) {
+                this.setBounds(result.getInt(1), result.getInt(2), result.getInt(3), result.getInt(4));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } finally {
+            try {
+                result.close();
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }
 }
