@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  * @author Laden
  */
 public class MainFrame extends javax.swing.JFrame {
-    DefaultListModel modelKategori;
-    ArrayList<String> dataIdKategori = new ArrayList();
-    ArrayList<Kegiatan> dataKategori = new ArrayList();
-    PreparedStatement pst;
-    ResultSet result;
-    Statement stm;
+    private final DefaultListModel modelKategori;
+    private final ArrayList<String> dataIdKategori = new ArrayList();
+    private final ArrayList<Kegiatan> dataKategori = new ArrayList();
+    private PreparedStatement pst;
+    private ResultSet result;
+    private Statement stm;
     private final Koneksi koneksi = new Koneksi();
     private int x,y;
     

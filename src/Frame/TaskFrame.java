@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  * @author Laden
  */
 public class TaskFrame extends javax.swing.JFrame {
-    DefaultListModel modelKegiatan;
-    ArrayList<String> dataIdKegiatan = new ArrayList();
-    ArrayList<Kegiatan> dataKegiatan = new ArrayList();
-    PreparedStatement pst;
-    ResultSet result;
-    Statement stm;
+    private final DefaultListModel modelKegiatan;
+    private final ArrayList<String> dataIdKegiatan = new ArrayList();
+    private final ArrayList<Kegiatan> dataKegiatan = new ArrayList();
+    private PreparedStatement pst;
+    private ResultSet result;
+    private Statement stm;
     private final Koneksi koneksi = new Koneksi();
     private String idKategori = "";
     private int x,y;

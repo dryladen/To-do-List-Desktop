@@ -19,6 +19,9 @@ public class InputFrame extends javax.swing.JFrame {
     private boolean isKategori = false;
     private String idKategori = null;
     private String idKegiatan = null;
+    private PreparedStatement pst;
+    private ResultSet result;
+    private Statement stm;
     private String sql = null;
     private int x,y;
     public InputFrame() {
@@ -52,7 +55,7 @@ public class InputFrame extends javax.swing.JFrame {
             getDataUpdate();
         } catch (ParseException ex) {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
     // constructor untuk update item 
     public InputFrame(boolean dataUpdate, String idKategori, String idKegiatan, boolean isKategori) {
@@ -264,15 +267,21 @@ public class InputFrame extends javax.swing.JFrame {
                 }
                 try {
                     Connection cn = koneksi.getKoneksi();
-                    PreparedStatement pst = cn.prepareStatement(sql);
+                    pst = cn.prepareStatement(sql);
                     pst.execute();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(inputTanggal, "Gagal membuat kategori baru : "+ex);
+                } finally {
+                    try {
+                        pst.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                setLokasi();
-                MainFrame main = new MainFrame();
-                main.setVisible(true);
-                this.dispose();
+            } 
+            setLokasi();
+            MainFrame main = new MainFrame();
+            main.setVisible(true);
+            this.dispose();
             } else {
                 JOptionPane.showMessageDialog(inputTanggal, "Kategori belum mempunyai nama");
             }
@@ -296,11 +305,17 @@ public class InputFrame extends javax.swing.JFrame {
                 }
                 try {
                     Connection cn = koneksi.getKoneksi();
-                    PreparedStatement pst = cn.prepareStatement(sql);
+                    pst = cn.prepareStatement(sql);
                     pst.execute();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(inputTanggal, "Gagal membuat kegiatan baru : "+ex);
-                }
+                } finally {
+                    try {
+                        pst.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } 
                 setLokasi();
                 TaskFrame task = new TaskFrame(idKategori);
                 task.setVisible(true);
@@ -386,8 +401,8 @@ public class InputFrame extends javax.swing.JFrame {
         try {
             SimpleDateFormat date = new SimpleDateFormat("MMM d, yyyy");
             Connection cn = koneksi.getKoneksi();
-            PreparedStatement pst = cn.prepareStatement(sql);
-            ResultSet result = pst.executeQuery();
+            pst = cn.prepareStatement(sql);
+            result = pst.executeQuery();
             while(result.next()){
                 inputNama.setText(result.getString(2));
                 if(!result.getString(3).equals("")){
@@ -397,14 +412,21 @@ public class InputFrame extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(InputFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } finally {
+            try {
+                pst.close();
+                result.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }
     // event untuk menyimpan lokasi ke dalam database 
     private void setLokasi() {
         try{
             sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
             Connection cn = koneksi.getKoneksi();
-            PreparedStatement pst = cn.prepareStatement(sql);
+            pst = cn.prepareStatement(sql);
             pst.setInt(1, getX());
             pst.setInt(2, getY());
             pst.setInt(3, getWidth());
@@ -413,19 +435,32 @@ public class InputFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                pst.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } 
     }
     // event untuk mendapatkankan lokasi dari dalam database
     private void getLokasi() {
         try {
             Connection cn = koneksi.getKoneksi();
-            Statement stm = cn.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM lokasiTable");
-            while (rst.next()) {
-                this.setBounds(rst.getInt(1), rst.getInt(2), rst.getInt(3), rst.getInt(4));
+            stm = cn.createStatement();
+            result = stm.executeQuery("SELECT * FROM lokasiTable");
+            while (result.next()) {
+                this.setBounds(result.getInt(1), result.getInt(2), result.getInt(3), result.getInt(4));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } finally {
+            try {
+                stm.close();
+                result.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }
 }
