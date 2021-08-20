@@ -16,8 +16,8 @@ public class MainFrame extends javax.swing.JFrame {
     ArrayList<String> dataIdKategori = new ArrayList();
     ArrayList<Kegiatan> dataKategori = new ArrayList();
     PreparedStatement pst;
-    Statement stm;
     ResultSet result;
+    Statement stm;
     private final Koneksi koneksi = new Koneksi();
     private int x,y;
     

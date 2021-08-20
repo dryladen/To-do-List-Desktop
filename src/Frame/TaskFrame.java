@@ -16,6 +16,9 @@ public class TaskFrame extends javax.swing.JFrame {
     DefaultListModel modelKegiatan;
     ArrayList<String> dataIdKegiatan = new ArrayList();
     ArrayList<Kegiatan> dataKegiatan = new ArrayList();
+    PreparedStatement pst;
+    ResultSet result;
+    Statement stm;
     private final Koneksi koneksi = new Koneksi();
     private String idKategori = "";
     private int x,y;
@@ -346,7 +349,7 @@ public class TaskFrame extends javax.swing.JFrame {
                 String index = dataIdKegiatan.get(pnlKegiatan.getSelectedIndex());
                 String sql = "DELETE FROM kegiatanTable WHERE idKegiatan=?";
                 Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
+                pst = cn.prepareStatement(sql);
                 pst.setString(1, index);
                 pst.execute();
                 dataIdKegiatan.remove(index);
@@ -355,7 +358,13 @@ public class TaskFrame extends javax.swing.JFrame {
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(pnlKegiatan, "Gagal menghapus kegiatan : "+ex);
-            }
+            } finally {
+                try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
         }
     }//GEN-LAST:event_btnHapusKegiatanActionPerformed
     
@@ -372,23 +381,29 @@ public class TaskFrame extends javax.swing.JFrame {
                     dataKegiatan.get(index).setIsCheck("1");
                 }
                 Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
+                pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKegiatan.get(index));
                 pst.execute();
                 getData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(pnlKegiatan, ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } finally {
+                try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
         }
         if(!pnlKegiatan.isSelectionEmpty()){ // event untuk menampilkan tanggal dan deskripsi
             try {
                 int index = pnlKegiatan.getSelectedIndex();
                 String sql = "SELECT * FROM kegiatanTable WHERE idKegiatan=?";
                 Connection cn = koneksi.getKoneksi();
-                PreparedStatement pst = cn.prepareStatement(sql);
+                pst = cn.prepareStatement(sql);
                 pst.setString(1, dataIdKegiatan.get(index));
-                ResultSet result = pst.executeQuery();
+                result = pst.executeQuery();
                 String tanggal = null,deskripsi=null;
                 pnlDetail.setText("");
                 while(result.next()){
@@ -406,7 +421,14 @@ public class TaskFrame extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(pnlKegiatan, ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } finally {
+                try {
+                    result.close();
+                    pst.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
         }
     }//GEN-LAST:event_pnlKegiatanMouseClicked
     
@@ -546,16 +568,23 @@ public class TaskFrame extends javax.swing.JFrame {
             dataKegiatan.clear();
             String sql = "SELECT * FROM kegiatanTable WHERE idKategori=?";
             Connection cn = koneksi.getKoneksi();
-            PreparedStatement pst = cn.prepareStatement(sql);
+            pst = cn.prepareStatement(sql);
             pst.setString(1, idKategori);
-            ResultSet rst = pst.executeQuery();
-            while(rst.next()){
-                modelKegiatan.addElement(new JlistCustom(rst.getString(2), rst.getString(6)));
-                dataIdKegiatan.add(rst.getString(1));
-                dataKegiatan.add(new Kegiatan(rst.getString(1),"",rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(6)));
+            result = pst.executeQuery();
+            while(result.next()){
+                modelKegiatan.addElement(new JlistCustom(result.getString(2), result.getString(6)));
+                dataIdKegiatan.add(result.getString(1));
+                dataKegiatan.add(new Kegiatan(result.getString(1),"",result.getString(2),result.getString(3),result.getString(4),result.getString(6)));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(pnlKegiatan, "Error : "+ ex);
+        } finally {
+            try {
+                result.close();
+                pst.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } 
     }
     // method untuk menyimpan lokasi frame kedalam database
@@ -563,7 +592,7 @@ public class TaskFrame extends javax.swing.JFrame {
         try{
             String sql = "UPDATE lokasiTable SET getX=?,getY=?,width=?,height=?";
             Connection cn = koneksi.getKoneksi();
-            PreparedStatement pst = cn.prepareStatement(sql);
+            pst = cn.prepareStatement(sql);
             pst.setInt(1, getX());
             pst.setInt(2, getY());
             pst.setInt(3, getWidth());
@@ -572,19 +601,31 @@ public class TaskFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(pnlKegiatan, "Error : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                pst.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } 
     }
     // method untuk mendapatkan lokasi dari dalam database
     private void getLokasi() {
         try {
             Connection cn = koneksi.getKoneksi();
-            Statement stm = cn.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM lokasiTable");
-            while (rst.next()) {
-                this.setBounds(rst.getInt(1), rst.getInt(2), rst.getInt(3), rst.getInt(4));
+            stm = cn.createStatement();
+            result = stm.executeQuery("SELECT * FROM lokasiTable");
+            while (result.next()) {
+                this.setBounds(result.getInt(1), result.getInt(2), result.getInt(3), result.getInt(4));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } finally {
+            try {
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }
 }
