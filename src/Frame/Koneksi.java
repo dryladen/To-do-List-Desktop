@@ -1,5 +1,6 @@
 package Frame;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,19 +16,31 @@ import javax.swing.JOptionPane;
  */
 public class Koneksi {
     private Connection connect;
-    private final String driverName = "org.sqlite.JDBC"; // jenis database
     private final String url = "jdbc:sqlite:databasetodolist.db"; // nama database
     
+    public boolean isDatabaseExists(String dbFilePath){
+        File database = new File(dbFilePath);
+        return database.exists();
+    }
     public Connection getKoneksi(){ // menghubungkan ke database
-        if (connect == null){
-            try{
-                Class.forName(driverName);
+        String getFilePath = new File("").getAbsolutePath();
+        String fileAbsolutePath = getFilePath.concat("\\databasetodolist.db");
+        if(isDatabaseExists(fileAbsolutePath)){
+            try {
                 connect = DriverManager.getConnection(url);
-            } catch(ClassNotFoundException | SQLException ex){
-                JOptionPane.showMessageDialog(null, "Error22 : "+ ex);
-                Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE,null,ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error connect database : "+ ex);
             }
         }
+//        if (connect == null){
+//            try{
+//                Class.forName(driverName);
+//                connect = DriverManager.getConnection(url);
+//            } catch(ClassNotFoundException | SQLException ex){
+//                Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE,null,ex);
+//            }
+//        }
         return connect;
     }
     
