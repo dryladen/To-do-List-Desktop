@@ -1,4 +1,10 @@
 # To-do-List-Desktop
+
+## Warning
+Aplikasi ini tidak dapat dijalankan jika anti virus atau windows defender anda menyala
+karena aplikasi ini buatan sendiri dan tidak resmi jadi tidak dikenali oleh windows defender
+dan akan diblokir pada tahap penginstalan.
+
 ## System Requirements
 ### Functional Requirements
 - Pengguna dapat menambahkan data kategori dan data kegiatan berupa nama kategori, tanggal, dan deskripsi.

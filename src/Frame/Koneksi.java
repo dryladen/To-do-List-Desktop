@@ -2,10 +2,8 @@ package Frame;
 
 import java.io.File;
 import java.sql.Connection;
-//import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -45,7 +43,6 @@ public class Koneksi {
         }
         return connect;
     }
-    
     // method untuk membuat database
     private void createNewDatabase() {
         Connection conn;
@@ -82,6 +79,9 @@ public class Koneksi {
                             ")";
                     Statement lokasiTable = conn.createStatement();
                     lokasiTable.execute(sql);
+                    sql = "INSERT INTO lokasiTable (getX,getY,width,height) VALUES (0,0,312,386)";
+                    PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.execute();
                 } catch (SQLException ex){
                     Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -90,7 +90,6 @@ public class Koneksi {
             Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     // method untuk mengubah posisi item di database
     public void moveItem(ArrayList<Kegiatan> dataKategori,ArrayList<String> dataId, int index, int index0, boolean isKategori) {
         try {
@@ -143,6 +142,4 @@ public class Koneksi {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    
 }

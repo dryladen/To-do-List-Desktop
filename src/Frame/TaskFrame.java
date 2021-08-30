@@ -320,7 +320,6 @@ public class TaskFrame extends javax.swing.JFrame {
         main.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuAwalActionPerformed
-    
     // button untuk tambah kegiatan
     private void btnTambahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahKegiatanActionPerformed
         setLokasi();
@@ -328,7 +327,6 @@ public class TaskFrame extends javax.swing.JFrame {
         input.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahKegiatanActionPerformed
-    
     // button untuk mengubah kegiatan
     private void btnUbahKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahKegiatanActionPerformed
         if(pnlKegiatan.isSelectionEmpty()){ // message jika tidak ada kegiatan yang di select
@@ -339,7 +337,6 @@ public class TaskFrame extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnUbahKegiatanActionPerformed
-    
     // button untuk menghapus kegiatan
     private void btnHapusKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusKegiatanActionPerformed
         if(pnlKegiatan.isSelectionEmpty()){ // message jika tidak ada kegiatan yang di select
@@ -367,7 +364,6 @@ public class TaskFrame extends javax.swing.JFrame {
             } 
         }
     }//GEN-LAST:event_btnHapusKegiatanActionPerformed
-    
     // event ketika panel kegiatan di klik
     private void pnlKegiatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKegiatanMouseClicked
         if(evt.getClickCount() == 2){ // event untuk mencentang / tidak mencentang kegiatan
@@ -431,7 +427,6 @@ public class TaskFrame extends javax.swing.JFrame {
             } 
         }
     }//GEN-LAST:event_pnlKegiatanMouseClicked
-    
     // event untuk memindahkan item ke atas
     private void moveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpActionPerformed
         if(!pnlKegiatan.isSelectionEmpty()){
@@ -452,7 +447,6 @@ public class TaskFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_moveUpActionPerformed
-    
     // event untuk memindahkan item ke bawah
     private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
         if(!pnlKegiatan.isSelectionEmpty()){
@@ -473,7 +467,6 @@ public class TaskFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(pnlKegiatan, "Pilih kegiatan dulu");
         }
     }//GEN-LAST:event_moveDownActionPerformed
-    
     // event untuk memindahkan frame
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         x = evt.getX();
