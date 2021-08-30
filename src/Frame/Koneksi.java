@@ -2,9 +2,12 @@ package Frame;
 
 import java.io.File;
 import java.sql.Connection;
+//import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +20,7 @@ import javax.swing.JOptionPane;
 public class Koneksi {
     private Connection connect;
     private final String url = "jdbc:sqlite:databasetodolist.db"; // nama database
-    
+    private String sql;
     public boolean isDatabaseExists(String dbFilePath){
         File database = new File(dbFilePath);
         return database.exists();
@@ -32,23 +35,67 @@ public class Koneksi {
                 Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error connect database : "+ ex);
             }
+        } else {
+            createNewDatabase();
+            try {
+                connect = DriverManager.getConnection(url);
+            } catch (SQLException ex) {
+                Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-//        if (connect == null){
-//            try{
-//                Class.forName(driverName);
-//                connect = DriverManager.getConnection(url);
-//            } catch(ClassNotFoundException | SQLException ex){
-//                Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE,null,ex);
-//            }
-//        }
         return connect;
+    }
+    
+    // method untuk membuat database
+    private void createNewDatabase() {
+        Connection conn;
+        try {
+            conn = DriverManager.getConnection(url);
+            if(conn != null){
+                try {
+                    sql = "CREATE TABLE \"kategoriTable\" (\n" +
+                            "	\"idKategori\"	INTEGER NOT NULL,\n" +
+                            "	\"namaKategori\"	TEXT DEFAULT NULL,\n" +
+                            "	\"tanggalKategori\"	TEXT DEFAULT NULL,\n" +
+                            "	\"deskripsiKategori\"	TEXT DEFAULT NULL,\n" +
+                            "	PRIMARY KEY(\"idKategori\" AUTOINCREMENT)\n" +
+                            ")";
+                    Statement kategoriTable = conn.createStatement();
+                    kategoriTable.execute(sql);
+                    sql = "CREATE TABLE \"kegiatanTable\" (\n" +
+                            "	\"idKegiatan\"	INTEGER NOT NULL,\n" +
+                            "	\"namaKegiatan\"	TEXT DEFAULT NULL,\n" +
+                            "	\"tanggalKegiatan\"	TEXT DEFAULT NULL,\n" +
+                            "	\"deskripsiKegiatan\"	TEXT DEFAULT NULL,\n" +
+                            "	\"idKategori\"	INTEGER NOT NULL,\n" +
+                            "	\"isCheck\"	INTEGER DEFAULT 0,\n" +
+                            "	FOREIGN KEY(\"idKategori\") REFERENCES \"kategoriTable\"(\"idKategori\"),\n" +
+                            "	PRIMARY KEY(\"idKegiatan\" AUTOINCREMENT)\n" +
+                            ")";
+                    Statement kegiatanTable = conn.createStatement();
+                    kegiatanTable.execute(sql);
+                    sql = "CREATE TABLE \"lokasiTable\" (\n" +
+                            "	\"getX\"	INTEGER DEFAULT NULL,\n" +
+                            "	\"getY\"	INTEGER DEFAULT NULL,\n" +
+                            "	\"width\"	INTEGER DEFAULT NULL,\n" +
+                            "	\"height\"	INTEGER DEFAULT NULL\n" +
+                            ")";
+                    Statement lokasiTable = conn.createStatement();
+                    lokasiTable.execute(sql);
+                } catch (SQLException ex){
+                    Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // method untuk mengubah posisi item di database
     public void moveItem(ArrayList<Kegiatan> dataKategori,ArrayList<String> dataId, int index, int index0, boolean isKategori) {
         try {
             Connection cn = getKoneksi();
-            String sql = "UPDATE kegiatanTable SET namaKegiatan=?,tanggalKegiatan=?,deskripsiKegiatan=?,isCheck=? WHERE idKegiatan=?";
+            sql = "UPDATE kegiatanTable SET namaKegiatan=?,tanggalKegiatan=?,deskripsiKegiatan=?,isCheck=? WHERE idKegiatan=?";
             if(isKategori == true){ // untuk main frame
                 sql = "UPDATE kegiatanTable SET idKategori=? WHERE idKategori=?";
                 PreparedStatement pst1 = cn.prepareStatement(sql);
@@ -96,4 +143,6 @@ public class Koneksi {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    
 }
