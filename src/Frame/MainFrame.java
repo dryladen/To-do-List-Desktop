@@ -533,6 +533,7 @@ public class MainFrame extends javax.swing.JFrame {
                 result.close();
                 stm.close();
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(pnlKategori, "Error set data : "+ ex);
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         } 
@@ -549,7 +550,7 @@ public class MainFrame extends javax.swing.JFrame {
             pst.setInt(4, getHeight());
             pst.execute();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(pnlKategori, "Error : "+ ex);
+            JOptionPane.showMessageDialog(pnlKategori, "Error set location : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -570,6 +571,7 @@ public class MainFrame extends javax.swing.JFrame {
                 this.setBounds(result.getInt(1), result.getInt(2), result.getInt(3), result.getInt(4));
             }
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(pnlKategori, "Error get location : "+ ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {

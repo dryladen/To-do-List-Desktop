@@ -19,10 +19,12 @@ public class Koneksi {
     private Connection connect;
     private final String url = "jdbc:sqlite:databasetodolist.db"; // nama database
     private String sql;
+    
     public boolean isDatabaseExists(String dbFilePath){
         File database = new File(dbFilePath);
         return database.exists();
     }
+    
     public Connection getKoneksi(){ // menghubungkan ke database
         String getFilePath = new File("").getAbsolutePath();
         String fileAbsolutePath = getFilePath.concat("\\databasetodolist.db");
@@ -39,14 +41,16 @@ public class Koneksi {
                 connect = DriverManager.getConnection(url);
             } catch (SQLException ex) {
                 Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error create database : "+ ex);
             }
         }
         return connect;
     }
     // method untuk membuat database
-    private void createNewDatabase() {
+    private void createNewDatabase(){
         Connection conn;
         try {
+            Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection(url);
             if(conn != null){
                 try {
@@ -84,10 +88,12 @@ public class Koneksi {
                     pst.execute();
                 } catch (SQLException ex){
                     Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Create database error : "+ ex);
                 }
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Create databases error : "+ ex);
         }
     }
     // method untuk mengubah posisi item di database
@@ -140,6 +146,7 @@ public class Koneksi {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Move Item error : "+ ex);
         }
     }
 }
