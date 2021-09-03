@@ -146,14 +146,13 @@ public class TaskFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(pnlKegiatan);
 
         pnlDetail.setEditable(false);
-        pnlDetail.setColumns(20);
+        pnlDetail.setColumns(5);
         pnlDetail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pnlDetail.setLineWrap(true);
         pnlDetail.setRows(2);
         pnlDetail.setAutoscrolls(false);
         pnlDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
         pnlDetail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pnlDetail.setPreferredSize(new java.awt.Dimension(116, 61));
         jScrollPane2.setViewportView(pnlDetail);
 
         pnlTanggal.setEditable(false);
